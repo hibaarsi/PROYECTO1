@@ -11,10 +11,10 @@ public class Producto {
 
     public Producto(int id, String nombre, Category category, double precio) {
 
-        if (id <= 0)  throw new IllegalArgumentException("ID must be a positive number");
-        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("Name cannot be empty");
-        if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("Name cannot exceed " + MAX_NAME_LENGTH + " characters");
-        if (precio <= 0) throw new IllegalArgumentException("Price must be greater than 0");
+        if (id <= 0)  throw new IllegalArgumentException("Tiene que ser un numero positivo");
+        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
+        if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No puede exceder 100 caracteres");
+        if (precio <= 0) throw new IllegalArgumentException("Tiene que ser mayor a 0");
         this.id = id;
         this.nombre = nombre.trim();
         this.category = category;
@@ -34,9 +34,9 @@ public class Producto {
         return precio;
     }
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("Name cannot be empty");
+        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
 
-        if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("Name cannot exceed " + MAX_NAME_LENGTH + " characters");
+        if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No puede exceder 100 caracteres");
 
         this.nombre = nombre.trim();
     }
@@ -47,7 +47,7 @@ public class Producto {
     
     public void setPrecio(double precio) {
         if (precio <= 0) {
-            throw new IllegalArgumentException("Price must be greater than 0");
+            throw new IllegalArgumentException("Tiene que ser mayor a 0");
         }
         this.precio = precio;
     }
