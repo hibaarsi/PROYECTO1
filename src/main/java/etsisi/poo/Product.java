@@ -1,15 +1,13 @@
 package etsisi.poo;
 
-import java.util.Objects;
-
-public class Producto {
+public class Product {
     public static final int MAX_NAME_LENGTH = 100;
     private final int id; // es unico
     private String nombre;
     private Category category;
     private double precio;
 
-    public Producto(int id, String nombre, Category category, double precio) {
+    public Product(int id, String nombre, Category category, double precio) {
 
         if (id <= 0)  throw new IllegalArgumentException("Tiene que ser un numero positivo");
         if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
@@ -55,7 +53,7 @@ public class Producto {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Producto producto = (Producto) o;
+        Product producto = (Product) o;
         return id == producto.id;
     }
 

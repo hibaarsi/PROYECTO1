@@ -3,20 +3,21 @@ package etsisi.poo;
 import java.util.ArrayList;
 
 public class Ticket {
-    private ArrayList<Producto> productos;
-    private static final int MAX_PRODUCTOS=100;
+    private ArrayList<Product> products;
+    private static final int MAX_PRODUCTS=100;
+
 
     public Ticket() {
-        this.productos = new ArrayList<>();
+        this.products = new ArrayList<>();
     }
-    public void addProducto(Producto producto) {
-        if (productos.size() >= MAX_PRODUCTOS) throw new IllegalArgumentException("No se pueden añadir mas productos");
-        productos.add(producto);
+    public void addProduct(Product product) {
+        if (products.size() >= MAX_PRODUCTS) throw new IllegalArgumentException("No se pueden añadir mas productos");
+        products.add(product);
     }
     public void newTicket() {
-        productos.clear();
+        products.clear();
     }
-    public void imprimirTicket(){
+    public void printTicket(){
 
     }
 
