@@ -44,7 +44,9 @@ public class App {
 
                     break;
                 case "echo":
-
+                    Scanner s = new Scanner(System.in);
+                    String textoLiteral=s.nextLine();
+                    System.out.println("<echo> "+"<"+textoLiteral+">");
                     break;
 
                 case "exit":
