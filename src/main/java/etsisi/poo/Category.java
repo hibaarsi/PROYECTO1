@@ -1,7 +1,7 @@
 package etsisi.poo;
 
 public enum Category {
-    MERCH(0.00),PAPELERIA(0.05), ROPA(0.07), LIBRO(0.10), ELECTRONICA(0.03);
+    MERCH(0.00),STATIONERY(0.05), CLOTHES(0.07), BOOK(0.10), ELECTRONICS(0.03);
     private double descuento;
     Category(double descuento) {
         this.descuento= descuento;

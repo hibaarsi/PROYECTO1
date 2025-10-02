@@ -44,9 +44,9 @@ public class App {
 
                     break;
                 case "echo":
-                    Scanner s = new Scanner(System.in);
-                    String textoLiteral=s.nextLine();
-                    System.out.println("<echo> "+"<"+textoLiteral+">");
+
+                    String text =sc.nextLine();
+                    System.out.println("<echo> "+"<"+text+">");
                     break;
 
                 case "exit":
@@ -75,7 +75,9 @@ public class App {
         System.out.println(SPACE+"ticket print");
         System.out.println(SPACE+"echo \"<texto>\"");
         System.out.println(SPACE+"help");
-        System.out.println(SPACE+"exit");
+        System.out.println(SPACE+"exit\n\n");
+        System.out.println();
+
     }
 }
 

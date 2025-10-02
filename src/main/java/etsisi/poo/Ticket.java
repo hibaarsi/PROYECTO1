@@ -1,49 +1,58 @@
 package etsisi.poo;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 public class Ticket {
-    private ArrayList<Product> productos;
+    private ArrayList<Product> products;
     private Catalogo catalogo;
     private static final int MAX_PRODUCTOS=100;
 
     public Ticket(Catalogo catalogo) {
-        this.productos = new ArrayList<>();
+        this.products = new ArrayList<>();
         this.catalogo = catalogo;
     }
     public void newTicket(){
-        productos.clear();
+        products.clear();
     }
    public void addProduct(int productId,int cant){
         if(catalogo.existProduct(productId)){
             throw new IllegalArgumentException("Product with id " + productId + " does not exist");
         }
-        if(productos.size() + cant >=MAX_PRODUCTOS)
-            throw new IllegalArgumentException("You cant add more products");
+        if(products.size() + cant >=MAX_PRODUCTOS)
+            throw new IllegalArgumentException("You can't add more products");
         Product product = catalogo.getProduct(productId);
         for(int i=0;i<cant; i++) {
-            productos.add(product);
+            products.add(product);
         }
    }
    public void removeProduct(int productId){
-        int contador=0;
-        // comprobar por id y quitar todas las cantidades
+        if (!catalogo.existProduct(productId)){
+            System.out.println("The product doesn't exist in this ticket");
+        }{
+           Iterator<Product> iterator =  products.iterator();
+           while (iterator.hasNext()){
+               Product p = iterator.next();
+               if (p.getId() == productId){
+                   iterator.remove();
+               }
+           }
+       }
    }
    //importe provisional, imprimir tickrt, updateticket,
 
     public void printTicket(){
-        if(productos.isEmpty()){
+        if(products.isEmpty()){
             System.out.println("Esta vacio");
         }
-        productos.sort((p1,p2)->p1.getNombre().compareToIgnoreCase(p2.getNombre()));
+        products.sort((p1, p2)->p1.getNombre().compareToIgnoreCase(p2.getNombre()));
 
-        for( int i =0; i< productos.size(); i++){
-            Product p= productos.get(i);
+        for(int i = 0; i< products.size(); i++){
+            Product p= products.get(i);
             int cont=0;
 
-            for(int j=0; j< productos.size();j++){
-                if (productos.get(j).getCategory() == p.getCategory()) {
+            for(int j = 0; j< products.size(); j++){
+                if (products.get(j).getCategory() == p.getCategory()) {
                     cont++;
                 }
             }

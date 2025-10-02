@@ -17,6 +17,7 @@ public class Catalogo {
             throw new IllegalArgumentException("Product with id " + product.getId() + " already exists");
         }
         items.put(product.getId(), product);
+        System.out.println("prod add: ok");
     }
     public void listProducts(){
         if(items.isEmpty()){
