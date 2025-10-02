@@ -32,5 +32,12 @@ public class Ticket {
    }
    //importe provisional, imprimir tickrt, updateticket,
 
+    public void printTicket(){
+        if(productos.isEmpty()){
+            System.out.println("Esta vacio");
+        }
+        productos.sort((p1,p2)->p1.getNombre().compareToIgnoreCase(p2.getNombre()));
+
+    }
 
 }
