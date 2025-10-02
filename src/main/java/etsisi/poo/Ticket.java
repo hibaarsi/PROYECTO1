@@ -38,6 +38,19 @@ public class Ticket {
         }
         productos.sort((p1,p2)->p1.getNombre().compareToIgnoreCase(p2.getNombre()));
 
+        for( int i =0; i< productos.size(); i++){
+            Product p= productos.get(i);
+            int cont=0;
+
+            for(int j=0; j< productos.size();j++){
+                if (productos.get(j).getCategory() == p.getCategory()) {
+                    cont++;
+                }
+            }
+            System.out.println("El producto "+p.getNombre()+" pertecene a la categoria "+p.getCategory()+" y hay en total: "+cont);
+        }
+
+
     }
 
 }
