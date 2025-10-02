@@ -9,7 +9,7 @@ public class Product {
 
     public Product(int id, String nombre, Category category, double precio) {
 
-        if (id <= 0)  throw new IllegalArgumentException("Tiene que ser un numero positivo");
+        if (id <= 0) throw new IllegalArgumentException("Tiene que ser un numero positivo");
         if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
         if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No puede exceder 100 caracteres");
         if (precio <= 0) throw new IllegalArgumentException("Tiene que ser mayor a 0");
@@ -18,19 +18,23 @@ public class Product {
         this.category = category;
         this.precio = precio;
     }
+
     public int getId() {
         return id;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public Category getCategory() {
         return category;
     }
-    
+
     public double getPrecio() {
         return precio;
     }
+
     public void setNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
 
@@ -38,11 +42,11 @@ public class Product {
 
         this.nombre = nombre.trim();
     }
-    
+
     public void setCategory(Category category) {
         this.category = category;
     }
-    
+
     public void setPrecio(double precio) {
         if (precio <= 0) {
             throw new IllegalArgumentException("Tiene que ser mayor a 0");
@@ -64,8 +68,8 @@ public class Product {
 
     @Override
     public String toString() {
-        return String.format("Product{id=%d, nombre='%s', category=%s, precio=%.2f}",
-                            id, nombre, category, precio);
+        return String.format("class:Product, id:%d, name:'%s', category:%s, price:%.2f}",
+                id, nombre, category, precio);
     }
 
 }

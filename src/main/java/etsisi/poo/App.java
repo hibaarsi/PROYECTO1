@@ -6,21 +6,23 @@ import java.util.Scanner;
  * Hello world!
  */
 public class App {
-    private static final String CLOSE_APP = "Closing application\n"+"Goodbye!";
+    private static final String CLOSE_APP = "Closing application\n" + "Goodbye!";
     private static final String FIRST_MESSAGE = "Welcome to the ticket module App.\n" +
             "Ticket module. Type 'help' to see commands.";
     private static final String SPACE = "    ";
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         App app = new App();
         app.init();
         app.start();
         app.end();
     }
 
-    private void init(){
+    private void init() {
         System.out.println(FIRST_MESSAGE);
     }
-    private void start(){
+
+    private void start() {
         Scanner sc = new Scanner(System.in);
         boolean continuar = true;
         while (continuar) {
@@ -45,8 +47,8 @@ public class App {
                     break;
                 case "echo":
 
-                    String text =sc.nextLine();
-                    System.out.println("<echo> "+"<"+text+">");
+                    String text = sc.nextLine();
+                    System.out.println("<echo> " + "<" + text + ">");
                     break;
 
                 case "exit":
@@ -59,23 +61,24 @@ public class App {
             }
         }
     }
-    private void end(){
+
+    private void end() {
         System.out.println(CLOSE_APP);
     }
 
     private void printHelp() {
         System.out.println("Commands:");
-        System.out.println(SPACE+"prod add <id> \"<name>\" <category> <price>");
-        System.out.println(SPACE+"prod list");
-        System.out.println(SPACE+"prod update <id> NAME|CATEGORY|PRICE <value>");
-        System.out.println(SPACE+"prod remove <id>");
-        System.out.println(SPACE+"ticket new");
-        System.out.println(SPACE+"ticket add <prodId> <quantity>");
-        System.out.println(SPACE+"ticket remove <prodId>");
-        System.out.println(SPACE+"ticket print");
-        System.out.println(SPACE+"echo \"<texto>\"");
-        System.out.println(SPACE+"help");
-        System.out.println(SPACE+"exit\n\n");
+        System.out.println(SPACE + "prod add <id> \"<name>\" <category> <price>");
+        System.out.println(SPACE + "prod list");
+        System.out.println(SPACE + "prod update <id> NAME|CATEGORY|PRICE <value>");
+        System.out.println(SPACE + "prod remove <id>");
+        System.out.println(SPACE + "ticket new");
+        System.out.println(SPACE + "ticket add <prodId> <quantity>");
+        System.out.println(SPACE + "ticket remove <prodId>");
+        System.out.println(SPACE + "ticket print");
+        System.out.println(SPACE + "echo \"<texto>\"");
+        System.out.println(SPACE + "help");
+        System.out.println(SPACE + "exit\n\n");
         System.out.println();
 
     }
