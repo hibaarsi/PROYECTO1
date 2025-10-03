@@ -79,6 +79,10 @@ public class App {
         System.out.println(SPACE + "echo \"<texto>\"");
         System.out.println(SPACE + "help");
         System.out.println(SPACE + "exit\n\n");
+
+        System.out.println(SPACE + "Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n" +
+                "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \n" +
+                "ELECTRONICS 3%.");
         System.out.println();
 
     }
