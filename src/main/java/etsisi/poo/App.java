@@ -6,6 +6,7 @@ import java.util.Scanner;
 /**
  * Hello world!
  */
+
 public class App {
     private static final String CLOSE_APP = "Closing application\n" + "Goodbye!";
     private static final String FIRST_MESSAGE = "Welcome to the ticket module App.\n" +

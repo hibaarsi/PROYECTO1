@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Catalog {
     private static final int max_ELEMENTS = 200;
     private HashMap<Integer, Product> items;
-    ;
+
 
     public Catalog() {
         this.items = new HashMap<>();
