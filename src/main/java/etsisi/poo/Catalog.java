@@ -2,12 +2,12 @@ package etsisi.poo;
 
 import java.util.HashMap;
 
-public class Catalogo {
+public class Catalog {
     private static final int max_ELEMENTS = 200;
     private HashMap<Integer, Product> items;
     ;
 
-    public Catalogo() {
+    public Catalog() {
         this.items = new HashMap<>();
     }
 

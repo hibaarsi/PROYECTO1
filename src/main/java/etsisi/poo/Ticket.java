@@ -5,10 +5,10 @@ import java.util.Iterator;
 
 public class Ticket {
     private ArrayList<Product> products;
-    private Catalogo catalogo;
+    private Catalog catalogo;
     private static final int MAX_PRODUCTOS = 100;
 
-    public Ticket(Catalogo catalogo) {
+    public Ticket(Catalog catalogo) {
         this.products = new ArrayList<>();
         this.catalogo = catalogo;
     }

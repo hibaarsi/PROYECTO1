@@ -1,5 +1,6 @@
 package etsisi.poo;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -23,7 +24,9 @@ public class App {
     }
 
     private void start() {
+
         Scanner sc = new Scanner(System.in);
+        Catalog catalog = new Catalog();
         boolean continuar = true;
         while (continuar) {
 
@@ -40,15 +43,47 @@ public class App {
                     printHelp();
                     break;
                 case "prod":
+                    switch (sepparatedComand[1]){
+                        case "add":
+                            Product p = new Product(Integer.parseInt(sepparatedComand[2]),sepparatedComand[3],Category.valueOf(sepparatedComand[4]),Double.parseDouble(sepparatedComand[5]));
+                            catalog.addProduct(p);
+                            break;
+                        case "list":
+                            catalog.listProducts();
+                            break;
+                        case "update":
+                            //catalog.updateProduct();
+                            break;
+                        case "remove":
+                            break;
+                    }
 
                     break;
                 case "ticket":
+                    switch (sepparatedComand[1]){
+                        case "new":
+
+                            break;
+                        case "add":
+                            break;
+                        case "remove":
+                            break;
+                        case "print":
+
+
+                            break;
+                    }
+
 
                     break;
                 case "echo":
 
-                    String text = sc.nextLine();
-                    System.out.println("<echo> " + "<" + text + ">");
+                    if (sepparatedComand.length > 1) {
+                        String text = String.join(" ", Arrays.copyOfRange(sepparatedComand, 1, sepparatedComand.length));
+                        System.out.println("echo \"" + text + "\"");
+                    } else {
+                        System.out.println("echo \"\"");
+                    }
                     break;
 
                 case "exit":
