@@ -69,11 +69,10 @@ public class App {
                             break;
 
                         case "add":
-                             int text = sc.nextInt();
-                            ticketNew.addProduct(text,text);
+                            ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]),Integer.parseInt(sepparatedComand[3]));
                             break;
                         case "remove":
-                            ticketNew.removeProduct(text);
+                            ticketNew.removeProduct(Integer.parseInt(sepparatedComand[2]));
                             break;
                         case "print":
                             ticketNew.printTicket();
