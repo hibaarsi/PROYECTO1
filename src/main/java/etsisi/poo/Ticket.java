@@ -32,8 +32,7 @@ public class Ticket {
     public void removeProduct(int productId) {
         if (!catalogo.existProduct(productId)) {
             System.out.println("The product doesn't exist in this ticket");
-        }
-        {
+        }else {
             Iterator<Product> iterator = products.iterator();
             while (iterator.hasNext()) {
                 Product p = iterator.next();

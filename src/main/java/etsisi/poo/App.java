@@ -27,6 +27,7 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         Catalog catalog = new Catalog();
+        Ticket ticketNew= new Ticket(catalog);
 
         boolean continuar = true;
         while (continuar) {
@@ -64,15 +65,18 @@ public class App {
                 case "ticket":
                     switch (sepparatedComand[1]){
                         case "new":
-
+                            ticketNew.newTicket();
                             break;
+
                         case "add":
+                             int text = sc.nextInt();
+                            ticketNew.addProduct(text,text);
                             break;
                         case "remove":
+                            ticketNew.removeProduct(text);
                             break;
                         case "print":
-
-
+                            ticketNew.printTicket();
                             break;
                     }
 
