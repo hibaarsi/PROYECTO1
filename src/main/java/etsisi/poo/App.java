@@ -27,6 +27,7 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         Catalog catalog = new Catalog();
+
         boolean continuar = true;
         while (continuar) {
 
@@ -52,9 +53,10 @@ public class App {
                             catalog.listProducts();
                             break;
                         case "update":
-                            //catalog.updateProduct();
+                            catalog.updateProduct(Integer.parseInt(sepparatedComand[2]),sepparatedComand[3],sepparatedComand[4]);
                             break;
                         case "remove":
+                            catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
                             break;
                     }
 
