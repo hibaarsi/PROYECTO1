@@ -30,7 +30,7 @@ public class App {
         boolean continuar = true;
         while (continuar) {
 
-            System.out.print("tUPM>");
+            System.out.print("tUPM> ");
             String comand = sc.nextLine();
 
             if (System.getenv("fileinput") != null &&
@@ -88,7 +88,6 @@ public class App {
 
                 case "exit":
                     continuar = false;
-
                     break;
                 default:
 
@@ -119,6 +118,7 @@ public class App {
                 "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \n" +
                 "ELECTRONICS 3%.");
         System.out.println();
+
 
     }
 }
