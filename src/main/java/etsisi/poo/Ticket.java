@@ -7,6 +7,7 @@ public class Ticket {
     private ArrayList<Product> products;
     private Catalog catalogo;
     private static final int MAX_PRODUCTOS = 100;
+    private double discount;
 
     public Ticket(Catalog catalogo) {
         this.products = new ArrayList<>();
@@ -18,7 +19,7 @@ public class Ticket {
     }
 
     public void addProduct(int productId, int cant) {
-        if (catalogo.existProduct(productId)) {
+        if (!catalogo.existProduct(productId)) {
             throw new IllegalArgumentException("Product with id " + productId + " does not exist");
         }
         if (products.size() + cant >= MAX_PRODUCTOS)
@@ -32,8 +33,7 @@ public class Ticket {
     public void removeProduct(int productId) {
         if (!catalogo.existProduct(productId)) {
             System.out.println("The product doesn't exist in this ticket");
-        }
-        {
+        }else {
             Iterator<Product> iterator = products.iterator();
             while (iterator.hasNext()) {
                 Product p = iterator.next();
