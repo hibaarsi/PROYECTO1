@@ -17,13 +17,13 @@ public class App {
 
     public static void main(String[] args) {
         App app = new App();
-        if (args.length > 0){
-            System.out.println("Nombre del fichero: "+ args[0]);
+        if (args.length > 0) {
+            System.out.println("Nombre del fichero: " + args[0]);
             app.init();
             app.start();
             app.end();
 
-        }else {
+        } else {
             app.init();
             app.start();
             app.end();
@@ -38,7 +38,7 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         Catalog catalog = new Catalog();
-        Ticket ticketNew= new Ticket(catalog);
+        Ticket ticketNew = new Ticket(catalog);
 
         boolean continuar = true;
         while (continuar) {
@@ -56,16 +56,16 @@ public class App {
                     printHelp();
                     break;
                 case "prod":
-                    switch (sepparatedComand[1]){
+                    switch (sepparatedComand[1]) {
                         case "add":
-                            Product p = new Product(Integer.parseInt(sepparatedComand[2]),sepparatedComand[3],Category.valueOf(sepparatedComand[4]),Double.parseDouble(sepparatedComand[5]));
+                            Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4]), Double.parseDouble(sepparatedComand[5]));
                             catalog.addProduct(p);
                             break;
                         case "list":
                             catalog.listProducts();
                             break;
                         case "update":
-                            catalog.updateProduct(Integer.parseInt(sepparatedComand[2]),sepparatedComand[3],sepparatedComand[4]);
+                            catalog.updateProduct(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], sepparatedComand[4]);
                             break;
                         case "remove":
                             catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
@@ -74,13 +74,13 @@ public class App {
 
                     break;
                 case "ticket":
-                    switch (sepparatedComand[1]){
+                    switch (sepparatedComand[1]) {
                         case "new":
                             ticketNew.newTicket();
                             break;
 
                         case "add":
-                            ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]),Integer.parseInt(sepparatedComand[3]));
+                            ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]), Integer.parseInt(sepparatedComand[3]));
                             break;
                         case "remove":
                             ticketNew.removeProduct(Integer.parseInt(sepparatedComand[2]));

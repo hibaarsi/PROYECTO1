@@ -21,15 +21,15 @@ public class Ticket {
     public void addProduct(int productId, int cant) {
         if (!catalog.existProduct(productId)) {
             System.out.println("Product with id " + productId + " does not exist");
-        }else if (products.size() + cant >= MAX_PRODUCTOS){
+        } else if (products.size() + cant >= MAX_PRODUCTOS) {
             System.out.println("You can't add more products");
-        }else {
+        } else {
             Product product = catalog.getProduct(productId);
             for (int i = 0; i < cant; i++) {
                 products.add(product);
             }
             System.out.println("Product added: " + product.getNombre() + " x " + cant);
-            System.out.println(String.format("%.2f€",Total()));
+            System.out.println(String.format("%.2f€", Total()));
         }
 
     }
@@ -37,8 +37,8 @@ public class Ticket {
     public void removeProduct(int productId) {
         if (!catalog.existProduct(productId)) {
             System.out.println("The product doesn't exist in this ticket");
-        }else {
-            int removed= 0;
+        } else {
+            int removed = 0;
             Iterator<Product> iterator = products.iterator();
             while (iterator.hasNext()) {
                 Product p = iterator.next();
@@ -47,11 +47,11 @@ public class Ticket {
                     removed++;
                 }
             }
-            if(removed>0){
-                System.out.println("Product with id "+ productId+" removed");
-                System.out.println(String.format("%.2f€",Total()));
+            if (removed > 0) {
+                System.out.println("Product with id " + productId + " removed");
+                System.out.println(String.format("%.2f€", Total()));
 
-            } else System.out.println("Product with id "+ productId+" not found");
+            } else System.out.println("Product with id " + productId + " not found");
         }
     }
 
@@ -62,7 +62,7 @@ public class Ticket {
         double total = 0;
 
         for (Product product : products) {
-            Category category= product.getCategory();
+            Category category = product.getCategory();
             int contador = 0;
             // si son de la misma categoria
             for (Product p : products) {
@@ -73,13 +73,13 @@ public class Ticket {
             // Aplicar descuento si hay más de 1
             if (contador > 1) {
                 double discount = category.getDiscount();
-                total += product.getPrecio()*(1 - discount);
+                total += product.getPrecio() * (1 - discount);
             } else {
                 total += product.getPrecio();
             }
         }
         return total;
-        }
+    }
 
 
     public void printTicket() {
