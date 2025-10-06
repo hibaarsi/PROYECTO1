@@ -84,53 +84,43 @@ public class Ticket {
 
     public void printTicket() {
         if (products.isEmpty()) {
-            System.out.println("Esta vacio");
+            System.out.println("Está vacío");
+            return;
         }
+
         products.sort((p1, p2) -> p1.getNombre().compareToIgnoreCase(p2.getNombre()));
 
-        for (int i = 0; i < products.size(); i++) {
-            Product p = products.get(i);
-            int cont = 0;
-
-            for (int j = 0; j < products.size(); j++) {
-                if (products.get(j).getCategory() == p.getCategory()) {
-                    cont++;
-                }
-            }
-            System.out.println("El producto " + p.getNombre() + " pertecene a la categoria " + p.getCategory() + " y hay en total: " + cont);
-        }
-
-        double totalprice = 0.0;
-        double totaldiscount = 0.0;
+        double totalPrice = 0.0;
+        double totalDiscount = 0.0;
 
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);
-            int cont = 0;
+
+            int count = 0;
             for (int j = 0; j < products.size(); j++) {
-                if (products.get(j).getCategory() == p.getCategory()) {
-                    cont++;
+                if (products.get(j).getCategory().equals(p.getCategory())) {
+                    count++;
                 }
             }
+
             double discount = 0.0;
-            if (cont >= 2) {
+            if (count >= 2) {
                 discount = p.getPrecio() * p.getCategory().getDiscount();
-                System.out.println(p + " **discount -" + String.format("%.1f", discount));
+                System.out.printf("%-20s | %-15s | %.2f €  **descuento -%.2f €%n",
+                        p.getNombre(), p.getCategory(), p.getPrecio(), discount);
             } else {
-                System.out.println(p);
+                System.out.printf("%-20s | %-15s | %.2f €%n",
+                        p.getNombre(), p.getCategory(), p.getPrecio());
             }
 
-            totalprice += p.getPrecio();
-            totaldiscount += discount;
-
-            double total=totalprice-totaldiscount;
-
-            System.out.println("Total price: "+String.format("%.1f",totalprice));
-            System.out.println("Total discount: "+String.format("%.1f",totaldiscount));
-            System.out.println("Final price: "+String.format("%.1f",total));
-            System.out.println("Ticked add: ok");
-
-
-
+            totalPrice += p.getPrecio();
+            totalDiscount += discount;
         }
+
+        double totalFinal = totalPrice - totalDiscount;
+        System.out.println("--------------------------------------------------");
+        System.out.printf("Total sin descuento: %.2f €%n", totalPrice);
+        System.out.printf("Descuento total:     -%.2f €%n", totalDiscount);
+        System.out.printf("TOTAL A PAGAR:        %.2f €%n", totalFinal);
     }
 }
