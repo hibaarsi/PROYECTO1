@@ -123,7 +123,13 @@ public class Ticket {
             totaldiscount += discount;
 
             double total=totalprice-totaldiscount;
-            System.out.printf("");
+
+            System.out.println("Total price: "+String.format("%.1f",totalprice));
+            System.out.println("Total discount: "+String.format("%.1f",totaldiscount));
+            System.out.println("Final price: "+String.format("%.1f",total));
+            System.out.println("Ticked add: ok");
+
+
 
         }
     }
