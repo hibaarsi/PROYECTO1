@@ -13,14 +13,15 @@ public class Catalog {
     }
 
     public void addProduct(Product product) { // revisar
-        if (items.size() >= MAX_ELEMENTS)
-            throw new IllegalArgumentException("Items limit reached");
-        if (items.containsKey(product.getId())) {
-            throw new IllegalArgumentException("Product with id " + product.getId() + " already exists");
+        if (size() >= MAX_ELEMENTS){
+            System.out.println("Items limit reached");
+        }else if (existProduct(product.getId())){
+            System.out.println("Product with id " + product.getId() + " already exists");
+        }else {
+            items.put(product.getId(), product);
+            System.out.println(product.toString());
+            System.out.println("prod add: ok");
         }
-        items.put(product.getId(), product);
-        System.out.println(product.toString());
-        System.out.println("prod add: ok");
     }
 
     public void listProducts() {
@@ -36,55 +37,68 @@ public class Catalog {
 
     public Product getProduct(int id) {
         if (!items.containsKey(id)) {
-            throw new IllegalArgumentException("Product with id " + id + " does not exist");
+            System.out.println("Product with id " + id + " does not exist");
         }
         return items.get(id);
     }
 
     public void removeProduct(int id) {
-        if (!items.containsKey(id)) {
-            throw new IllegalArgumentException("Product with id " + id + " does not exist");
+        if (!existProduct(id)) {
+            System.out.println("Product with id " + id + " does not exist");
+        }else {
+            items.remove(id);
+            System.out.println("prod remove:ok");
         }
-        items.remove(id);
-        System.out.println("prod remove:ok");
     }
 
     public void updateProduct(int id, String field, String value) {
         //revisar
-        if (!items.containsKey(id)) {
-            throw new IllegalArgumentException("Product with id " + id + " does not exist");
-        }
-        Product product = items.get(id);
+        // he metido el
+        // System.out.println(product.toString());
+        // System.out.println("prod update: ok");
+        //dentro de cada opcion porque como estaba fuera del switch se imprimia aunque no se actualizase
+        if (!existProduct(id)) {
+            System.out.println("Product with id " + id + " does not exist");
+        }else{
+            Product product = items.get(id);
 
-        switch (field.toUpperCase()) {
-            case "NAME":
-                product.setNombre(value);
-                break;
+            switch (field.toUpperCase()) {
+                case "NAME":
+                    product.setNombre(value);
+                    System.out.println(product.toString());
+                    System.out.println("prod update: ok");
+                    break;
 
-            case "CATEGORY":
-                try {
-                    Category category = Category.valueOf(value.toUpperCase());
-                    product.setCategory(category);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Invalid category: " + value);
-                }
-                break;
+                case "CATEGORY":                            // este no he cambiado lo de la excep.
+                    try {
+                        Category category = Category.valueOf(value.toUpperCase());
+                        product.setCategory(category);
+                        System.out.println(product.toString());
+                        System.out.println("prod update: ok");
+                    } catch (IllegalArgumentException e) {
+                        throw new IllegalArgumentException("Invalid category: " + value);
+                    }
+                    break;
 
-            case "PRICE":
-                try {
+                case "PRICE":
                     double price = Double.parseDouble(value);
-                    product.setPrecio(price);
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Price must be a positive number: " + value);
-                }
-                break;
+                    if (price <= 0) {
+                        System.out.println("Price must be a positive number: " + value);
+                    }
+                    else {
+                        product.setPrecio(price);
+                        System.out.println(product.toString());
+                        System.out.println("prod update: ok");
+                    }
 
-            default:
-                throw new IllegalArgumentException("Unknown field: " + field);
+                    break;
+
+                default:
+                    System.out.println("Unknown field: " + field);
+            }
+
         }
 
-        System.out.println(product);
-        System.out.println("prod update: ok");
     }
 
     public int size() {
