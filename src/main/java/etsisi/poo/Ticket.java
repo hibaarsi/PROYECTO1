@@ -3,7 +3,7 @@ package etsisi.poo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Ticket {
+public class Ticket { //REVISAR
     private ArrayList<Product> products;
     private Catalog catalog;
     private static final int MAX_PRODUCTOS = 100;
@@ -30,6 +30,7 @@ public class Ticket {
             }
             System.out.println("Product added: " + product.getNombre() + " x " + cant);
             System.out.println(String.format("%.2f€",Total()));
+            System.out.println("ticket add: ok");
         }
 
     }
@@ -50,6 +51,7 @@ public class Ticket {
             if(removed>0){
                 System.out.println("Product with id "+ productId+" removed");
                 System.out.println(String.format("%.2f€",Total()));
+                System.out.println("ticket removed: ok");
 
             } else System.out.println("Product with id "+ productId+" not found");
         }
@@ -84,43 +86,56 @@ public class Ticket {
 
     public void printTicket() {
         if (products.isEmpty()) {
-            System.out.println("Está vacío");
+            System.out.println("It´s empty");
             return;
         }
-
         products.sort((p1, p2) -> p1.getNombre().compareToIgnoreCase(p2.getNombre()));
-
-        double totalPrice = 0.0;
-        double totalDiscount = 0.0;
 
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);
+            int cont = 0;
 
-            int count = 0;
             for (int j = 0; j < products.size(); j++) {
-                if (products.get(j).getCategory().equals(p.getCategory())) {
-                    count++;
+                if (products.get(j).getCategory() == p.getCategory()) {
+                    cont++;
                 }
             }
-
-            double discount = 0.0;
-            if (count >= 2) {
-                discount = p.getPrecio() * p.getCategory().getDiscount();
-                System.out.printf("%-20s | %-15s | %.2f €  **descuento -%.2f €%n",
-                        p.getNombre(), p.getCategory(), p.getPrecio(), discount);
-            } else {
-                System.out.printf("%-20s | %-15s | %.2f €%n",
-                        p.getNombre(), p.getCategory(), p.getPrecio());
-            }
-
-            totalPrice += p.getPrecio();
-            totalDiscount += discount;
+            System.out.println("El producto " + p.getNombre() + " pertecene a la categoria " + p.getCategory() + " y hay en total: " + cont);
         }
 
-        double totalFinal = totalPrice - totalDiscount;
-        System.out.println("--------------------------------------------------");
-        System.out.printf("Total sin descuento: %.2f €%n", totalPrice);
-        System.out.printf("Descuento total:     -%.2f €%n", totalDiscount);
-        System.out.printf("TOTAL A PAGAR:        %.2f €%n", totalFinal);
+        double totalprice = 0.0;
+        double totaldiscount = 0.0;
+
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            int cont = 0;
+            for (int j = 0; j < products.size(); j++) {
+                if (products.get(j).getCategory() == p.getCategory()) {
+                    cont++;
+                }
+            }
+            double discount = 0.0;
+            if (cont >= 2) {
+                discount = p.getPrecio() * p.getCategory().getDiscount();
+                System.out.println(p + " **discount -" + String.format("%.1f", discount));
+            } else {
+                System.out.println(p);
+            }
+
+            totalprice += p.getPrecio();
+            totaldiscount += discount;
+
+           //double total=totalprice-totaldiscount;
+            double total= Total();
+            //ESTOS SOUTS DEBERIAN IR FUERA DEL FOR NO?
+            System.out.println("Total price: "+String.format("%.1f",totalprice));
+            System.out.println("Total discount: "+String.format("%.1f",totaldiscount));
+            System.out.println("Final price: "+String.format("%.1f",total));
+            System.out.println("ticket print: ok");
+
+
+
+        }
+
     }
 }

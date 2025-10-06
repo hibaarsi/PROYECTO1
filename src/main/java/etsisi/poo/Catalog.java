@@ -1,6 +1,6 @@
 package etsisi.poo;
 
-import java.sql.SQLOutput;
+
 import java.util.HashMap;
 
 public class Catalog {
@@ -19,7 +19,8 @@ public class Catalog {
             System.out.println("Product with id " + product.getId() + " already exists");
         }else {
             items.put(product.getId(), product);
-            System.out.println(product.toString());
+            String productString = product.toString();
+            System.out.println(productString);
             System.out.println("prod add: ok");
         }
     }
@@ -33,6 +34,7 @@ public class Catalog {
         for (Product product : items.values()) {
             System.out.println(product);
         }
+        System.out.println("prod list: ok");
     }
 
     public Product getProduct(int id) {
@@ -46,7 +48,9 @@ public class Catalog {
         if (!existProduct(id)) {
             System.out.println("Product with id " + id + " does not exist");
         }else {
+            Product removed=items.get(id);
             items.remove(id);
+            System.out.println(removed.toString());
             System.out.println("prod remove:ok");
         }
     }
