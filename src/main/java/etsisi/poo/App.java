@@ -34,8 +34,6 @@ public class App {
         System.out.println(FIRST_MESSAGE);
     }
 
-
-
     private void start() {
 
         Scanner sc = new Scanner(System.in);
@@ -108,7 +106,7 @@ public class App {
                     continuar = false;
                     break;
                 default:
-
+                    System.out.println("Unknown command");
                     break;
             }
         }

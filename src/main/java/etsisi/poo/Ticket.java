@@ -1,17 +1,16 @@
 package etsisi.poo;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
 public class Ticket {
     private ArrayList<Product> products;
-    private Catalog catalogo;
+    private Catalog catalog;
     private static final int MAX_PRODUCTOS = 100;
 
-    public Ticket(Catalog catalogo) {
+    public Ticket(Catalog catalog) {
         this.products = new ArrayList<>();
-        this.catalogo = catalogo;
+        this.catalog = catalog;
     }
 
     public void newTicket() {
@@ -20,21 +19,23 @@ public class Ticket {
     }
 
     public void addProduct(int productId, int cant) {
-        if (!catalogo.existProduct(productId)) {
-            throw new IllegalArgumentException("Product with id " + productId + " does not exist");
+        if (!catalog.existProduct(productId)) {
+            System.out.println("Product with id " + productId + " does not exist");
+        }else if (products.size() + cant >= MAX_PRODUCTOS){
+            System.out.println("You can't add more products");
+        }else {
+            Product product = catalog.getProduct(productId);
+            for (int i = 0; i < cant; i++) {
+                products.add(product);
+            }
+            System.out.println("Product added: " + product.getNombre() + " x " + cant);
+            System.out.println(String.format("%.2f€",Total()));
         }
-        if (products.size() + cant >= MAX_PRODUCTOS)
-            throw new IllegalArgumentException("You can't add more products");
-        Product product = catalogo.getProduct(productId);
-        for (int i = 0; i < cant; i++) {
-            products.add(product);
-        }
-        System.out.println("Product added: " + product.getNombre() + " x " + cant);
-        System.out.println(String.format("%.2f€",Total()));
+
     }
 
     public void removeProduct(int productId) {
-        if (!catalogo.existProduct(productId)) {
+        if (!catalog.existProduct(productId)) {
             System.out.println("The product doesn't exist in this ticket");
         }else {
             int removed= 0;
@@ -81,7 +82,6 @@ public class Ticket {
         }
 
 
-
     public void printTicket() {
         if (products.isEmpty()) {
             System.out.println("Esta vacio");
@@ -100,7 +100,29 @@ public class Ticket {
             System.out.println("El producto " + p.getNombre() + " pertecene a la categoria " + p.getCategory() + " y hay en total: " + cont);
         }
 
+        double totalprice = 0.0;
+        double totaldiscount = 0.0;
 
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            int cont = 0;
+            for (int j = 0; j < products.size(); j++) {
+                if (products.get(j).getCategory() == p.getCategory()) {
+                    cont++;
+                }
+            }
+            double discount = 0.0;
+            if (cont >= 2) {
+                discount = p.getPrecio() * p.getCategory().getDiscount();
+                System.out.println(p + " **discount -" + String.format("%.1f", discount));
+            } else {
+                System.out.println(p);
+            }
+
+            totalprice += p.getPrecio();
+            totaldiscount += discount;
+        }
     }
+
 
 }
