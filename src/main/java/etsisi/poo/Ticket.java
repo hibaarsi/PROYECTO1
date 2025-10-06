@@ -121,8 +121,10 @@ public class Ticket {
 
             totalprice += p.getPrecio();
             totaldiscount += discount;
+
+            double total=totalprice-totaldiscount;
+            System.out.printf("");
+
         }
     }
-
-
 }
