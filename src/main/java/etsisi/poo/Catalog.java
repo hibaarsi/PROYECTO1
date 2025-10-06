@@ -1,9 +1,10 @@
 package etsisi.poo;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 
 public class Catalog {
-    private static final int max_ELEMENTS = 200;
+    private static final int MAX_ELEMENTS = 200;
     private HashMap<Integer, Product> items;
 
 
@@ -12,7 +13,7 @@ public class Catalog {
     }
 
     public void addProduct(Product product) { // revisar
-        if (items.size() >= max_ELEMENTS)
+        if (items.size() >= MAX_ELEMENTS)
             throw new IllegalArgumentException("Items limit reached");
         if (items.containsKey(product.getId())) {
             throw new IllegalArgumentException("Product with id " + product.getId() + " already exists");
@@ -25,6 +26,7 @@ public class Catalog {
     public void listProducts() {
         if (items.isEmpty()) {
             System.out.println("No products in catalog");
+            return;
         }
         System.out.println("Catalog:");
         for (Product product : items.values()) {
@@ -44,6 +46,7 @@ public class Catalog {
             throw new IllegalArgumentException("Product with id " + id + " does not exist");
         }
         items.remove(id);
+        System.out.println("prod remove:ok");
     }
 
     public void updateProduct(int id, String field, String value) {

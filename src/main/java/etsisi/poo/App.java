@@ -1,5 +1,7 @@
 package etsisi.poo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -15,14 +17,24 @@ public class App {
 
     public static void main(String[] args) {
         App app = new App();
-        app.init();
-        app.start();
-        app.end();
+        if (args.length > 0){
+            System.out.println("Nombre del fichero: "+ args[0]);
+            app.init();
+            app.start();
+            app.end();
+
+        }else {
+            app.init();
+            app.start();
+            app.end();
+        }
     }
 
     private void init() {
         System.out.println(FIRST_MESSAGE);
     }
+
+
 
     private void start() {
 
@@ -120,7 +132,7 @@ public class App {
         System.out.println(SPACE + "help");
         System.out.println(SPACE + "exit\n\n");
 
-        System.out.println(SPACE + "Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n" +
+        System.out.println("Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n" +
                 "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \n" +
                 "ELECTRONICS 3%.");
         System.out.println();
