@@ -82,7 +82,6 @@ public class Ticket {
         }
 
 
-
     public void printTicket() {
         if (products.isEmpty()) {
             System.out.println("Esta vacio");
@@ -101,7 +100,29 @@ public class Ticket {
             System.out.println("El producto " + p.getNombre() + " pertecene a la categoria " + p.getCategory() + " y hay en total: " + cont);
         }
 
+        double totalprice = 0.0;
+        double totaldiscount = 0.0;
 
+        for (int i = 0; i < products.size(); i++) {
+            Product p = products.get(i);
+            int cont = 0;
+            for (int j = 0; j < products.size(); j++) {
+                if (products.get(j).getCategory() == p.getCategory()) {
+                    cont++;
+                }
+            }
+            double discount = 0.0;
+            if (cont >= 2) {
+                discount = p.getPrecio() * p.getCategory().getDiscount();
+                System.out.println(p + " **discount -" + String.format("%.1f", discount));
+            } else {
+                System.out.println(p);
+            }
+
+            totalprice += p.getPrecio();
+            totaldiscount += discount;
+        }
     }
+
 
 }
