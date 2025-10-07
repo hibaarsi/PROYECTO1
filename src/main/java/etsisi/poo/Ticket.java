@@ -3,7 +3,7 @@ package etsisi.poo;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Ticket { //REVISAR
+public class Ticket {
     private ArrayList<Product> products;
     private Catalog catalog;
     private static final int MAX_PRODUCTOS = 100;
@@ -21,16 +21,15 @@ public class Ticket { //REVISAR
     public void addProduct(int productId, int cant) {
         if (!catalog.existProduct(productId)) {
             System.out.println("Product with id " + productId + " does not exist");
-        }else if (products.size() + cant >= MAX_PRODUCTOS){
+        } else if (products.size() + cant >= MAX_PRODUCTOS) {
             System.out.println("You can't add more products");
-        }else {
+        } else {
             Product product = catalog.getProduct(productId);
             for (int i = 0; i < cant; i++) {
                 products.add(product);
             }
             System.out.println("Product added: " + product.getNombre() + " x " + cant);
-            System.out.println(String.format("%.2f€",Total()));
-            System.out.println("ticket add: ok");
+            System.out.println(String.format("%.2f€", Total()));
         }
 
     }
@@ -38,8 +37,8 @@ public class Ticket { //REVISAR
     public void removeProduct(int productId) {
         if (!catalog.existProduct(productId)) {
             System.out.println("The product doesn't exist in this ticket");
-        }else {
-            int removed= 0;
+        } else {
+            int removed = 0;
             Iterator<Product> iterator = products.iterator();
             while (iterator.hasNext()) {
                 Product p = iterator.next();
@@ -48,12 +47,11 @@ public class Ticket { //REVISAR
                     removed++;
                 }
             }
-            if(removed>0){
-                System.out.println("Product with id "+ productId+" removed");
-                System.out.println(String.format("%.2f€",Total()));
-                System.out.println("ticket removed: ok");
+            if (removed > 0) {
+                System.out.println("Product with id " + productId + " removed");
+                System.out.println(String.format("%.2f€", Total()));
 
-            } else System.out.println("Product with id "+ productId+" not found");
+            } else System.out.println("Product with id " + productId + " not found");
         }
     }
 
@@ -64,7 +62,7 @@ public class Ticket { //REVISAR
         double total = 0;
 
         for (Product product : products) {
-            Category category= product.getCategory();
+            Category category = product.getCategory();
             int contador = 0;
             // si son de la misma categoria
             for (Product p : products) {
@@ -75,19 +73,18 @@ public class Ticket { //REVISAR
             // Aplicar descuento si hay más de 1
             if (contador > 1) {
                 double discount = category.getDiscount();
-                total += product.getPrecio()*(1 - discount);
+                total += product.getPrecio() * (1 - discount);
             } else {
                 total += product.getPrecio();
             }
         }
         return total;
-        }
+    }
 
 
     public void printTicket() {
         if (products.isEmpty()) {
-            System.out.println("It´s empty");
-            return;
+            System.out.println("Esta vacio");
         }
         products.sort((p1, p2) -> p1.getNombre().compareToIgnoreCase(p2.getNombre()));
 
@@ -100,7 +97,7 @@ public class Ticket { //REVISAR
                     cont++;
                 }
             }
-            System.out.println("El producto " + p.getNombre() + " pertecene a la categoria " + p.getCategory() + " y hay en total: " + cont);
+            System.out.println("{class:Product, id:" + p.getId() + ", name:'"+ p.getNombre() +"', category:"+p.getCategory()+", price:"+p.getPrecio()+"30.0} **discount "); //+p.getDiscount+"-3.0 "
         }
 
         double totalprice = 0.0;
@@ -124,18 +121,8 @@ public class Ticket { //REVISAR
 
             totalprice += p.getPrecio();
             totaldiscount += discount;
-
-           //double total=totalprice-totaldiscount;
-            double total= Total();
-            //ESTOS SOUTS DEBERIAN IR FUERA DEL FOR NO?
-            System.out.println("Total price: "+String.format("%.1f",totalprice));
-            System.out.println("Total discount: "+String.format("%.1f",totaldiscount));
-            System.out.println("Final price: "+String.format("%.1f",total));
-            System.out.println("ticket print: ok");
-
-
-
         }
-
     }
+
+
 }
