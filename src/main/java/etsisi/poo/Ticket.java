@@ -114,7 +114,7 @@ public class Ticket {
             double discount = 0.0;
             if (cont >= 2) {
                 discount = p.getPrecio() * p.getCategory().getDiscount();
-                System.out.println(p + " **discount -" + String.format("%.1f", discount));
+                System.out.println(p+" **discount -"+String.format("%.1f",discount));
             } else {
                 System.out.println(p);
             }
