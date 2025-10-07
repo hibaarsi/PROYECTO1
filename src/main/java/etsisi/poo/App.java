@@ -40,8 +40,8 @@ public class App {
         Catalog catalog = new Catalog();
         Ticket ticketNew = new Ticket(catalog);
 
-        boolean continue = true;
-        while (continue) {
+        boolean keepRunning = true;
+        while (keepRunning) {
 
             System.out.print("tUPM> ");
             String comand = sc.nextLine();
@@ -103,7 +103,7 @@ public class App {
                     break;
 
                 case "exit":
-                    continue = false;
+                    keepRunning = false;
                     break;
                 default:
                     System.out.println("Unknown command");
