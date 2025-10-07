@@ -49,7 +49,8 @@ public class App {
             if (System.getenv("fileinput") != null &&
                     System.getenv("fileinput").equals("true"))
                 System.out.println(comand);
-            String[] sepparatedComand = comand.split(" ");
+            String[] sepparatedComand = comand.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            //
 
             switch (sepparatedComand[0]) {
                 case "help":
