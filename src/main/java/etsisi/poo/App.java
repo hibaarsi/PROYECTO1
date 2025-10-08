@@ -1,10 +1,12 @@
 package etsisi.poo;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
+/**
+ * Hello world!
+ */
 
 public class App {
     private static final String CLOSE_APP = "Closing application\n" + "Goodbye!";
@@ -17,7 +19,7 @@ public class App {
         if (args.length > 0) {
             System.out.println("Nombre del fichero: " + args[0]);
             app.init();
-            app.start();
+            app.leerArchivo(args[0]);
             app.end();
 
         } else {
@@ -30,9 +32,25 @@ public class App {
     private void init() {
         System.out.println(FIRST_MESSAGE);
     }
-
+    private void leerArchivo(String filename){
+        Catalog catalog= new Catalog();
+        Ticket ticketNew = new Ticket(catalog);
+        FileReader fileReader= null;
+        BufferedReader bufreader= null;
+        try {
+            fileReader = new FileReader(filename);
+            bufreader = new BufferedReader(fileReader);
+            String command;
+            while ((command = bufreader.readLine()) != null) {
+                System.out.print("tUPM> ");
+                System.out.println(command);
+                processCommand(command,catalog,ticketNew);
+            }
+        }catch (IOException e){
+            System.out.println("Error:File with " +filename+ " not found");
+        }
+    }
     private void start() {
-
         Scanner sc = new Scanner(System.in);
         Catalog catalog = new Catalog();
         Ticket ticketNew = new Ticket(catalog);
@@ -110,6 +128,67 @@ public class App {
 
     private void end() {
         System.out.println(CLOSE_APP);
+    }
+    private boolean processCommand(String command, Catalog catalog, Ticket ticketNew) {
+        String[] sepparatedComand = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+
+        switch (sepparatedComand[0]) {
+            case "help":
+                printHelp();
+                break;
+            case "prod":
+                switch (sepparatedComand[1]) {
+                    case "add":
+                        Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4]), Double.parseDouble(sepparatedComand[5]));
+                        catalog.addProduct(p);
+                        break;
+                    case "list":
+                        catalog.listProducts();
+                        break;
+                    case "update":
+                        catalog.updateProduct(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], sepparatedComand[4]);
+                        break;
+                    case "remove":
+                        catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
+                        break;
+                }
+
+                break;
+            case "ticket":
+                switch (sepparatedComand[1]) {
+                    case "new":
+                        ticketNew.newTicket();
+                        break;
+                    case "add":
+                        ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]), Integer.parseInt(sepparatedComand[3]));
+                        break;
+                    case "remove":
+                        ticketNew.removeProduct(Integer.parseInt(sepparatedComand[2]));
+                        break;
+                    case "print":
+                        ticketNew.printTicket();
+                        break;
+                }
+
+
+                break;
+            case "echo":
+
+                if (sepparatedComand.length > 1) {
+                    String text = String.join(" ", Arrays.copyOfRange(sepparatedComand, 1, sepparatedComand.length));
+                    System.out.println("echo \"" + text + "\"");
+                } else {
+                    System.out.println("echo \"\"");
+                }
+                break;
+
+            case "exit":
+                return false;
+            default:
+                System.out.println("Unknown command");
+                break;
+        }
+        return true;
     }
 
     private void printHelp() {
