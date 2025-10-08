@@ -73,7 +73,7 @@ public class App {
                 case "prod":
                     switch (sepparatedComand[1]) {
                         case "add":
-                            Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4]), Double.parseDouble(sepparatedComand[5]));
+                            Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4].toUpperCase()), Double.parseDouble(sepparatedComand[5]));
                             catalog.addProduct(p);
                             break;
                         case "list":
@@ -111,7 +111,6 @@ public class App {
 
                     break;
                 case "echo":
-
                     if (sepparatedComand.length > 1) {
                         String text = String.join(" ", Arrays.copyOfRange(sepparatedComand, 1, sepparatedComand.length));
                         System.out.println("echo \"" + text + "\"");
@@ -143,7 +142,7 @@ public class App {
             case "prod":
                 switch (sepparatedComand[1]) {
                     case "add":
-                        Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4]), Double.parseDouble(sepparatedComand[5]));
+                        Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4].toUpperCase()), Double.parseDouble(sepparatedComand[5]));
                         catalog.addProduct(p);
                         break;
                     case "list":
