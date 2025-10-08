@@ -5,9 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * Hello world!
- */
 
 public class App {
     private static final String CLOSE_APP = "Closing application\n" + "Goodbye!";
@@ -50,7 +47,6 @@ public class App {
                     System.getenv("fileinput").equals("true"))
                 System.out.println(comand);
             String[] sepparatedComand = comand.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-            //
 
             switch (sepparatedComand[0]) {
                 case "help":
