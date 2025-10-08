@@ -75,7 +75,6 @@ public class App {
                         case "new":
                             ticketNew.newTicket();
                             break;
-
                         case "add":
                             ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]), Integer.parseInt(sepparatedComand[3]));
                             break;
