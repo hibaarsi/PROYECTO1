@@ -9,9 +9,9 @@ import java.util.Scanner;
  */
 
 public class App {
-    private static final String CLOSE_APP = "Closing application\n" + "Goodbye!";
-    private static final String FIRST_MESSAGE = "Welcome to the ticket module App.\n" +
-            "Ticket module. Type 'help' to see commands.";
+    private static final String UNKNOWN_COMMAND = "Unknown command";
+    private static final String CLOSE_APP = "Closing application\nGoodbye!";
+    private static final String FIRST_MESSAGE = "Welcome to the ticket module App.\nTicket module. Type 'help' to see commands.";
     private static final String SPACE = "    ";
 
     public static void main(String[] args) {
@@ -85,6 +85,8 @@ public class App {
                         case "remove":
                             catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
                             break;
+                        default:
+                            unknownCommand();
                     }
 
                     break;
@@ -102,6 +104,8 @@ public class App {
                         case "print":
                             ticketNew.printTicket();
                             break;
+                        default:
+                            unknownCommand();
                     }
 
 
@@ -120,7 +124,7 @@ public class App {
                     keepRunning = false;
                     break;
                 default:
-                    System.out.println("Unknown command");
+                    unknownCommand();
                     break;
             }
         }
@@ -151,6 +155,8 @@ public class App {
                     case "remove":
                         catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
                         break;
+                    default:
+                        unknownCommand();
                 }
 
                 break;
@@ -168,6 +174,8 @@ public class App {
                     case "print":
                         ticketNew.printTicket();
                         break;
+                    default:
+                        unknownCommand();
                 }
 
 
@@ -185,32 +193,38 @@ public class App {
             case "exit":
                 return false;
             default:
-                System.out.println("Unknown command");
+                unknownCommand();
                 break;
         }
         return true;
     }
+    private void unknownCommand(){
+        System.out.println(UNKNOWN_COMMAND);
+    }
 
+    private String helpSb(){
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("Commands:\n")
+                .append(SPACE).append("prod add <id> \"<name>\" <category> <price>\n")
+                .append(SPACE).append("prod list\n")
+                .append(SPACE).append("prod update <id> NAME|CATEGORY|PRICE <value>\n")
+                .append(SPACE).append("prod remove <id>\n")
+                .append(SPACE).append("ticket new\n")
+                .append(SPACE).append("ticket add <prodId> <quantity>\n")
+                .append(SPACE).append("ticket remove <prodId>\n")
+                .append(SPACE).append("ticket print\n")
+                .append(SPACE).append("echo \"<texto>\"\n")
+                .append(SPACE).append("help\n")
+                .append(SPACE).append("exit\n\n\n")
+                .append("Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n")
+                .append("Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \n")
+                .append("ELECTRONICS 3%.\n");
+
+        return sb.toString();
+    }
     private void printHelp() {
-        System.out.println("Commands:");
-        System.out.println(SPACE + "prod add <id> \"<name>\" <category> <price>");
-        System.out.println(SPACE + "prod list");
-        System.out.println(SPACE + "prod update <id> NAME|CATEGORY|PRICE <value>");
-        System.out.println(SPACE + "prod remove <id>");
-        System.out.println(SPACE + "ticket new");
-        System.out.println(SPACE + "ticket add <prodId> <quantity>");
-        System.out.println(SPACE + "ticket remove <prodId>");
-        System.out.println(SPACE + "ticket print");
-        System.out.println(SPACE + "echo \"<texto>\"");
-        System.out.println(SPACE + "help");
-        System.out.println(SPACE + "exit\n\n");
-
-        System.out.println("Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n" +
-                "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \n" +
-                "ELECTRONICS 3%.");
-        System.out.println();
-
-
+        System.out.println(helpSb());
     }
 }
 
