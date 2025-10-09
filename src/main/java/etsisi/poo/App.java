@@ -4,10 +4,6 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
-/**
- * Hello world!
- */
-
 public class App {
     private static final String UNKNOWN_COMMAND = "Unknown command";
     private static final String CLOSE_APP = "Closing application\nGoodbye!";
@@ -34,7 +30,7 @@ public class App {
     }
     private void leerArchivo(String filename){
         Catalog catalog= new Catalog();
-        Ticket ticketNew = new Ticket(catalog);
+        Ticket ticket = new Ticket(catalog);
         FileReader fileReader= null;
         BufferedReader bufreader= null;
         try {
@@ -44,7 +40,7 @@ public class App {
             while ((command = bufreader.readLine()) != null) {
                 System.out.print("tUPM> ");
                 System.out.println(command);
-                processCommand(command,catalog,ticketNew);
+                startCommand(command,catalog,ticket);
             }
         }catch (IOException e){
             System.out.println("Error:File with " +filename+ " not found");
@@ -53,106 +49,41 @@ public class App {
     private void start() {
         Scanner sc = new Scanner(System.in);
         Catalog catalog = new Catalog();
-        Ticket ticketNew = new Ticket(catalog);
+        Ticket ticket = new Ticket(catalog);
 
         boolean keepRunning = true;
         while (keepRunning) {
 
             System.out.print("tUPM> ");
             String comand = sc.nextLine();
-
-            if (System.getenv("fileinput") != null &&
-                    System.getenv("fileinput").equals("true"))
-                System.out.println(comand);
-            String[] sepparatedComand = comand.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
-
-            switch (sepparatedComand[0]) {
-                case "help":
-                    printHelp();
-                    break;
-                case "prod":
-                    switch (sepparatedComand[1]) {
-                        case "add":
-                            Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4].toUpperCase()), Double.parseDouble(sepparatedComand[5]));
-                            catalog.addProduct(p);
-                            break;
-                        case "list":
-                            catalog.listProducts();
-                            break;
-                        case "update":
-                            catalog.updateProduct(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], sepparatedComand[4]);
-                            break;
-                        case "remove":
-                            catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
-                            break;
-                        default:
-                            unknownCommand();
-                    }
-
-                    break;
-                case "ticket":
-                    switch (sepparatedComand[1]) {
-                        case "new":
-                            ticketNew.newTicket();
-                            break;
-                        case "add":
-                            ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]), Integer.parseInt(sepparatedComand[3]));
-                            break;
-                        case "remove":
-                            ticketNew.removeProduct(Integer.parseInt(sepparatedComand[2]));
-                            break;
-                        case "print":
-                            ticketNew.printTicket();
-                            break;
-                        default:
-                            unknownCommand();
-                    }
-
-
-                    break;
-                case "echo":
-                    if (sepparatedComand.length > 1) {
-                        String text = String.join(" ", Arrays.copyOfRange(sepparatedComand, 1, sepparatedComand.length));
-                        System.out.println("echo \"" + text + "\"");
-                    } else {
-                        System.out.println("echo \"\"");
-                    }
-                    break;
-
-                case "exit":
-                    keepRunning = false;
-                    break;
-                default:
-                    unknownCommand();
-                    break;
-            }
+            keepRunning= startCommand(comand,catalog,ticket);
         }
     }
 
     private void end() {
         System.out.println(CLOSE_APP);
     }
-    private boolean processCommand(String command, Catalog catalog, Ticket ticketNew) {
-        String[] sepparatedComand = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+    private boolean startCommand(String command, Catalog catalog, Ticket ticket) {
+        String[] separatedComand = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
-        switch (sepparatedComand[0]) {
+        switch (separatedComand[0]) {
             case "help":
                 printHelp();
                 break;
             case "prod":
-                switch (sepparatedComand[1]) {
+                switch (separatedComand[1]) {
                     case "add":
-                        Product p = new Product(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], Category.valueOf(sepparatedComand[4].toUpperCase()), Double.parseDouble(sepparatedComand[5]));
+                        Product p = new Product(Integer.parseInt(separatedComand[2]), separatedComand[3], Category.valueOf(separatedComand[4].toUpperCase()), Double.parseDouble(separatedComand[5]));
                         catalog.addProduct(p);
                         break;
                     case "list":
                         catalog.listProducts();
                         break;
                     case "update":
-                        catalog.updateProduct(Integer.parseInt(sepparatedComand[2]), sepparatedComand[3], sepparatedComand[4]);
+                        catalog.updateProduct(Integer.parseInt(separatedComand[2]), separatedComand[3], separatedComand[4]);
                         break;
                     case "remove":
-                        catalog.removeProduct(Integer.parseInt(sepparatedComand[2]));
+                        catalog.removeProduct(Integer.parseInt(separatedComand[2]));
                         break;
                     default:
                         unknownCommand();
@@ -160,18 +91,18 @@ public class App {
 
                 break;
             case "ticket":
-                switch (sepparatedComand[1]) {
+                switch (separatedComand[1]) {
                     case "new":
-                        ticketNew.newTicket();
+                        ticket.newTicket();
                         break;
                     case "add":
-                        ticketNew.addProduct(Integer.parseInt(sepparatedComand[2]), Integer.parseInt(sepparatedComand[3]));
+                        ticket.addProduct(Integer.parseInt(separatedComand[2]), Integer.parseInt(separatedComand[3]));
                         break;
                     case "remove":
-                        ticketNew.removeProduct(Integer.parseInt(sepparatedComand[2]));
+                        ticket.removeProduct(Integer.parseInt(separatedComand[2]));
                         break;
                     case "print":
-                        ticketNew.printTicket();
+                        ticket.printTicket();
                         break;
                     default:
                         unknownCommand();
@@ -180,9 +111,8 @@ public class App {
 
                 break;
             case "echo":
-
-                if (sepparatedComand.length > 1) {
-                    String text = String.join(" ", Arrays.copyOfRange(sepparatedComand, 1, sepparatedComand.length));
+                if (separatedComand.length > 1) {
+                    String text = String.join(" ", Arrays.copyOfRange(separatedComand, 1, separatedComand.length));
                     System.out.println("echo \"" + text + "\"");
                 } else {
                     System.out.println("echo \"\"");

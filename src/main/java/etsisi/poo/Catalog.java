@@ -68,7 +68,7 @@ public class Catalog {
 
             switch (field.toUpperCase()) {
                 case "NAME":
-                    product.setNombre(value);
+                    product.setName(value);
                     System.out.println(product.toString());
                     System.out.println("prod update: ok");
                     break;
@@ -90,7 +90,7 @@ public class Catalog {
                         System.out.println("Price must be a positive number: " + value);
                     }
                     else {
-                        product.setPrecio(price);
+                        product.setPrice(price);
                         System.out.println(product.toString());
                         System.out.println("prod update: ok");
                     }

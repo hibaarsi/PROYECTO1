@@ -3,55 +3,55 @@ package etsisi.poo;
 public class Product {
     public static final int MAX_NAME_LENGTH = 100;
     private final int id; // es unico
-    private String nombre;
+    private String name;
     private Category category;
-    private double precio;
+    private double price;
 
-    public Product(int id, String nombre, Category category, double precio) {
+    public Product(int id, String name, Category category, double price) {
 
-        if (id <= 0) throw new IllegalArgumentException("Tiene que ser un numero positivo");
-        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
-        if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No puede exceder 100 caracteres");
-        if (precio <= 0) throw new IllegalArgumentException("Tiene que ser mayor a 0");
+        if (id <= 0) throw new IllegalArgumentException("It needs to be a positive number");
+        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException("It can't be empty");
+        if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No more than 100 characters");
+        if (price <= 0) throw new IllegalArgumentException("Be greater than 0");
         this.id = id;
-        this.nombre = nombre.trim();
+        this.name = name.trim();
         this.category = category;
-        this.precio = precio;
+        this.price = price;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
     public Category getCategory() {
         return category;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrice() {
+        return price;
     }
 
-    public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) throw new IllegalArgumentException("No puede estar vacio");
+    public void setName(String name) {
+        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException("It can't be empty");
 
-        if (nombre.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No puede exceder 100 caracteres");
+        if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No more than 100 characters");
 
-        this.nombre = nombre.trim();
+        this.name = name.trim();
     }
 
     public void setCategory(Category category) {
         this.category = category;
     }
 
-    public void setPrecio(double precio) {
-        if (precio <= 0) {
-            throw new IllegalArgumentException("Tiene que ser mayor a 0");
+    public void setPrice(double price) {
+        if (price <= 0) {
+            throw new IllegalArgumentException("Be greater than 0");
         }
-        this.precio = precio;
+        this.price = price;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Product {
     @Override
     public String toString() {
         return String.format("{class:Product, id:%d, name:'%s', category:%s, price:%.1f}",
-                id, nombre, category, precio);
+                id, name, category, price);
     }
 
 }

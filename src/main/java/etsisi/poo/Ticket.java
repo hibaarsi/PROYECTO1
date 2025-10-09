@@ -28,7 +28,7 @@ public class Ticket {
             for (int i = 0; i < cant; i++) {
                 products.add(product);
             }
-            System.out.println("Product added: " + product.getNombre() + " x " + cant);
+            System.out.println("Product added: " + product.getName() + " x " + cant);
             System.out.println(String.format("%.2f€", Total()));
         }
 
@@ -73,9 +73,9 @@ public class Ticket {
             // Aplicar descuento si hay más de 1
             if (contador > 1) {
                 double discount = category.getDiscount();
-                total += product.getPrecio() * (1 - discount);
+                total += product.getPrice() * (1 - discount);
             } else {
-                total += product.getPrecio();
+                total += product.getPrice();
             }
         }
         return total;
@@ -86,7 +86,7 @@ public class Ticket {
         if (products.isEmpty()) {
             System.out.println("Esta vacio");
         }
-        products.sort((p1, p2) -> p1.getNombre().compareToIgnoreCase(p2.getNombre()));
+        products.sort((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
 
         for (int i = 0; i < products.size(); i++) {
             Product p = products.get(i);
@@ -97,7 +97,7 @@ public class Ticket {
                     cont++;
                 }
             }
-            System.out.println("{class:Product, id:" + p.getId() + ", name:'"+ p.getNombre() +"', category:"+p.getCategory()+", price:"+p.getPrecio()+"30.0} **discount "); //+p.getDiscount+"-3.0 "
+            System.out.println("{class:Product, id:" + p.getId() + ", name:'"+ p.getName() +"', category:"+p.getCategory()+", price:"+p.getPrice()+"30.0} **discount "); //+p.getDiscount+"-3.0 "
         }
 
         double totalprice = 0.0;
@@ -113,13 +113,13 @@ public class Ticket {
             }
             double discount = 0.0;
             if (cont >= 2) {
-                discount = p.getPrecio() * p.getCategory().getDiscount();
+                discount = p.getPrice() * p.getCategory().getDiscount();
                 System.out.println(p+" **discount -"+String.format("%.1f",discount));
             } else {
                 System.out.println(p);
             }
 
-            totalprice += p.getPrecio();
+            totalprice += p.getPrice();
             totaldiscount += discount;
         }
     }
