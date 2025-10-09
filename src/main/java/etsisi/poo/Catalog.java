@@ -13,11 +13,11 @@ public class Catalog {
     }
 
     public void addProduct(Product product) { // revisar
-        if (size() >= MAX_ELEMENTS){
+        if (size() >= MAX_ELEMENTS) {
             System.out.println("Items limit reached");
-        }else if (existProduct(product.getId())){
+        } else if (existProduct(product.getId())) {
             System.out.println("Product with id " + product.getId() + " already exists");
-        }else {
+        } else {
             items.put(product.getId(), product);
             String productString = product.toString();
             System.out.println(productString);
@@ -47,8 +47,8 @@ public class Catalog {
     public void removeProduct(int id) {
         if (!existProduct(id)) {
             System.out.println("Product with id " + id + " does not exist");
-        }else {
-            Product removed=items.get(id);
+        } else {
+            Product removed = items.get(id);
             items.remove(id);
             System.out.println(removed.toString());
             System.out.println("prod remove:ok\n");
@@ -63,7 +63,7 @@ public class Catalog {
         //dentro de cada opcion porque como estaba fuera del switch se imprimia aunque no se actualizase
         if (!existProduct(id)) {
             System.out.println("Product with id " + id + " does not exist");
-        }else{
+        } else {
             Product product = items.get(id);
 
             switch (field.toUpperCase()) {
@@ -88,8 +88,7 @@ public class Catalog {
                     double price = Double.parseDouble(value);
                     if (price <= 0) {
                         System.out.println("Price must be a positive number: " + value);
-                    }
-                    else {
+                    } else {
                         product.setPrice(price);
                         System.out.println(product.toString());
                         System.out.println("prod update: ok\n");

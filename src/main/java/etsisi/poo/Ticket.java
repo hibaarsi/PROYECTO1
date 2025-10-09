@@ -21,11 +21,9 @@ public class Ticket {
     public void addProduct(int productId, int cant) {
         if (!catalog.existProduct(productId)) {
             System.out.println("Product with id " + productId + " does not exist");
-        }
-        else if (products.size() + cant >MAX_PRODUCTOS) {
+        } else if (products.size() + cant > MAX_PRODUCTOS) {
             System.out.println("You can't add more products");
-        }
-        else {
+        } else {
             Product product = catalog.getProduct(productId);
             for (int i = 0; i < cant; i++) {
                 products.add(product);
@@ -56,13 +54,15 @@ public class Ticket {
             } else System.out.println("Product with id " + productId + " not found");
         }
     }
+
     public double getTotal() {
         double total = 0;
-        for(Product product: products){
-           total+=product.getPrice();
+        for (Product product : products) {
+            total += product.getPrice();
         }
         return total;
     }
+
     public double TotalwDiscount() {
         if (products.isEmpty()) {
             return 0;
@@ -70,15 +70,15 @@ public class Ticket {
         double total = 0;
         for (Product product : products) {
             Category category = product.getCategory();
-            int contador = 0;
+            int cont = 0;
             // si son de la misma categoria
             for (Product p : products) {
                 if (p.getCategory() == category) {
-                    contador++;
+                    cont++;
                 }
             }
             // Aplicar descuento si hay más de 1
-            if (contador > 1) {
+            if (cont > 1) {
                 double discount = category.getDiscount();
                 total += product.getPrice() * discount;
             }
@@ -86,24 +86,25 @@ public class Ticket {
         }
         return total;
     }
-    public double getFinalPrice(){
+
+    public double getFinalPrice() {
         return getTotal() - TotalwDiscount();
     }
 
 
     public void printTicket() {
         if (products.isEmpty()) System.out.println("It's empty");
-        else{
+        else {
             products.sort((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
             for (Product product : products) {
                 Category category = product.getCategory();
-                int contador = 0;
+                int cont = 0;
                 for (Product p : products) {
                     if (p.getCategory() == category) {
-                        contador++;
+                        cont++;
                     }
                 }
-                if (contador > 1) {
+                if (cont > 1) {
                     double discount = product.getPrice() * category.getDiscount();
                     System.out.println(product + " **discount -" + discount);
                 } else {
@@ -123,7 +124,6 @@ public class Ticket {
 
 
     }
-
 
 
 }

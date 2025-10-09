@@ -68,8 +68,9 @@ public class Product {
 
     @Override
     public String toString() {
+        String cleanName = name.replace("\"", ""); //esto es para quitar las comillas dobles
         return String.format("{class:Product, id:%d, name:'%s', category:%s, price:%.1f}",
-                id, name, category, price);
+                id, cleanName, category, price);
     }
 
 }

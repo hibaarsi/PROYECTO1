@@ -28,11 +28,12 @@ public class App {
     private void init() {
         System.out.println(FIRST_MESSAGE);
     }
-    private void leerArchivo(String filename){
-        Catalog catalog= new Catalog();
+
+    private void leerArchivo(String filename) {
+        Catalog catalog = new Catalog();
         Ticket ticket = new Ticket(catalog);
-        FileReader fileReader= null;
-        BufferedReader bufreader= null;
+        FileReader fileReader = null;
+        BufferedReader bufreader = null;
         try {
             fileReader = new FileReader(filename);
             bufreader = new BufferedReader(fileReader);
@@ -40,12 +41,13 @@ public class App {
             while ((command = bufreader.readLine()) != null) {
                 System.out.print("tUPM> ");
                 System.out.println(command);
-                startCommand(command,catalog,ticket);
+                startCommand(command, catalog, ticket);
             }
-        }catch (IOException e){
-            System.out.println("Error:File with " +filename+ " not found");
+        } catch (IOException e) {
+            System.out.println("Error:File with " + filename + " not found");
         }
     }
+
     private void start() {
         Scanner sc = new Scanner(System.in);
         Catalog catalog = new Catalog();
@@ -56,13 +58,14 @@ public class App {
 
             System.out.print("tUPM> ");
             String comand = sc.nextLine();
-            keepRunning= startCommand(comand,catalog,ticket);
+            keepRunning = startCommand(comand, catalog, ticket);
         }
     }
 
     private void end() {
         System.out.println(CLOSE_APP);
     }
+
     private boolean startCommand(String command, Catalog catalog, Ticket ticket) {
         String[] separatedComand = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
@@ -128,11 +131,12 @@ public class App {
         }
         return true;
     }
-    private void unknownCommand(){
+
+    private void unknownCommand() {
         System.out.println(UNKNOWN_COMMAND);
     }
 
-    private String helpSb(){
+    private String helpSb() {
         StringBuffer sb = new StringBuffer();
 
         sb.append("Commands:\n")
@@ -153,6 +157,7 @@ public class App {
 
         return sb.toString();
     }
+
     private void printHelp() {
         System.out.println(helpSb());
     }
