@@ -21,9 +21,11 @@ public class Ticket {
     public void addProduct(int productId, int cant) {
         if (!catalog.existProduct(productId)) {
             System.out.println("Product with id " + productId + " does not exist");
-        } else if (products.size() + cant >= MAX_PRODUCTOS) {
+        }
+        else if (products.size() + cant >MAX_PRODUCTOS) {
             System.out.println("You can't add more products");
-        } else {
+        }
+        else {
             Product product = catalog.getProduct(productId);
             for (int i = 0; i < cant; i++) {
                 products.add(product);
