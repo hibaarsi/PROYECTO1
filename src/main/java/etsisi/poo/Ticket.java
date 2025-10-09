@@ -15,7 +15,7 @@ public class Ticket {
 
     public void newTicket() {
         products.clear();
-        System.out.println("ticket new: ok");
+        System.out.println("ticket new: ok\n");
     }
 
     public void addProduct(int productId, int cant) {
@@ -30,8 +30,8 @@ public class Ticket {
             for (int i = 0; i < cant; i++) {
                 products.add(product);
             }
-            System.out.println("Product added: " + product.getName() + " x " + cant);
-            System.out.println(String.format("%.2f€", Total()));
+            printTicket();
+            System.out.println("ticket add:ok\n");
         }
 
     }
@@ -51,18 +51,23 @@ public class Ticket {
             }
             if (removed > 0) {
                 System.out.println("Product with id " + productId + " removed");
-                System.out.println(String.format("%.2f€", Total()));
+                printTicket();
 
             } else System.out.println("Product with id " + productId + " not found");
         }
     }
-
-    public double Total() {
+    public double getTotal() {
+        double total = 0;
+        for(Product product: products){
+           total+=product.getPrice();
+        }
+        return total;
+    }
+    public double TotalwDiscount() {
         if (products.isEmpty()) {
             return 0;
         }
         double total = 0;
-
         for (Product product : products) {
             Category category = product.getCategory();
             int contador = 0;
@@ -75,56 +80,50 @@ public class Ticket {
             // Aplicar descuento si hay más de 1
             if (contador > 1) {
                 double discount = category.getDiscount();
-                total += product.getPrice() * (1 - discount);
-            } else {
-                total += product.getPrice();
+                total += product.getPrice() * discount;
             }
+
         }
         return total;
+    }
+    public double getFinalPrice(){
+        return getTotal() - TotalwDiscount();
     }
 
 
     public void printTicket() {
-        if (products.isEmpty()) {
-            System.out.println("Esta vacio");
-        }
-        products.sort((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
-
-        for (int i = 0; i < products.size(); i++) {
-            Product p = products.get(i);
-            int cont = 0;
-
-            for (int j = 0; j < products.size(); j++) {
-                if (products.get(j).getCategory() == p.getCategory()) {
-                    cont++;
+        if (products.isEmpty()) System.out.println("It's empty");
+        else{
+            products.sort((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
+            for (Product product : products) {
+                Category category = product.getCategory();
+                int contador = 0;
+                for (Product p : products) {
+                    if (p.getCategory() == category) {
+                        contador++;
+                    }
+                }
+                if (contador > 1) {
+                    double discount = product.getPrice() * category.getDiscount();
+                    System.out.println(product + " **discount -" + discount);
+                } else {
+                    System.out.println(product);
                 }
             }
-            System.out.println("{class:Product, id:" + p.getId() + ", name:'"+ p.getName() +"', category:"+p.getCategory()+", price:"+p.getPrice()+"30.0} **discount "); //+p.getDiscount+"-3.0 "
+
+
+            double totalPrice = getTotal();
+            double totalDiscount = TotalwDiscount();
+            double finalPrice = getFinalPrice();
+
+            System.out.println("Total price: " + totalPrice);
+            System.out.println("Total discount: " + totalDiscount);
+            System.out.println("Final Price: " + finalPrice);
         }
 
-        double totalprice = 0.0;
-        double totaldiscount = 0.0;
 
-        for (int i = 0; i < products.size(); i++) {
-            Product p = products.get(i);
-            int cont = 0;
-            for (int j = 0; j < products.size(); j++) {
-                if (products.get(j).getCategory() == p.getCategory()) {
-                    cont++;
-                }
-            }
-            double discount = 0.0;
-            if (cont >= 2) {
-                discount = p.getPrice() * p.getCategory().getDiscount();
-                System.out.println(p+" **discount -"+String.format("%.1f",discount));
-            } else {
-                System.out.println(p);
-            }
-
-            totalprice += p.getPrice();
-            totaldiscount += discount;
-        }
     }
+
 
 
 }

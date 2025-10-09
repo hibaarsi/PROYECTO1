@@ -21,7 +21,7 @@ public class Catalog {
             items.put(product.getId(), product);
             String productString = product.toString();
             System.out.println(productString);
-            System.out.println("prod add: ok");
+            System.out.println("prod add: ok\n");
         }
     }
 
@@ -34,7 +34,7 @@ public class Catalog {
         for (Product product : items.values()) {
             System.out.println(product);
         }
-        System.out.println("prod list: ok");
+        System.out.println("prod list: ok\n");
     }
 
     public Product getProduct(int id) {
@@ -51,7 +51,7 @@ public class Catalog {
             Product removed=items.get(id);
             items.remove(id);
             System.out.println(removed.toString());
-            System.out.println("prod remove:ok");
+            System.out.println("prod remove:ok\n");
         }
     }
 
@@ -70,7 +70,7 @@ public class Catalog {
                 case "NAME":
                     product.setName(value);
                     System.out.println(product.toString());
-                    System.out.println("prod update: ok");
+                    System.out.println("prod update: ok\n");
                     break;
 
                 case "CATEGORY":                            // este no he cambiado lo de la excep.
@@ -78,7 +78,7 @@ public class Catalog {
                         Category category = Category.valueOf(value.toUpperCase());
                         product.setCategory(category);
                         System.out.println(product.toString());
-                        System.out.println("prod update: ok");
+                        System.out.println("prod update: ok\n");
                     } catch (IllegalArgumentException e) {
                         throw new IllegalArgumentException("Invalid category: " + value);
                     }
@@ -92,7 +92,7 @@ public class Catalog {
                     else {
                         product.setPrice(price);
                         System.out.println(product.toString());
-                        System.out.println("prod update: ok");
+                        System.out.println("prod update: ok\n");
                     }
 
                     break;

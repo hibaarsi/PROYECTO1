@@ -103,6 +103,7 @@ public class App {
                         break;
                     case "print":
                         ticket.printTicket();
+                        System.out.println("ticket print: ok\n");
                         break;
                     default:
                         unknownCommand();
@@ -113,7 +114,7 @@ public class App {
             case "echo":
                 if (separatedComand.length > 1) {
                     String text = String.join(" ", Arrays.copyOfRange(separatedComand, 1, separatedComand.length));
-                    System.out.println("echo \"" + text + "\"");
+                    System.out.println("echo " + text + "\n");
                 } else {
                     System.out.println("echo \"\"");
                 }
