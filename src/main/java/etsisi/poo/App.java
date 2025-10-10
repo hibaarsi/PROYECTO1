@@ -105,8 +105,7 @@ public class App {
                         ticket.removeProduct(Integer.parseInt(separatedComand[2]));
                         break;
                     case "print":
-                        ticket.printTicket();
-                        System.out.println("ticket print: ok\n");
+                       ticket.printTicketwithOk();
                         break;
                     default:
                         unknownCommand();
