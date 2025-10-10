@@ -7,6 +7,11 @@ public class Ticket {
     private ArrayList<Product> products;
     private Catalog catalog;
     private static final int MAX_PRODUCTOS = 100;
+    private static final String NEW_TICKET = "ticket new: ok\n";
+    private static final String ADD_TICKET = "ticket add: ok\n";
+    private static final String EMPTY_TICKET = "It's empty";
+    private static final String PRINT_TICKET = "ticket print: ok\n";
+    private static final String PRODUCT_NOT_EXISTS = "The product doesn't exist in this ticket";
 
     public Ticket(Catalog catalog) {
         this.products = new ArrayList<>();
@@ -15,7 +20,7 @@ public class Ticket {
 
     public void newTicket() {
         products.clear();
-        System.out.println("ticket new: ok\n");
+        System.out.println(NEW_TICKET);
     }
 
     public void addProduct(int productId, int cant) {
@@ -29,14 +34,14 @@ public class Ticket {
                 products.add(product);
             }
             printTicketWithoutOk();
-            System.out.println("ticket add:ok\n");
+            System.out.println(ADD_TICKET);
         }
 
     }
 
     public void removeProduct(int productId) {
         if (!catalog.existProduct(productId)) {
-            System.out.println("The product doesn't exist in this ticket");
+            System.out.println(PRODUCT_NOT_EXISTS);
         } else {
             int removed = 0;
             Iterator<Product> iterator = products.iterator();
@@ -93,7 +98,7 @@ public class Ticket {
 
 
     public void printTicketWithoutOk() {
-        if (products.isEmpty()) System.out.println("It's empty");
+        if (products.isEmpty()) System.out.println(EMPTY_TICKET);
         else {
             products.sort((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
             for (Product product : products) {
@@ -126,7 +131,7 @@ public class Ticket {
     }
     public void printTicketWithOk(){
         printTicketWithoutOk();
-        System.out.println("ticket print: ok\n");
+        System.out.println(PRINT_TICKET);
     }
 
 

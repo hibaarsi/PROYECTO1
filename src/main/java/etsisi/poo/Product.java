@@ -2,6 +2,10 @@ package etsisi.poo;
 
 public class Product {
     public static final int MAX_NAME_LENGTH = 100;
+    private static final String NEEDS_TO_BE_POSITIVE = "It needs to be a positive number";
+    private static final String NOT_EMPTY = "It can't be empty";
+    private static final String SIZE_LIMIT_MESSAGE = "No more than 100 characters";
+    private static final String PRICE_RESTRICTION = "Be greater than 0";
     private final int id; // es unico
     private String name;
     private Category category;
@@ -9,10 +13,10 @@ public class Product {
 
     public Product(int id, String name, Category category, double price) {
 
-        if (id <= 0) throw new IllegalArgumentException("It needs to be a positive number");
-        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException("It can't be empty");
-        if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException("No more than 100 characters");
-        if (price <= 0) throw new IllegalArgumentException("Be greater than 0");
+        if (id <= 0) throw new IllegalArgumentException(NEEDS_TO_BE_POSITIVE);
+        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException(NOT_EMPTY);
+        if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException(SIZE_LIMIT_MESSAGE);
+        if (price <= 0) throw new IllegalArgumentException(PRICE_RESTRICTION);
         this.id = id;
         this.name = name.trim();
         this.category = category;
