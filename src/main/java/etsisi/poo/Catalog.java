@@ -12,7 +12,7 @@ public class Catalog {
         this.items = new HashMap<>();
     }
 
-    public void addProduct(Product product) { // revisar
+    public void addProduct(Product product) {
         if (size() >= MAX_ELEMENTS) {
             System.out.println("Items limit reached");
         } else if (existProduct(product.getId())) {
@@ -56,11 +56,6 @@ public class Catalog {
     }
 
     public void updateProduct(int id, String field, String value) {
-        //revisar
-        // he metido el
-        // System.out.println(product.toString());
-        // System.out.println("prod update: ok");
-        //dentro de cada opcion porque como estaba fuera del switch se imprimia aunque no se actualizase
         if (!existProduct(id)) {
             System.out.println("Product with id " + id + " does not exist");
         } else {
@@ -73,7 +68,7 @@ public class Catalog {
                     System.out.println("prod update: ok\n");
                     break;
 
-                case "CATEGORY":                            // este no he cambiado lo de la excep.
+                case "CATEGORY":
                     try {
                         Category category = Category.valueOf(value.toUpperCase());
                         product.setCategory(category);
