@@ -28,7 +28,7 @@ public class Ticket {
             for (int i = 0; i < cant; i++) {
                 products.add(product);
             }
-            printTicket();
+            printTicketwithoutOk();
             System.out.println("ticket add:ok\n");
         }
 
@@ -49,7 +49,7 @@ public class Ticket {
             }
             if (removed > 0) {
                 System.out.println("Product with id " + productId + " removed");
-                printTicket();
+                printTicketwithoutOk();
 
             } else System.out.println("Product with id " + productId + " not found");
         }
@@ -92,7 +92,7 @@ public class Ticket {
     }
 
 
-    public void printTicket() {
+    public void printTicketwithoutOk() {
         if (products.isEmpty()) System.out.println("It's empty");
         else {
             products.sort((p1, p2) -> p1.getName().compareToIgnoreCase(p2.getName()));
@@ -123,6 +123,10 @@ public class Ticket {
         }
 
 
+    }
+    public void printTicketwithOk(){
+        printTicketwithoutOk();
+        System.out.println("ticket print: ok\n");
     }
 
 
