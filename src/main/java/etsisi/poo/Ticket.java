@@ -31,7 +31,6 @@ public class Ticket {
             printTicket();
             System.out.println("ticket add:ok\n");
         }
-
     }
 
     public void removeProduct(int productId) {
@@ -82,7 +81,6 @@ public class Ticket {
                 double discount = category.getDiscount();
                 total += product.getPrice() * discount;
             }
-
         }
         return total;
     }
@@ -112,7 +110,6 @@ public class Ticket {
                 }
             }
 
-
             double totalPrice = getTotal();
             double totalDiscount = TotalwDiscount();
             double finalPrice = getFinalPrice();
@@ -121,9 +118,5 @@ public class Ticket {
             System.out.println("Total discount: " + totalDiscount);
             System.out.println("Final Price: " + finalPrice);
         }
-
-
     }
-
-
 }
