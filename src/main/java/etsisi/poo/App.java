@@ -51,10 +51,10 @@ public class App {
         System.out.println(FIRST_MESSAGE);
     }
 
-    private void leerArchivo(String filename) {
+    private void leerArchivo(String fileName) {
         Catalog catalog = new Catalog();
         Ticket ticket = new Ticket(catalog);
-        try (FileReader fileReader = new FileReader(filename);
+        try (FileReader fileReader = new FileReader(fileName);
              BufferedReader bufreader = new BufferedReader(fileReader)) {
 
             String command;
@@ -65,7 +65,7 @@ public class App {
             }
 
         } catch (IOException e) {
-            System.out.println(String.format(FILE_NOT_FOUND, filename));
+            System.out.println(String.format(FILE_NOT_FOUND, fileName));
         }
     }
 

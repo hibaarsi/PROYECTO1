@@ -79,7 +79,7 @@ public class Ticket {
         return total;
     }
 
-    public double TotalwDiscount() {
+    public double totalWithDiscount() {
         if (products.isEmpty()) {
             return 0;
         }
@@ -101,7 +101,7 @@ public class Ticket {
     }
 
     public double getFinalPrice() {
-        return getTotal() - TotalwDiscount();
+        return getTotal() - totalWithDiscount();
     }
 
     public void printTicketWithoutOk() {
@@ -126,7 +126,7 @@ public class Ticket {
             }
 
             double totalPrice = getTotal();
-            double totalDiscount = TotalwDiscount();
+            double totalDiscount = totalWithDiscount();
             double finalPrice = getFinalPrice();
 
             System.out.println(String.format(TOTAL_PRICE, totalPrice));
