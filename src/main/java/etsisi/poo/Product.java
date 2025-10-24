@@ -21,7 +21,7 @@ public class Product {
 
     // 🔹 Constructor
     public Product(int id, String name, Category category, double price) {
-        if (id <= 0) throw new IllegalArgumentException(NEEDS_TO_BE_POSITIVE);
+        if (id < 0) throw new IllegalArgumentException(NEEDS_TO_BE_POSITIVE);
         if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException(NOT_EMPTY);
         if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException(SIZE_LIMIT_MESSAGE);
         if (price <= 0) throw new IllegalArgumentException(PRICE_RESTRICTION);

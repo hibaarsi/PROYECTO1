@@ -33,6 +33,8 @@ public class App {
     private static final String HELP_DISCOUNTS =
             "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \nELECTRONICS 3%.\n";
 
+    // poner catalog y ticket de atributo en vez de parametros
+    // muchos try-catch para que no pare la ejecucion
     public static void main(String[] args) {
         App app = new App();
         if (args.length > 0) {
@@ -98,12 +100,16 @@ public class App {
             case "prod":
                 switch (separatedComand[1]) {
                     case "add":
-                        Product p = new Product(
-                                Integer.parseInt(separatedComand[2]),
-                                separatedComand[3],
-                                Category.valueOf(separatedComand[4].toUpperCase()),
-                                Double.parseDouble(separatedComand[5]));
-                        catalog.addProduct(p);
+                        if( separatedComand.length == 6) {
+                            Product p = new Product(
+                                    Integer.parseInt(separatedComand[2]),
+                                    separatedComand[3],
+                                    Category.valueOf(separatedComand[4].toUpperCase()),
+                                    Double.parseDouble(separatedComand[5]));
+                            catalog.addProduct(p);
+                        }else{
+                            System.out.println("Not valid");
+                        }
                         break;
                     case "list":
                         catalog.listProducts();
