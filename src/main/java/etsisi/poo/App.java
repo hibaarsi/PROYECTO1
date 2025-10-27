@@ -32,9 +32,10 @@ public class App {
             "Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n";
     private static final String HELP_DISCOUNTS =
             "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \nELECTRONICS 3%.\n";
+    Catalog catalog;
+    Ticket ticket;
 
-    // poner catalog y ticket de atributo en vez de parametros
-    // muchos try-catch para que no pare la ejecucion
+
     public static void main(String[] args) {
         App app = new App();
         if (args.length > 0) {
@@ -54,8 +55,8 @@ public class App {
     }
 
     private void leerArchivo(String fileName) {
-        Catalog catalog = new Catalog();
-        Ticket ticket = new Ticket(catalog);
+        catalog= new Catalog();
+        ticket = new Ticket(catalog);
         try (FileReader fileReader = new FileReader(fileName);
              BufferedReader bufreader = new BufferedReader(fileReader)) {
 
@@ -63,7 +64,7 @@ public class App {
             while ((command = bufreader.readLine()) != null) {
                 System.out.print(PROMPT);
                 System.out.println(command);
-                startCommand(command, catalog, ticket);
+                startCommand(command);
             }
 
         } catch (IOException e) {
@@ -73,14 +74,14 @@ public class App {
 
     private void start() {
         Scanner sc = new Scanner(System.in);
-        Catalog catalog = new Catalog();
-        Ticket ticket = new Ticket(catalog);
+         catalog = new Catalog();
+         ticket = new Ticket(catalog);
 
         boolean keepRunning = true;
         while (keepRunning) {
             System.out.print(PROMPT);
             String comand = sc.nextLine();
-            keepRunning = startCommand(comand, catalog, ticket);
+            keepRunning = startCommand(comand);
         }
         sc.close();
     }
@@ -89,7 +90,7 @@ public class App {
         System.out.println(CLOSE_APP);
     }
 
-    private boolean startCommand(String command, Catalog catalog, Ticket ticket) {
+    private boolean startCommand(String command) {
         String[] separatedComand = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 
         switch (separatedComand[0]) {
@@ -101,14 +102,32 @@ public class App {
                 switch (separatedComand[1]) {
                     case "add":
                         if( separatedComand.length == 6) {
-                            Product p = new Product(
-                                    Integer.parseInt(separatedComand[2]),
-                                    separatedComand[3],
-                                    Category.valueOf(separatedComand[4].toUpperCase()),
-                                    Double.parseDouble(separatedComand[5]));
+                            int id;
+                            try {
+                                id = Integer.parseInt(separatedComand[2]);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid ID " + separatedComand[2]);
+                                break;
+                            }
+                            String name = separatedComand[3];
+                            double price;
+                            try {
+                                price = Double.parseDouble(separatedComand[5]);
+                            } catch (NumberFormatException e) {
+                                System.out.println("Invalid Price " + separatedComand[5]);
+                                break;
+                            }
+                            Category category;
+                            try {
+                                category = Category.valueOf(separatedComand[4].toUpperCase());
+                            } catch (IllegalArgumentException e) {
+                                System.out.println("Invalid Category " + separatedComand[4]);
+                                break;
+                            }
+                            Product p = new Product(id, name, category, price);
                             catalog.addProduct(p);
                         }else{
-                            System.out.println("Not valid");
+                            System.out.println("Not valid\n");
                         }
                         break;
                     case "list":

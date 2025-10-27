@@ -1,5 +1,7 @@
 package etsisi.poo;
 
+import java.sql.SQLOutput;
+
 public class Product {
     //Constantes públicas
     public static final int MAX_NAME_LENGTH = 100;
@@ -21,11 +23,10 @@ public class Product {
 
     // 🔹 Constructor
     public Product(int id, String name, Category category, double price) {
-        if (id < 0) throw new IllegalArgumentException(NEEDS_TO_BE_POSITIVE);
-        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException(NOT_EMPTY);
-        if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException(SIZE_LIMIT_MESSAGE);
-        if (price <= 0) throw new IllegalArgumentException(PRICE_RESTRICTION);
-
+        if (id <= 0) System.out.println(NEEDS_TO_BE_POSITIVE);
+        if (name == null || name.trim().isEmpty()) System.out.println(NOT_EMPTY);
+        if (name.length() > MAX_NAME_LENGTH) System.out.println(SIZE_LIMIT_MESSAGE);
+        if (price <= 0) System.out.println(PRICE_RESTRICTION);
         this.id = id;
         this.name = name.trim();
         this.category = category;
@@ -51,8 +52,8 @@ public class Product {
 
     // 🔹 Setters con validaciones
     public void setName(String name) {
-        if (name == null || name.trim().isEmpty()) throw new IllegalArgumentException(NOT_EMPTY);
-        if (name.length() > MAX_NAME_LENGTH) throw new IllegalArgumentException(SIZE_LIMIT_MESSAGE);
+        if (name == null || name.trim().isEmpty()) System.out.println(NOT_EMPTY);
+        if (name.length() > MAX_NAME_LENGTH) System.out.println(SIZE_LIMIT_MESSAGE);
         this.name = name.trim();
     }
 
@@ -61,7 +62,7 @@ public class Product {
     }
 
     public void setPrice(double price) {
-        if (price <= 0) throw new IllegalArgumentException(PRICE_RESTRICTION);
+        if (price <= 0) System.out.println(PRICE_RESTRICTION);
         this.price = price;
     }
 
