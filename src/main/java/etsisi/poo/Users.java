@@ -1,11 +1,11 @@
 package etsisi.poo;
 
-public class Usuarios {
+public abstract class Users {
 
-    private String name;
-    private String email;
+    protected String name;
+    protected String email;
 
-    public Usuarios(String name, String email) {
+    public Users(String name, String email) {
         this.name = name;
         this.email = email;
     }//

@@ -32,8 +32,8 @@ public class App {
             "Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n";
     private static final String HELP_DISCOUNTS =
             "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \nELECTRONICS 3%.\n";
-    Catalog catalog;
-    Ticket ticket;
+    private Catalog catalog;
+    private Ticket ticket;
 
 
     public static void main(String[] args) {
