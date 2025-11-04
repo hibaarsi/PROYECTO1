@@ -8,7 +8,7 @@ public abstract class Users {
     public Users(String name, String email) {
         this.name = name;
         this.email = email;
-    }//
+    }
 
     public String getName() {
         return name; }
@@ -18,4 +18,6 @@ public abstract class Users {
     public String toString() {
         return "{name:" + name + "', email:'" + email + "'}";
     }
+
+    public abstract String getID();
 }

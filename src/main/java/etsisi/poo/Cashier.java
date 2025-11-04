@@ -6,5 +6,9 @@ public class Cashier extends Users{
         super(name, email);
         this.UW = UW;
     }
+    @Override
+    public String getID(){
+        return this.UW;
+    }
 
 }

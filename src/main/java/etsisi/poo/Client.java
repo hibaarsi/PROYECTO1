@@ -1,5 +1,4 @@
-import etsisi.poo.Cashier;
-import etsisi.poo.Users;
+package etsisi.poo;
 
 public class Client extends Users {
     private String DNI;
@@ -8,6 +7,10 @@ public class Client extends Users {
         super(name, email);
         this.DNI = DNI;
         this.cashier = cashier;
+    }
+    @Override
+    public String getID(){
+        return this.DNI;
     }
 
 }
