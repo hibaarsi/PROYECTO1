@@ -2,8 +2,8 @@ package etsisi.poo;
 
 public abstract class Users {
 
-    protected String name;
-    protected String email;
+    private String name;
+    private String email;
 
     public Users(String name, String email) {
         this.name = name;
@@ -13,10 +13,7 @@ public abstract class Users {
     public String getName() {
         return name; }
     public String getEmail() {
-        return email; }
-
-    public String toString() {
-        return "{name:" + name + "', email:'" + email + "'}";
+        return email;
     }
 
     public abstract String getID();
