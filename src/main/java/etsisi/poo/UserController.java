@@ -1,7 +1,6 @@
 package etsisi.poo;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class UserController {
@@ -33,6 +32,26 @@ public class UserController {
             clientMap.put(client.getID(),client);
         }
     }
+    public void removeClient(String DNI) {
+        if (!clientMap.containsKey(DNI)) {
+            System.out.println("El cliente no está registrado.");
+        } else {
+            clientMap.remove(DNI);
+        }
+    }
+    public void listClients(){
+        List<Client> sortedClients = getClientsSortedByName();
+        for (Client c : sortedClients){
+            System.out.println(c);
+        }
+    }
+
+    public List<Client> getClientsSortedByName() {
+        List<Client> clientList = new ArrayList<>(this.clientMap.values());
+        //Esto compara los clientes usando el .getName()
+        clientList.sort(Comparator.comparing(Client::getName));
+        return clientList;
+    }
 
     public Cashier createCashier(String name, String email, String UW){
         if (UW == null){
@@ -53,6 +72,27 @@ public class UserController {
         }else{
             cashierMap.put(cashier.getID(),cashier);
         }
+    }
+    public void removeCashier(String UW){
+        if(!cashierMap.containsKey(UW)){
+            System.out.println("El cajero no está registrado.");
+        }else {
+            // Aqui hay que borrar también lso tickets del cajero.
+            // Lo pongo cuando esté hecho en TicketController
+            cashierMap.remove(UW);
+        }
+    }
+    public void listCashier(){
+        List<Cashier> sortedCashier = getCashiersSortedByName();
+        for (Cashier c : sortedCashier){
+            System.out.println(c);
+        }
+    }
+
+    public List<Cashier> getCashiersSortedByName(){
+        List<Cashier> cashierList = new ArrayList<>(this.cashierMap.values());
+        cashierList.sort(Comparator.comparing(Cashier::getName));
+        return cashierList;
     }
     private String generateCashierID(){
         StringBuilder sb = new StringBuilder("UW");
@@ -75,6 +115,5 @@ public class UserController {
             }
         }
         return true;
-
     }
 }

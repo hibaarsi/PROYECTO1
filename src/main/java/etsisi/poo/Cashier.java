@@ -18,6 +18,10 @@ public class Cashier extends Users{
         this.tickets.remove(ticket);
     }
 
+    public List<Ticket> getTickets(){
+        return this.tickets;
+    }
+
     @Override
     public String getID(){
         return this.UW;
