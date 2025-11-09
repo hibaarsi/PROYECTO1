@@ -3,110 +3,76 @@ package etsisi.poo;
 
 import java.util.HashMap;
 
-public class Catalog {
-    private HashMap<Integer, Product> items;
-    private static final int MAX_ELEMENTS = 200;
+import java.util.Map;
 
-    //Mensajes estáticos
-    private static final String MSG_MAX_ELEMENTS = "Items limit reached";
-    private static final String MSG_ADD_OK = "prod add: ok\n";
-    private static final String MSG_ADD_DUPLICATE = "Product with id %d already exists";
-    private static final String MSG_NO_PRODUCTS = "No products in catalog";
-    private static final String MSG_CATALOG_HEADER = "Catalog:";
-    private static final String MSG_LIST_OK = "prod list: ok\n";
-    private static final String MSG_NOT_FOUND = "Product with id %d does not exist";
-    private static final String MSG_REMOVE_OK = "prod remove: ok\n";
-    private static final String MSG_UPDATE_OK = "prod update: ok\n";
-    private static final String MSG_INVALID_CATEGORY = "Invalid category: %s";
-    private static final String MSG_INVALID_PRICE = "Price must be a positive number: %s";
-    private static final String MSG_UNKNOWN_FIELD = "Unknown field: %s";
+public class Catalog {
+    private final Map<Integer, Product> items;
+    private static final int MAX_ELEMENTS = 200;
 
     public Catalog() {
         this.items = new HashMap<>();
     }
 
-    public void addProduct(Product product) {
-        if (size() >= MAX_ELEMENTS) {
-            System.out.println(MSG_MAX_ELEMENTS);
-        } else if (existProduct(product.getId())) {
-            System.out.println(String.format(MSG_ADD_DUPLICATE, product.getId()));
-        } else {
-            items.put(product.getId(), product);
-            System.out.println(product);
-            System.out.println(MSG_ADD_OK);
+    public boolean addProduct(Product product) { //true se ha añadido, false si hay id duplicado o limite
+        if (items.size() >= MAX_ELEMENTS) {
+            return false; // límite alcanzado
         }
+        if (items.containsKey(product.getId())) {
+            return false; //  esta duplicado
+        }
+        items.put(product.getId(), product);
+        return true;
     }
 
-    public void listProducts() {
-        if (items.isEmpty()) {
-            System.out.println(MSG_NO_PRODUCTS);
-            return;
-        }
-        System.out.println(MSG_CATALOG_HEADER);
-        for (Product product : items.values()) {
-            System.out.println(product);
-        }
-        System.out.println(MSG_LIST_OK);
+    public Map<Integer, Product>getAll(){
+        return new HashMap<>(items); //devuelve una copia del mapa interno items,para protegerlo
     }
 
     public Product getProduct(int id) {
-        if (!items.containsKey(id)) {
-            System.out.println(String.format(MSG_NOT_FOUND, id));
-        }
-        return items.get(id);
+        return items.get(id);//el producto o null si no existe
     }
 
-    public void removeProduct(int id) {
-        if (!existProduct(id)) {
-            System.out.println(String.format(MSG_NOT_FOUND, id));
-        } else {
-            Product removed = items.get(id);
-            items.remove(id);
-            System.out.println(removed);
-            System.out.println(MSG_REMOVE_OK);
-        }
+    public Product removeProduct(int id) {
+        return items.remove(id);
     }
 
-    public void updateProduct(int id, String field, String value) {
-        if (!existProduct(id)) {
-            System.out.println(String.format(MSG_NOT_FOUND, id));
-        } else {
-            Product product = items.get(id);
+    public boolean updateProduct(int id, String field, String value) {
+        Product product = items.get(id);
+        if (product == null) {
+            return false;
+        }
 
-            switch (field.toUpperCase()) {
-                case "NAME":
-                    product.setName(value);
-                    System.out.println(product);
-                    System.out.println(MSG_UPDATE_OK);
-                    break;
+        switch (field.toUpperCase()) {
+            case "NAME":
+                product.setName(value);
+                return true;
 
-                case "CATEGORY":
-                    try {
-                        Category category = Category.valueOf(value.toUpperCase());
-                        product.setCategory(category);
-                        System.out.println(product);
-                        System.out.println(MSG_UPDATE_OK);
-                    } catch (IllegalArgumentException e) {
-                        System.out.println(String.format(MSG_INVALID_CATEGORY, value));
-                    }
-                    break;
+            case "CATEGORY":
+                try {
+                    Category category = Category.valueOf(value.toUpperCase());
+                    product.setCategory(category);
+                    return true;
+                } catch (IllegalArgumentException e) {
+                    return false; // categoría inválida
+                }
 
-                case "PRICE":
+            case "PRICE":
+                try {
                     double price = Double.parseDouble(value);
                     if (price <= 0) {
-                        System.out.println(String.format(MSG_INVALID_PRICE, value));
-                    } else {
-                        product.setPrice(price);
-                        System.out.println(product);
-                        System.out.println(MSG_UPDATE_OK);
+                        return false;
                     }
-                    break;
+                    product.setPrice(price);
+                    return true;
+                } catch (NumberFormatException e) {
+                    return false;
+                }
 
-                default:
-                    System.out.println(String.format(MSG_UNKNOWN_FIELD, field));
-            }
+            default:
+                return false; // campo desconocido
         }
     }
+
 
     public int size() {
         return items.size();
@@ -115,5 +81,8 @@ public class Catalog {
     public boolean existProduct(int id) {
         return items.containsKey(id);
     }
+
+
+
 }
 
