@@ -131,7 +131,7 @@ public class App {
                         }
                         break;
                     case "list":
-                        catalog.listProducts();
+                        //catalog.listProducts();
                         break;
                     case "update":
                         catalog.updateProduct(
