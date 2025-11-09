@@ -8,7 +8,7 @@ public class ProductReunion extends Product implements EventProduct {
 
     public ProductReunion(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, null, price);
-        if (maxPeople < 1 || maxPeople > 100)
+        if (maxPeople < 1 || maxPeople > 100) //personas
             throw new IllegalArgumentException("maxPeople must be between 1 and 100");
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
