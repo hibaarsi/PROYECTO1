@@ -124,7 +124,7 @@ public class App {
                                 System.out.println("Invalid Category " + separatedComand[4]);
                                 break;
                             }
-                            Product p = new Product(id, name, category, price);
+                            Product p = new RegularProduct(id, name, category,price);
                             catalog.addProduct(p);
                         }else{
                             System.out.println("Not valid\n");

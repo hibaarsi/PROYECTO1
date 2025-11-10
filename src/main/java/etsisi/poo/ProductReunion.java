@@ -7,7 +7,7 @@ public class ProductReunion extends Product implements EventProduct {
     private static final Duration MIN_PLANNING = Duration.ofHours(12); //tiempo min de antelacion para programarla
 
     public ProductReunion(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
-        super(id, name, null, price);
+        super(id, name, price);
         if (maxPeople < 1 || maxPeople > 100) //personas
             throw new IllegalArgumentException("maxPeople must be between 1 and 100");
         this.eventDate = eventDate;

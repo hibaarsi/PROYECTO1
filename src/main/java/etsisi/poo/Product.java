@@ -2,7 +2,7 @@ package etsisi.poo;
 
 import java.sql.SQLOutput;
 
-public class Product {
+public abstract class Product {
     //Constantes públicas
     public static final int MAX_NAME_LENGTH = 100;
 
@@ -16,20 +16,19 @@ public class Product {
     private static final String PRODUCT_FORMAT = "{class:Product, id:%d, name:'%s', category:%s, price:%.1f}";
 
     //Atributos
-    private final int id; // es único
-    private String name;
-    private Category category;
-    private double price;
+    protected final int id; // es único
+    protected String name;
+    protected double price;
 
     // 🔹 Constructor
-    public Product(int id, String name, Category category, double price) {
+    public Product(int id, String name, double price) {
         if (id <= 0) System.out.println(NEEDS_TO_BE_POSITIVE);
         if (name == null || name.trim().isEmpty()) System.out.println(NOT_EMPTY);
         if (name.length() > MAX_NAME_LENGTH) System.out.println(SIZE_LIMIT_MESSAGE);
         if (price <= 0) System.out.println(PRICE_RESTRICTION);
         this.id = id;
         this.name = name.trim();
-        this.category = category;
+
         this.price = price;
     }
 
@@ -42,9 +41,7 @@ public class Product {
         return name;
     }
 
-    public Category getCategory() {
-        return category;
-    }
+
 
     public double getPrice() {
         return price;
@@ -57,9 +54,7 @@ public class Product {
         this.name = name.trim();
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+
 
     public void setPrice(double price) {
         if (price <= 0) System.out.println(PRICE_RESTRICTION);
@@ -83,7 +78,9 @@ public class Product {
     @Override
     public String toString() {
         String cleanName = name.replace("\"", ""); // elimina comillas dobles
-        return String.format(PRODUCT_FORMAT, id, cleanName, category, price);
+        return String.format(PRODUCT_FORMAT, id, cleanName, price);
     }
+
+
 }
 
