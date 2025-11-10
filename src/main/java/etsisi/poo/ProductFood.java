@@ -11,7 +11,7 @@ public class ProductFood extends Product implements EventProduct {
     public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, price); // sin categoría
         if (maxPeople < 1 || maxPeople > 100)
-            throw new IllegalArgumentException("The capacity of people is 100");
+            System.out.println("maxPeople must be between 1 and 100");
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
         if (!hasEnoughPlanning()) {

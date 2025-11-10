@@ -48,15 +48,15 @@ public class Catalog {
                 return true;
 
             case "CATEGORY":
-                if(product instanceof RegularProduct )
-                try {
-
-                    Category category = Category.valueOf(value.toUpperCase());
-                    ((RegularProduct) product).setCategory(category);
-                    return true;
-                } catch (IllegalArgumentException e) {
-                    return false; // categoría inválida
-                }
+                if (product instanceof RegularProduct)
+                    try {
+                        Category category = Category.valueOf(value.toUpperCase());
+                        ((RegularProduct) product).setCategory(category);
+                        return true;
+                    } catch (IllegalArgumentException e) {
+                        return false; // categoría inválida
+                    }
+                else return false;
 
             case "PRICE":
                 try {
