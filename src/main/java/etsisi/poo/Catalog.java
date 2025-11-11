@@ -24,7 +24,7 @@ public class Catalog {
         return true;
     }
 
-    public Map<Integer, Product>getAll(){
+    public Map<Integer, Product> getAll() {
         return new HashMap<>(items); //devuelve una copia del mapa interno items,para protegerlo
     }
 
@@ -83,7 +83,6 @@ public class Catalog {
     public boolean existProduct(int id) {
         return items.containsKey(id);
     }
-
 
 
 }

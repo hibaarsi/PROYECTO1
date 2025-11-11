@@ -13,78 +13,86 @@ public class TicketModel {
     private LocalDateTime openDate;
     private LocalDateTime endDate;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
-    private static ArrayList<String> listaIds= new ArrayList<>();
-    public TicketModel(String id){
-       if(listaIds.contains(id)){
-           System.out.println("El id ya existe");
-       }
-       this.id=id;
+    private static ArrayList<String> listaIds = new ArrayList<>();
+
+    public TicketModel(String id) {
+        if (listaIds.contains(id)) {
+            System.out.println("El id ya existe");
+        }
+        this.id = id;
         this.products = new ArrayList<>();
         this.ticketStatus = TicketStatus.VACIO;
         this.openDate = LocalDateTime.now();
 
     }
-    public TicketModel(){
-        this.id= generateId();
+
+    public TicketModel() {
+        this.id = generateId();
         this.products = new ArrayList<>();
         this.ticketStatus = TicketStatus.VACIO;
         this.openDate = LocalDateTime.now();
 
     }
-    private String generateId(){
-        String baseId=LocalDate.now().format(DATE_FORMATTER);
+
+    private String generateId() {
+        String baseId = LocalDate.now().format(DATE_FORMATTER);
         Random random = new Random();
         String newId;
-        do{
-            newId = baseId +"-"+ String.format("%05d", random.nextInt(100000));
-        }while(listaIds.contains(newId));
+        do {
+            newId = baseId + "-" + String.format("%05d", random.nextInt(100000));
+        } while (listaIds.contains(newId));
         listaIds.add(newId);
         return newId;
     }
 
-    public void addProduct(Product product){// mejorar dependiendo de qur producto meto
-        if(isClosed()){
+    public void addProduct(Product product) {// mejorar dependiendo de qur producto meto
+        if (isClosed()) {
             System.out.println("No se pueden añadir productos, esta cerrado");
         }
-        if(product instanceof ProductFood|| product instanceof ProductReunion){
-            for(Product p: products){
-                if(p instanceof ProductFood|| p instanceof ProductReunion){
+        if (product instanceof ProductFood || product instanceof ProductReunion) {
+            for (Product p : products) {
+                if (p instanceof ProductFood || p instanceof ProductReunion) {
                     System.out.println("No se pueden añadir productos de tipo comida o reunion");
                     return;
                 }
             }
         }
         products.add(product);
-        if(ticketStatus==TicketStatus.VACIO)
-            ticketStatus=TicketStatus.ACTIVO;
+        if (ticketStatus == TicketStatus.VACIO)
+            ticketStatus = TicketStatus.ACTIVO;
     }
-    public void removeProduct(Product product){// mejorar dependiendo d productos
-        if(isClosed()){
+
+    public void removeProduct(Product product) {// mejorar dependiendo d productos
+        if (isClosed()) {
             System.out.println("No se pueden eliminar productos, esta cerrado");
         }
         products.remove(product);
-        if(products.isEmpty())
-            ticketStatus=TicketStatus.VACIO;
+        if (products.isEmpty())
+            ticketStatus = TicketStatus.VACIO;
 
     }
-    public void close(){
-      if(!isClosed()){
-          ticketStatus=TicketStatus.CERRADO;
-          endDate=LocalDateTime.now();
-          String cierre= "-"+ endDate.format(DATE_FORMATTER);
-          listaIds.remove(id);
-          id+= cierre;
-          listaIds.add(id);
-      }
+
+    public void close() {
+        if (!isClosed()) {
+            ticketStatus = TicketStatus.CERRADO;
+            endDate = LocalDateTime.now();
+            String cierre = "-" + endDate.format(DATE_FORMATTER);
+            listaIds.remove(id);
+            id += cierre;
+            listaIds.add(id);
+        }
 
     }
-    public boolean isClosed(){
-        return ticketStatus==TicketStatus.CERRADO;
+
+    public boolean isClosed() {
+        return ticketStatus == TicketStatus.CERRADO;
     }
-    public String getId(){
+
+    public String getId() {
         return id;
     }
-    public TicketStatus getTicketStatus(){
+
+    public TicketStatus getTicketStatus() {
         return ticketStatus;
     }
 

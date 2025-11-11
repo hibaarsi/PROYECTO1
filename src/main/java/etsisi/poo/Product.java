@@ -42,7 +42,6 @@ public abstract class Product {
     }
 
 
-
     public double getPrice() {
         return price;
     }
@@ -53,7 +52,6 @@ public abstract class Product {
         if (name.length() > MAX_NAME_LENGTH) System.out.println(SIZE_LIMIT_MESSAGE);
         this.name = name.trim();
     }
-
 
 
     public void setPrice(double price) {

@@ -20,13 +20,20 @@ public class ProductFood extends Product implements EventProduct {
     }
 
     @Override
-    public LocalDateTime getEventDate() { return eventDate; }
+    public LocalDateTime getEventDate() {
+        return eventDate;
+    }
 
     @Override
-    public int getMaxPeople() { return maxPeople; }
+    public int getMaxPeople() {
+        return maxPeople;
+    }
 
     @Override
-    public Duration getMinPlanning() { return MIN_PLANNING; }
+    public Duration getMinPlanning() {
+        return MIN_PLANNING;
+    }
+
     @Override
     public String toString() {
         return String.format("{class:ProductFood, id:%d, name:'%s', price:%.1f, eventDate:%s, maxPeople:%d}",
