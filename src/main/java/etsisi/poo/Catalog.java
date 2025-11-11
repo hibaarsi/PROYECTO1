@@ -24,8 +24,8 @@ public class Catalog {
         return true;
     }
 
-    public Map<Integer, Product> getAll() {
-        return new HashMap<>(items); //devuelve una copia del mapa interno items,para protegerlo
+    public Map<Integer, Product> getProducts() {
+        return new HashMap<>(items); //da una copia del mapa interno items,para protegerlo
     }
 
     public Product getProduct(int id) {
