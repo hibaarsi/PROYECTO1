@@ -10,7 +10,7 @@ public class ProdRemoveCommand {
         this.catalog = catalog;
     }
     public void execute(String[] args) {
-        if (args.length != 2) {//tiene que ser 2 arg
+        if (args.length != 2) {//tiene que ser 2 argu
             System.out.println("Not valid");
             return;
         }

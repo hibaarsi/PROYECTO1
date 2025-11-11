@@ -9,7 +9,7 @@ public class ProdUpdateCommand {
         this.catalog = catalog;
     }
     public void execute(String[] args) {
-        if (args.length != 4) {//tienen q ser 4 arg
+        if (args.length != 4) {//tienen q ser 4 argu
             System.out.println("Not valid");
             return;
         }

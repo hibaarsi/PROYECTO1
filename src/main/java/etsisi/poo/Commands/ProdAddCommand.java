@@ -11,7 +11,7 @@ public class ProdAddCommand {
         this.catalog = catalog;
     }
     public void execute(String[] args) {
-        if (args.length != 5) {//tiene 5
+        if (args.length != 5) {//tiene 5 arg
             System.out.println("Not valid");
             return;
         }
