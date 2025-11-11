@@ -14,7 +14,7 @@ public class ProdListCommand {
     }
 
     public void execute(String[] args) {
-        Map<Integer, Product> products = catalog.getProducts(); //copia del mapa de los productos
+        Map<Integer, Product> products = catalog.getProducts(); //copia del mapa de productos
 
         boolean isEmpty = products.isEmpty();
         if (isEmpty) {
