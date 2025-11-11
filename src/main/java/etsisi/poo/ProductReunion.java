@@ -1,4 +1,5 @@
 package etsisi.poo;
+
 import java.time.*;
 
 public class ProductReunion extends Product implements EventProduct {
@@ -18,12 +19,18 @@ public class ProductReunion extends Product implements EventProduct {
     }
 
     @Override
-    public LocalDateTime getEventDate() { return eventDate; }
+    public LocalDateTime getEventDate() {
+        return eventDate;
+    }
 
     @Override
-    public int getMaxPeople() { return maxPeople; }
+    public int getMaxPeople() {
+        return maxPeople;
+    }
 
     @Override
-    public Duration getMinPlanning() { return MIN_PLANNING; }
+    public Duration getMinPlanning() {
+        return MIN_PLANNING;
+    }
 }
 

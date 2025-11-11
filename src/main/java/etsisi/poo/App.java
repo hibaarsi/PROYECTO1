@@ -55,7 +55,7 @@ public class App {
     }
 
     private void leerArchivo(String fileName) {
-        catalog= new Catalog();
+        catalog = new Catalog();
         ticket = new Ticket(catalog);
         try (FileReader fileReader = new FileReader(fileName);
              BufferedReader bufreader = new BufferedReader(fileReader)) {
@@ -74,8 +74,8 @@ public class App {
 
     private void start() {
         Scanner sc = new Scanner(System.in);
-         catalog = new Catalog();
-         ticket = new Ticket(catalog);
+        catalog = new Catalog();
+        ticket = new Ticket(catalog);
 
         boolean keepRunning = true;
         while (keepRunning) {
@@ -101,7 +101,7 @@ public class App {
             case "prod":
                 switch (separatedComand[1]) {
                     case "add":
-                        if( separatedComand.length == 6) {
+                        if (separatedComand.length == 6) {
                             int id;
                             try {
                                 id = Integer.parseInt(separatedComand[2]);
@@ -124,9 +124,9 @@ public class App {
                                 System.out.println("Invalid Category " + separatedComand[4]);
                                 break;
                             }
-                            Product p = new RegularProduct(id, name, category,price);
+                            Product p = new RegularProduct(id, name, category, price);
                             catalog.addProduct(p);
-                        }else{
+                        } else {
                             System.out.println("Not valid\n");
                         }
                         break;
