@@ -6,7 +6,7 @@ import java.util.List;
 public class Client extends Users {
     private String DNI;
     private Cashier cashier;
-    private List<Ticket> tickets;
+    private List<TicketModel> tickets;
 
     public Client(String name, String email, String DNI, Cashier cashier) {
         super(name, email);
@@ -15,11 +15,11 @@ public class Client extends Users {
         this.tickets = new ArrayList<>();
     }
 
-    public void addTicket(Ticket ticket) {
+    public void addTicket(TicketModel ticket) {
         this.tickets.add(ticket);
     }
 
-    public void removeTicket(Ticket ticket) {
+    public void removeTicket(TicketModel ticket) {
         this.tickets.remove(ticket);
     }
 
