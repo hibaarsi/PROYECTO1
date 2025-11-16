@@ -9,7 +9,7 @@ public class CashAddCommand {
         this.userController=userController;
     }
 
-    public void Excute(String[]args){
+    public void execute(String[]args){
         if(args.length<3){
             System.out.println("cashAdd <name> <email> <UW>");
             return;

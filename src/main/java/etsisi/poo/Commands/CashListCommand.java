@@ -12,7 +12,7 @@ public class CashListCommand {
         this.userController = userController;
     }
 
-    public void excute(String[]args){
+    public void execute(String[]args){
         List<Cashier> cashiers=userController.getCashiersSortedByName();//lista de cajeros ordenada por nombre
 
         if(cashiers.isEmpty()){
