@@ -11,10 +11,9 @@ public class TicketListCommand implements ICommand{
         if (args!=null && args.length>0){
             return "Usage: ticket list";
 
-        }else{
+        }
             ticketController.listTickets();
             return "";
-        }
 
     }
     public String getPrimerArgumento(){
