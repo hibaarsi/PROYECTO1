@@ -12,6 +12,8 @@ public class TicketModel {
     private ArrayList<Product> products;
     private LocalDateTime openDate;
     private LocalDateTime endDate;
+    private Cashier cashierid;
+    private Client clientid;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
     private static ArrayList<String> listaIds = new ArrayList<>();
 
@@ -20,6 +22,7 @@ public class TicketModel {
             System.out.println("El id ya existe");
         }
         this.id = id;
+
         this.products = new ArrayList<>();
         this.ticketStatus = TicketStatus.VACIO;
         this.openDate = LocalDateTime.now();
