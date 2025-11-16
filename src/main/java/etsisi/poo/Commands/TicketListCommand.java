@@ -1,18 +1,21 @@
 package etsisi.poo.Commands;
 
+import etsisi.poo.TicketController;
+
 public class TicketListCommand implements ICommand{
-    private final TicketListCommand ticketListCommand;
-    TicketListCommand(TicketListCommand d){
-        this.ticketListCommand=d;
+    private final TicketController ticketController;
+    TicketListCommand(TicketController ticketController){
+        this.ticketController=ticketController;
     }
     public String execute (String[] args){
+        if (args!=null && args.length>0){
+            return "Usage: ticket list";
 
-        if (args.length>2){
-            System.out.println("Mal");
         }else{
-
+            ticketController.listTickets();
+            return "";
         }
-        return null;
+
     }
     public String getPrimerArgumento(){
         return  "ticket";

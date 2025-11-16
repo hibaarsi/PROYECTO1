@@ -34,7 +34,14 @@ public class TicketController {
 
     }
     public void listTickets(){
-
+        if (!tickets.isEmpty()){
+            for (TicketModel t: tickets.values()){
+                System.out.println("ticketId= "+t.getId()+
+                        ", status=" + t.getTicketStatus());
+            }
+        }else{
+            System.out.println("Ticket is empty");
+            return;
+        }
     }
-    //mira a ver
 }
