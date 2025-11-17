@@ -5,18 +5,23 @@ import etsisi.poo.Catalog;
 import etsisi.poo.Category;
 import etsisi.poo.ProductCustomizable;
 
-public class ProdAddCustomizableCommand {
+public class ProdAddCustomizableCommand implements ICommand {
 
     private final Catalog catalog;
 
     public ProdAddCustomizableCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-
-    public void execute(String[] args) {
+    public String getPrimerArgumento(){
+        return "prod";
+    }
+    public String getSegundoArgumento(){
+        return"addCustomizable";
+    }
+    public String execute(String[] args) {
         if (args.length != 7) {
             System.out.println("Usage: prod addCustomizable <id> \"<name>\" <category> <price> <maxTexts>");
-            return;
+            return null;
         }
 
         try {
@@ -28,7 +33,7 @@ public class ProdAddCustomizableCommand {
 
             if (!isCustomizableCategory(category)) {
                 System.out.println("This category cannot be customizable.");
-                return;
+                return name;
             }
 
             ProductCustomizable custom = new ProductCustomizable(id, name, category, price, maxTexts);
@@ -40,6 +45,7 @@ public class ProdAddCustomizableCommand {
         } catch (Exception e) {
             System.out.println("Unexpected error adding customizable product.");
         }
+        return null;
     }
 
     private boolean isCustomizableCategory(Category category) {

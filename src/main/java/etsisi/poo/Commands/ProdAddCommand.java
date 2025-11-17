@@ -4,16 +4,23 @@ import etsisi.poo.Catalog;
 import etsisi.poo.Category;
 import etsisi.poo.RegularProduct;
 
-public class ProdAddCommand {
+public class ProdAddCommand implements ICommand {
     private Catalog catalog;
 
     public ProdAddCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-    public void execute(String[] args) {
+    public String getPrimerArgumento(){
+        return "prod ";
+    }
+    public String getSegundoArgumento(){
+        return"add";
+    }
+    public String execute(String[] args) {
         if (args.length != 5) {//tiene 5 arg
             System.out.println("Not valid");
-            return;
+            return null;
+
         }
 
         try {
@@ -34,5 +41,7 @@ public class ProdAddCommand {
         } catch (Exception e) {
             System.out.println("Invalid command");
         }
+
+        return null;
     }
 }

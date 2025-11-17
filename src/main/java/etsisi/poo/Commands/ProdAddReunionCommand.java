@@ -5,7 +5,7 @@ import etsisi.poo.ProductReunion;
 
 import java.time.*;
 
-public class ProdAddReunionCommand {
+public class ProdAddReunionCommand implements ICommand {
 
     private final Catalog catalog;
 
@@ -13,11 +13,17 @@ public class ProdAddReunionCommand {
         this.catalog = catalog;
 
     }
+    public String getPrimerArgumento(){
+        return "prod";
+    }
+    public String getSegundoArgumento(){
+        return"addMeeting";
+    }
 
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         if (args.length != 7) {
             System.out.println("Usage: prod addMeeting <id> \"<name>\" <price> <yyyy-MM-dd> <maxPeople>");
-            return;
+            return null;
         }
 
         try {
@@ -38,5 +44,6 @@ public class ProdAddReunionCommand {
         } catch (Exception e) {
             System.out.println("Error adding reunion product: " + e.getMessage());
         }
+        return null;
     }
 }

@@ -5,6 +5,12 @@ import etsisi.poo.UserController;
 
 public class ClienteRemoveCommand {
     private UserController userController;
+    public String getPrimerArgumento(){
+        return "client";
+    }
+    public String getSegundoArgumento(){
+        return"remove";
+    }
 
     public ClienteRemoveCommand(UserController userController){
         this.userController=userController;

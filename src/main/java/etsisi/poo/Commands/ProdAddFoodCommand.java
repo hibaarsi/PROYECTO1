@@ -5,18 +5,23 @@ import etsisi.poo.ProductFood;
 
 import java.time.*;
 
-public class ProdAddFoodCommand {
+public class ProdAddFoodCommand implements ICommand{
 
     private final Catalog catalog;
 
     public ProdAddFoodCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-
-    public void execute(String[] args) {
+    public String getPrimerArgumento(){
+        return "prod";
+    }
+    public String getSegundoArgumento(){
+        return"addFood";
+    }
+    public String execute(String[] args) {
         if (args.length != 7) {
             System.out.println("Usage: prod addFood <id> \"<name>\" <price> <yyyy-MM-dd> <maxPeople>");
-            return;
+            return null;
         }
 
         try {
@@ -37,5 +42,6 @@ public class ProdAddFoodCommand {
         } catch (Exception e) {
             System.out.println("Error adding food product: " + e.getMessage());
         }
+        return null;
     }
 }

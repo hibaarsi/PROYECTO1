@@ -3,16 +3,22 @@ package etsisi.poo.Commands;
 import etsisi.poo.Catalog;
 import etsisi.poo.Product;
 
-public class ProdRemoveCommand {
+public class ProdRemoveCommand implements ICommand {
     private Catalog catalog;
 
     public ProdRemoveCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-    public void execute(String[] args) {
+    public String getPrimerArgumento(){
+        return "prod";
+    }
+    public String getSegundoArgumento(){
+        return"remove";
+    }
+    public String execute(String[] args) {
         if (args.length != 2) {//tiene que ser 2 argu
             System.out.println("Not valid");
-            return;
+            return null;
         }
 
         try {
@@ -29,5 +35,6 @@ public class ProdRemoveCommand {
         } catch (NumberFormatException e) {//en caso de que el ID no es un num valido
             System.out.println("Invalid ID format");
         }
+        return null;
     }
 }

@@ -94,6 +94,7 @@ public class UserController {
         if (!cashierMap.containsKey(UW)) {
             System.out.println("El cajero no está registrado.");
         } else {
+            ticketController.removeTicketsFromCashier(cashierMap.get(UW));
             // Aqui hay que borrar también lso tickets del cajero.
             // Lo pongo cuando esté hecho en TicketController
             cashierMap.remove(UW);
