@@ -3,7 +3,7 @@ package etsisi.poo.Commands;
 import etsisi.poo.Client;
 import etsisi.poo.UserController;
 
-public class ClienteRemoveCommand {
+public class ClienteRemoveCommand implements ICommand {
     private UserController userController;
     public String getPrimerArgumento(){
         return "client";
@@ -16,10 +16,9 @@ public class ClienteRemoveCommand {
         this.userController=userController;
     }
 
-    public void execute(String[]args){
+    public String execute(String[]args){
         if(args.length<1){
-            System.out.println("Need the clienteremove <DNI>");
-            return;
+            return "Need the clienteremove <DNI>";
         }
 
         String dni=args[0];
@@ -32,12 +31,11 @@ public class ClienteRemoveCommand {
             }
         }
         if (!found) {
-            System.out.println("Client not found.");
-            return;
+            return "Client not found.";
         }
 
         userController.removeClient(dni);
-        System.out.println("Client removed");
+     return "Client removed";
 
     }
 }

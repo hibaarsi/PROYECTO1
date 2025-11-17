@@ -2,16 +2,21 @@ package etsisi.poo.Commands;
 import etsisi.poo.Catalog;
 import etsisi.poo.Product;
 
-public class ProdUpdateCommand {
+public class ProdUpdateCommand implements ICommand {
     private Catalog catalog;
 
     public ProdUpdateCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-    public void execute(String[] args) {
+    public String getPrimerArgumento(){
+        return "prod";
+    }
+    public String getSegundoArgumento(){
+        return"update";
+    }
+    public String execute(String[] args) {
         if (args.length != 4) {//tienen q ser 4 argu
-            System.out.println("Not valid");
-            return;
+            return "Not valid";
         }
 
         try {
@@ -21,8 +26,7 @@ public class ProdUpdateCommand {
 
             Product product = catalog.getProduct(id);
             if (product == null) {
-                System.out.printf("Product with id %d does not exist%n", id);
-                return;
+                return "Product with id " + id + " does not exist";
             }
 
             boolean ok = catalog.updateProduct(id, field, value);//actualiza el producto en el catalog
@@ -47,5 +51,6 @@ public class ProdUpdateCommand {
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid argument");
         }
+        return "prod update: ok\n";
     }
 }

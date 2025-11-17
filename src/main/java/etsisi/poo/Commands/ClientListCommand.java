@@ -28,6 +28,6 @@ public class ClientListCommand implements ICommand{
         for(Client c: clients){
             System.out.println(c);
         }
-        return null;
+        return clients.toString() ;
     }
 }

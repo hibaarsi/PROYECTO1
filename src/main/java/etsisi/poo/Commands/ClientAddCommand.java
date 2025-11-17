@@ -4,16 +4,21 @@ import etsisi.poo.Cashier;
 import etsisi.poo.Client;
 import etsisi.poo.UserController;
 
-public class ClientAddCommand {
+public class ClientAddCommand implements ICommand {
     private UserController userController;
 
     public ClientAddCommand(UserController userController) {
         this.userController = userController;
     }
-    public void execute(String[] args) {
-        if (args.length < 4) {
-            System.out.println("Use: clientadd <name> <email> <DNI> <UW_cashier>");
-            return;
+    public String getPrimerArgumento(){
+        return "client";
+    }
+    public String getSegundoArgumento(){
+        return"add";
+    }
+    public String execute(String[] args) {
+        if (args.length < 4) {;
+            return "Use: clientadd <name> <email> <DNI> <UW_cashier>";
         }
         //guarda los datos del cliente
         String name = args[0];
@@ -30,17 +35,14 @@ public class ClientAddCommand {
         }
 
         if (cashier == null) {//si no se ha encontrado
-            System.out.println("Cashier not found");
-            return;
+            return "Cashier not found";
         }
 
         Client client = userController.createClient(name, email, dni, cashier);
         if (client != null) {//lo añadimos al mapa
             userController.addClient(client);
-            System.out.println("Client added");
-        } else{
-            System.out.println("Client could not be created");
+            return "Client added";
+        } else return "Client could not be created";
 
-        }
     }
 }

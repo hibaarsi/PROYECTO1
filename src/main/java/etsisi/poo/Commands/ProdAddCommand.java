@@ -18,8 +18,7 @@ public class ProdAddCommand implements ICommand {
     }
     public String execute(String[] args) {
         if (args.length != 5) {//tiene 5 arg
-            System.out.println("Not valid");
-            return null;
+            return "Not valid";
 
         }
 

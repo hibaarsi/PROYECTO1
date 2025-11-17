@@ -5,19 +5,24 @@ import etsisi.poo.UserController;
 
 import java.util.List;
 
-public class CashListCommand {
+public class CashListCommand implements ICommand {
     private UserController userController;
 
     public CashListCommand(UserController userController) {
         this.userController = userController;
     }
+    public String getPrimerArgumento(){
+        return "cash";
+    }
+    public String getSegundoArgumento(){
+        return"list";
+    }
 
-    public void execute(String[]args){
+    public String execute(String[]args){
         List<Cashier> cashiers=userController.getCashiersSortedByName();//lista de cajeros ordenada por nombre
 
         if(cashiers.isEmpty()){
-            System.out.println("List of registered cashiers");
-            return;
+            return "List of registered cashiers";
         }
 
         System.out.println("List of cashiers");
@@ -25,6 +30,7 @@ public class CashListCommand {
         for(Cashier c: cashiers){
             System.out.println("- "+c);
         }
+        return "List of cashiers" +cashiers; // MIRAR
 
     }
 }

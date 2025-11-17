@@ -3,16 +3,21 @@ package etsisi.poo.Commands;
 import etsisi.poo.Cashier;
 import etsisi.poo.UserController;
 
-public class CashAddCommand {
+public class CashAddCommand implements ICommand{
     private UserController userController;
     public CashAddCommand(UserController userController){
         this.userController=userController;
     }
+    public String getPrimerArgumento(){
+        return "cash";
+    }
+    public String getSegundoArgumento(){
+        return"add";
+    }
 
-    public void execute(String[]args){
+    public String execute(String[]args){
         if(args.length<3){
-            System.out.println("cashAdd <name> <email> <UW>");
-            return;
+            return "cashAdd <name> <email> <UW>";
         }
 
         String name =args[0];
@@ -22,11 +27,12 @@ public class CashAddCommand {
         Cashier cashier= userController.createCashier(name,email,UW);
 
         if(cashier==null){
-            System.out.println("Cashier could not be created");
-            return;
+            return "Cashier could not be created";
+
         }
 
         userController.addCashier(cashier);
         System.out.println("Cashier added");
+        return "Cashier" +cashier.getName() + "added with " +cashier.getID();
     }
 }
