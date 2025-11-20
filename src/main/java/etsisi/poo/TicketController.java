@@ -13,7 +13,7 @@ public class TicketController {
         this.ticketsByCashier= new HashMap<>();
     }
 
-    public void removeTicketsFromCashier(Cashier cashier){
+    /*public void removeTicketsFromCashier(Cashier cashier){
         List<String> remove= new ArrayList<>();
         for (TicketModel ticket: tickets.values()){
             if (ticket.getCashier() == cashier){
@@ -23,7 +23,20 @@ public class TicketController {
         for (String id: remove){
             tickets.remove(id);
         }
+    }*/
+    //este salia en rojo get.Cashier();
+    public void removeTicketsFromCashier(Cashier cashier){
+        if (cashier==null) return;
+        String cashierId =cashier.getID();
+        List<TicketModel> lista=ticketsByCashier.remove(cashierId);//quitar la lista de tickets del cajero del mapa que esta en CASHIER
+        if (lista==null)return;//el cajero no tenia tickets ahi
+        for (TicketModel t:lista){//borrar los tickets del mapa global
+            tickets.remove(t.getId());
+        }
+        cashier.getTickets().clear();//vaciar la lista interna del cajero
     }
+
+
    /* public void newTicket(String ticketID, String cashierID, String userID){
         if (userController.getCashier(cashierID) == null){
             System.out.println("Cashier ID not found");
