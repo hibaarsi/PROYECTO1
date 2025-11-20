@@ -13,8 +13,7 @@ public class TicketModel {
     private ArrayList<Product> products;
     private LocalDateTime openDate;
     private LocalDateTime endDate;
-    private Cashier cashier;
-    private Client client;
+
     private final List<ElementoTicket> elementos;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
     private static ArrayList<String> listaIds = new ArrayList<>();
@@ -37,12 +36,6 @@ public class TicketModel {
         this.ticketStatus = TicketStatus.VACIO;
         this.openDate = LocalDateTime.now();
         this.elementos = new ArrayList<>();
-    }
-    public Cashier getCashier(){
-        return cashier;
-    }
-    public Client getClient(){
-        return client;
     }
 
     private String generateId() {
