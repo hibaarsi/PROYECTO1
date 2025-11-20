@@ -37,7 +37,6 @@ public class CLI {
         commandController.registerCommand(new CashRemoveCommand(userController));
         commandController.registerCommand(new ClientAddCommand(userController));
         commandController.registerCommand(new ClienteRemoveCommand(userController));
-
     }
     public static void printFromString(String message){
         System.out.println(message);
