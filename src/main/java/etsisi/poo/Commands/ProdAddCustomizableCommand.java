@@ -3,49 +3,35 @@ package etsisi.poo.Commands;
 
 import etsisi.poo.Catalog;
 import etsisi.poo.Category;
+import etsisi.poo.Product;
 import etsisi.poo.ProductCustomizable;
 
-public class ProdAddCustomizableCommand implements ICommand {
-
-    private final Catalog catalog;
-
-    public ProdAddCustomizableCommand(Catalog catalog) {
-        this.catalog = catalog;
-    }
-    public String getPrimerArgumento(){
+public class ProdAddCustomizableCommand extends AbstractProdAddCommand {
+    public String getPrimerArgumento() {
         return "prod";
     }
-    public String getSegundoArgumento(){
-        return"addCustomizable";
+
+    public String getSegundoArgumento() {
+        return "addCustomizable";
     }
-    public String execute(String[] args) {
-        if (args.length != 7) {
-            System.out.println("Usage: prod addCustomizable <id> \"<name>\" <category> <price> <maxTexts>");
-            return null;
+
+    public ProdAddCustomizableCommand(Catalog catalog) {
+        super(catalog);
+    }
+
+    @Override
+    protected Product createProduct(String[] args) {
+        int id = parseId(args[2]);
+        String name = parseName(args[3]);
+        Category category = Category.valueOf(args[4].toUpperCase());
+        double price = parsePrice(args[5]);
+        int maxTexts = Integer.parseInt(args[6]);
+
+        if (!isCustomizableCategory(category)) {
+            throw new IllegalArgumentException("This category cannot be customized");
         }
 
-        try {
-            int id = Integer.parseInt(args[2]);
-            String name = args[3].replace("\"", "");
-            Category category = Category.valueOf(args[4].toUpperCase());
-            double price = Double.parseDouble(args[5]);
-            int maxTexts = Integer.parseInt(args[6]);
-
-            if (!isCustomizableCategory(category)) {
-                System.out.println("This category cannot be customizable.");
-                return name;
-            }
-
-            ProductCustomizable custom = new ProductCustomizable(id, name, category, price, maxTexts);
-            catalog.addProduct(custom);
-            System.out.println("Added customizable product correctly: " + custom);
-
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Unexpected error adding customizable product.");
-        }
-        return null;
+        return new ProductCustomizable(id, name, category, price, maxTexts);
     }
 
     private boolean isCustomizableCategory(Category category) {
