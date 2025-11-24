@@ -2,14 +2,19 @@ package etsisi.poo;
 
 import etsisi.poo.Commands.*;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
-
+//revisar
 public class CLI {
     private CommandController commandController;
     private UserController userController;
     private TicketController ticketController;
     private Catalog catalog;
+    private final static String PROMPT = "tUPM> ";
+
 
     public CLI() {
         this.commandController = new CommandController();
@@ -20,10 +25,38 @@ public class CLI {
     }
     public void run(){
         Scanner sc = new Scanner(System.in);
-
+        boolean keepRunning = true;
+        while (keepRunning) {
+            System.out.print(PROMPT);
+            String comand = sc.nextLine();
+            String[] args = comand.split(" ");
+            String primerArgumento = args[0];
+            String segundoArgumento = args[1];
+            keepRunning = startCommand(primerArgumento, segundoArgumento, args);
+        }
+        sc.close();
     }
+    public void runfromFile(String fileName){
+        try (FileReader fileReader = new FileReader(fileName);
+             BufferedReader bufreader = new BufferedReader(fileReader)) {
 
+            String command;
+            while ((command = bufreader.readLine()) != null) {
+                System.out.print(PROMPT);
+                System.out.println(command);
+                String[] args = command.split(" ");
+                String primerArgumento = args[0];
+                String segundoArgumento = args[1];
+                startCommand(primerArgumento,segundoArgumento,args);
+            }
 
+        } catch (IOException e) {
+            System.out.println("No encontrado tal archivo");
+        }
+    }
+    public boolean startCommand(String primerArgumento, String segundoArgumento, String[] args){
+        return commandController.executeCommand(primerArgumento, segundoArgumento, args);
+    }
 
     private void registerCommands(CommandController commandController, UserController userController, TicketController ticketController,Catalog catalog){
         commandController.registerCommand(new ProdAddCommand(catalog));
@@ -38,6 +71,7 @@ public class CLI {
         commandController.registerCommand(new ClientAddCommand(userController));
         commandController.registerCommand(new ClienteRemoveCommand(userController));
     }
+
     public static void printFromString(String message){
         System.out.println(message);
     }
