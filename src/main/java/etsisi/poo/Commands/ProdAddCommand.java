@@ -11,7 +11,7 @@ public class ProdAddCommand extends AbstractProdAddCommand {
     }
 
     public String getPrimerArgumento() {
-        return "prod ";
+        return "prod";
     }
 
     public String getSegundoArgumento() {
@@ -20,10 +20,10 @@ public class ProdAddCommand extends AbstractProdAddCommand {
 
     @Override
     protected Product createProduct(String[] args) {
-        int id = parseId(args[1]);
-        String name = parseName(args[2]);
-        Category category = Category.valueOf(args[3].toUpperCase());
-        double price = parsePrice(args[4]);
+        int id = parseId(args[2]);
+        String name = parseName(args[3]);
+        Category category = Category.valueOf(args[4].toUpperCase());
+        double price = parsePrice(args[5]);
 
         return new RegularProduct(id, name, category, price);
     }

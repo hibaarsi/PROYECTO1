@@ -18,12 +18,12 @@ public class CashRemoveCommand implements ICommand {
 
     public String execute(String[] args) {
         //el código UW
-        if (args.length < 1) {
-            return "Use cashremove <UW>";
+        if (args.length < 3) {
+            return "cash remove <UW>";
         }
 
         // Guardamos el código UW
-        String uw = args[0];
+        String uw = args[2];
 
         boolean encontrar = false;
         for (Cashier c : userController.getCashiersSortedByName()) {

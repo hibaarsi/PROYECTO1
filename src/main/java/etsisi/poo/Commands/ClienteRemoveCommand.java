@@ -17,11 +17,11 @@ public class ClienteRemoveCommand implements ICommand {
     }
 
     public String execute(String[]args){
-        if(args.length<1){
+        if(args.length<3){
             return "Need the clienteremove <DNI>";
         }
 
-        String dni=args[0];
+        String dni=args[2];
 
         boolean found = false;
 

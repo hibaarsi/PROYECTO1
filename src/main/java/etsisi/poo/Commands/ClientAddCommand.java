@@ -17,14 +17,14 @@ public class ClientAddCommand implements ICommand {
         return"add";
     }
     public String execute(String[] args) {
-        if (args.length < 4) {;
-            return "Use: clientadd <name> <email> <DNI> <UW_cashier>";
+        if (args.length < 6) { //mirar
+            return "Use: clientadd <name> <DNI> <email> <UW>";
         }
         //guarda los datos del cliente
-        String name = args[0];
-        String email = args[1];
-        String dni = args[2];
-        String uw = args[3];
+        String name = args[2];
+        String dni = args[3];
+        String email = args[4];
+        String uw = args[5];
 
         // Buscar el cajero asociado
         Cashier cashier = null;

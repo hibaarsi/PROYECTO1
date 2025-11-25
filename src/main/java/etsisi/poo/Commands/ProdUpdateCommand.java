@@ -15,14 +15,14 @@ public class ProdUpdateCommand implements ICommand {
         return"update";
     }
     public String execute(String[] args) {
-        if (args.length != 4) {//tienen q ser 4 argu
+        if (args.length != 5) {//mirar
             return "Not valid";
         }
 
         try {
-            int id = Integer.parseInt(args[1]); //id del producto a entero
-            String field = args[2].toUpperCase(); //nombre del campo
-            String value = args[3].replace("\"", "");
+            int id = Integer.parseInt(args[2]); //id del producto a entero
+            String field = args[3].toUpperCase(); //nombre del campo
+            String value = args[4].replace("\"", "");
 
             Product product = catalog.getProduct(id);
             if (product == null) {

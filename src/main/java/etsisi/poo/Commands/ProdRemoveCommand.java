@@ -16,13 +16,13 @@ public class ProdRemoveCommand implements ICommand {
         return"remove";
     }
     public String execute(String[] args) {
-        if (args.length != 2) {//tiene que ser 2 argu
+        if (args.length != 3) {
             System.out.println("Not valid");
             return null;
         }
 
         try {
-            int id = Integer.parseInt(args[1]);//el arg a numero entero, seria el ID
+            int id = Integer.parseInt(args[2]);//el arg a numero entero, seria el ID
             Product removed = catalog.removeProduct(id); //intenta eliminar
 
             if (removed == null) {

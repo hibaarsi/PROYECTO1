@@ -16,13 +16,15 @@ public class CashAddCommand implements ICommand{
     }
 
     public String execute(String[]args){
-        if(args.length<3){
-            return "cashAdd <name> <email> <UW>";
+        if(args.length<5){
+            return "cashAdd <UW> <name> <email> ";
         }
 
-        String name =args[0];
-        String email=args[1];
         String UW= args[2];
+        String name =args[3];
+        String email=args[4];
+
+
 
         Cashier cashier= userController.createCashier(name,email,UW);
 
