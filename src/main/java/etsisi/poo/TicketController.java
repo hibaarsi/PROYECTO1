@@ -83,6 +83,12 @@ public class TicketController {
         cashier.addTicket(ticket);//añadirmos el ticket a la lista del cajero interna la que se crea en cashier
         //esta lista es para si borras el cajero que se borren todos sus tickets
     }
+    public boolean cashierHasTicket(String cashierId, TicketModel ticket) {//comprueba si un ticket pertenece al cajero
+        List<TicketModel> lista = ticketsByCashier.get(cashierId);
+        if (lista == null) return false;
+        return lista.contains(ticket);
+    }
+
     public TicketModel getTicket(String id){
         return tickets.get(id);
     }
@@ -150,13 +156,18 @@ public class TicketController {
             int cantidad=e.getQuantity();
 
             if (p instanceof RegularProduct){//si extiende regular product es que es un producto con category y solo se coge esos
-               Category category=((RegularProduct)p).getCategory();
+               Category category=((RegularProduct)p).getCategory();//pasa de product a regular product porq el get categori solo esta en regular product
                 int actual = unidadesPorCategoria.getOrDefault(category, 0);//busca la clave categoria que es la categoria de cada prod
                 unidadesPorCategoria.put(category,actual+cantidad);//actualiza el mapa sumando la cantidad actual+nuevas uds
+
+
 
             }
         }
         double totalPrice = 0.0;
         double totalDiscount = 0.0;
+
+        System.out.println("Ticket : " + ticket.getId());
+
     }
 }

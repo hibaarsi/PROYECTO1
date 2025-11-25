@@ -21,7 +21,12 @@ public class TicketPrintCommand implements ICommand {
             String cashierId=args[1];
             TicketModel ticket=ticketController.getTicket(ticketId);
             if (ticket==null)return "Ticket ID not found";
-            if
+            if(!ticketController.cashierHasTicket(cashierId,ticket)) {//comprobar q el cajero tiene este ticket
+                return "This ticket does not belong to cashier " + cashierId;
+            }
+                ticketController.printTicket(ticketId);
+                return "ticket print: ok";
+
         }
     }
     public String getPrimerArgumento(){
