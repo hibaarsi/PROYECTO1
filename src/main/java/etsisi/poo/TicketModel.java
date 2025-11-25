@@ -37,7 +37,18 @@ public class TicketModel {
         this.openDate = LocalDateTime.now();
         this.elementos = new ArrayList<>();
     }
-
+    public List<ElementoTicket> getElementos() {//para leer desde fuera las lineas del ticket
+        return elementos;
+    }
+    public double getTotal() { //calculo del total bruto del ticket
+        double total = 0.0;
+        for (ElementoTicket e : elementos) {
+            Product p = e.getProduct();   // asumo que ElementoTicket tiene getProduct()
+            int cantidad = e.getQuantity(); // y getCantidad()
+            total += p.getPrice() * cantidad;
+        }
+        return total;
+    }
     private String generateId() {
         String baseId = LocalDate.now().format(DATE_FORMATTER);
         Random random = new Random();

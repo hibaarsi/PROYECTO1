@@ -20,7 +20,7 @@ public class TicketListCommand implements ICommand{
         return  "ticket";
     }
     public String getSegundoArgumento(){
-        return "print";
+        return "list";
     }
 //cuando se ponga lo de implements hay que sobreescribir los metodos getName getSurname y execute,
     //para que asi esta clase se encargue de ejecutar su comando ticket list

@@ -24,7 +24,7 @@ public class ClientListCommand implements ICommand{
             return "It is empty";
         }
 
-        System.out.println("list of registerd clients:");
+        System.out.println("list of registered clients:");
         for(Client c: clients){
             System.out.println(c);
         }

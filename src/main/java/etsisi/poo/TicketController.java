@@ -25,6 +25,9 @@ public class TicketController {
         }
     }*/
     //este salia en rojo get.Cashier();
+
+
+
     public void removeTicketsFromCashier(Cashier cashier){
         if (cashier==null) return;
         String cashierId =cashier.getID();
@@ -64,7 +67,11 @@ public class TicketController {
         return ticket;
 
     }
-    public void associateTicketToCashier(Cashier cashier,TicketModel ticket){
+
+
+    //el metodo registra un ticket nuevo en la estructura del mapa tickets by cashier
+    //y añade el ticket a la lista interna del mapa Cashier
+    public void associateTicketToCashier(Cashier cashier,TicketModel ticket){//hay que llamar a este cuando se cree el ticket
         if (cashier==null||ticket==null)return;
         String cashierId = cashier.getID();
         List<TicketModel> lista = ticketsByCashier.get(cashierId);//coje la lista de tickets del cajero
@@ -106,9 +113,9 @@ public class TicketController {
         cashierIds.sort(String::compareTo);//se ordenan alfabeticamente los cajeros
         for (String cashierId : cashierIds) {//recorrer los cajeros ya ordenados
             List<TicketModel> lista = ticketsByCashier.get(cashierId);// Obtener su lista de tickets
-            // Si el cajero no tiene tickets o está vacío, lo saltamos para que no se pare la impresion
             if (lista == null || lista.isEmpty()) {
-                continue;
+                continue;            // Si el cajero no tiene tickets o está vacío, lo saltamos para que no se pare la impresion
+
             }
             lista.sort(Comparator.comparing(TicketModel::getId));//se ordenar los tickets del cajero por su ID de ticket
             for (TicketModel t : lista) {//se muestra la info de cada ticket
@@ -124,5 +131,32 @@ public class TicketController {
     }
     public void printTicket(String ticketId){
         TicketModel ticket = getTicket(ticketId);
+        if (ticket==null){
+            System.out.println("Ticket ID not found");
+            return;
+        }
+        if (!ticket.isClosed()){// primero se cierra el ticket si no esta cerrado
+            ticket.close();
+        }
+        List<ElementoTicket> elementos=ticket.getElementos();
+        if (elementos.isEmpty()){ //segundo se van coger cada linea del ticket
+            System.out.println("Its empty");
+            return;
+        }
+        Map<Category,Integer> unidadesPorCategoria=new HashMap<>();//para contar cuantas unidades hay por categoria
+        //en vez de usar contadores que es ineficiente usamos un hashmap
+        for (ElementoTicket e:elementos){
+            Product p= e.getProduct();
+            int cantidad=e.getQuantity();
+
+            if (p instanceof RegularProduct){//si extiende regular product es que es un producto con category y solo se coge esos
+               Category category=((RegularProduct)p).getCategory();
+                int actual = unidadesPorCategoria.getOrDefault(category, 0);//busca la clave categoria que es la categoria de cada prod
+                unidadesPorCategoria.put(category,actual+cantidad);//actualiza el mapa sumando la cantidad actual+nuevas uds
+
+            }
+        }
+        double totalPrice = 0.0;
+        double totalDiscount = 0.0;
     }
 }
