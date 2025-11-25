@@ -21,7 +21,7 @@ public class CLI {
         this.userController = new UserController(new TicketController());
         this.ticketController = new TicketController();
         this.catalog = new Catalog();
-        registerCommands(commandController, userController, ticketController, catalog);
+        registerCommands();
     }
     public void run(){
         Scanner sc = new Scanner(System.in);
@@ -31,7 +31,12 @@ public class CLI {
             String comand = sc.nextLine();
             String[] args = comand.split(" ");
             String primerArgumento = args[0];
-            String segundoArgumento = args[1];
+            String segundoArgumento;
+            if(args.length>1) {
+                segundoArgumento = args[1];
+            }else{
+                segundoArgumento="";
+            }
             keepRunning = startCommand(primerArgumento, segundoArgumento, args);
         }
         sc.close();
@@ -46,7 +51,12 @@ public class CLI {
                 System.out.println(command);
                 String[] args = command.split(" ");
                 String primerArgumento = args[0];
-                String segundoArgumento = args[1];
+                String segundoArgumento;
+                if(args.length>1) {
+                    segundoArgumento = args[1];
+                }else{
+                    segundoArgumento="";
+                }
                 startCommand(primerArgumento,segundoArgumento,args);
             }
 
@@ -58,7 +68,7 @@ public class CLI {
         return commandController.executeCommand(primerArgumento, segundoArgumento, args);
     }
 
-    private void registerCommands(CommandController commandController, UserController userController, TicketController ticketController,Catalog catalog){
+    private void registerCommands(){
         commandController.registerCommand(new ProdAddCommand(catalog));
         commandController.registerCommand(new ProdAddCustomizableCommand(catalog));
         commandController.registerCommand(new ProdAddFoodCommand(catalog));
