@@ -28,8 +28,8 @@ public class CLI {
         boolean keepRunning = true;
         while (keepRunning) {
             System.out.print(PROMPT);
-            String comand = sc.nextLine();
-            String[] args = comand.split(" ");
+            String command = sc.nextLine();
+            String[] args = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             String primerArgumento = args[0];
             String segundoArgumento;
             if(args.length>1) {
