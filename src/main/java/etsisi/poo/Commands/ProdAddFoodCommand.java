@@ -30,4 +30,10 @@ public class ProdAddFoodCommand extends AbstractProdAddCommand {
 
         return new ProductFood(id, name, price, dateTime, maxPeople);
     }
+
+    @Override
+    protected String getOkMessage() {
+        return "prod addFood: ok";
+    }
+
 }

@@ -35,6 +35,8 @@ public abstract class AbstractProdAddCommand implements ICommand {
 
     protected abstract Product createProduct(String[] args);
 
+    protected abstract String getOkMessage();
+
     @Override
     public String execute(String[] args) {
         try {
@@ -42,8 +44,8 @@ public abstract class AbstractProdAddCommand implements ICommand {
             boolean ok = catalog.addProduct(product);
 
             if (ok) {
-                System.out.println("prod add: ok");
                 System.out.println(product);
+                System.out.println(getOkMessage());
             } else {
                 System.out.println("Product could not be added");
             }

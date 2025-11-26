@@ -19,7 +19,6 @@ public class ProdAddReunionCommand extends AbstractProdAddCommand {
         return "addMeeting";
     }
 
-
     @Override
     protected Product createProduct(String[] args) {
         int id = Integer.parseInt(args[2]);
@@ -31,4 +30,10 @@ public class ProdAddReunionCommand extends AbstractProdAddCommand {
 
         return new ProductReunion(id, name, price, dateTime, maxPeople);
     }
+
+    @Override
+    protected String getOkMessage() {
+        return "prod addMeeting: ok";
+    }
+
 }

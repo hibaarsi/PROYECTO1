@@ -36,7 +36,7 @@ public class ProductFood extends Product implements EventProduct {
 
     @Override
     public String toString() {
-        return String.format("{class:ProductFood, id:%d, name:'%s', price:%.1f, eventDate:%s, maxPeople:%d}",
-                id, name.replace("\"", ""), price, eventDate, maxPeople);
+        return String.format("{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d}",
+                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople);
     }
 }

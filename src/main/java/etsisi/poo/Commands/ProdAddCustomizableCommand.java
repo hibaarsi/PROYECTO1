@@ -44,4 +44,9 @@ public class ProdAddCustomizableCommand extends AbstractProdAddCommand {
                 return false;
         }
     }
+
+    @Override
+    protected String getOkMessage() {
+        return "prod addCustomizable: ok";
+    }
 }

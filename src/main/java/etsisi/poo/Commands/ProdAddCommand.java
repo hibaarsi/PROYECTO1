@@ -27,4 +27,9 @@ public class ProdAddCommand extends AbstractProdAddCommand {
 
         return new RegularProduct(id, name, category, price);
     }
+
+    @Override
+    protected String getOkMessage() {
+        return "prod add: ok";
+    }
 }

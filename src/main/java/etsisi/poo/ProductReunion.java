@@ -32,5 +32,11 @@ public class ProductReunion extends Product implements EventProduct {
     public Duration getMinPlanning() {
         return MIN_PLANNING;
     }
+
+    @Override
+    public String toString() {
+        return String.format("{class:Meeting, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d}",
+                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople);
+    }
 }
 
