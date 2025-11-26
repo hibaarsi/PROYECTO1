@@ -29,7 +29,7 @@ public class ProdRemoveCommand implements ICommand {
                 System.out.printf("Product with id %d does not exist%n", id);
             } else {
                 System.out.println(removed);
-                System.out.println("prod remove: ok\n");
+                System.out.println("prod remove: ok");
             }
 
         } catch (NumberFormatException e) {//en caso de que el ID no es un num valido

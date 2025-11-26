@@ -26,9 +26,9 @@ public class ProdListCommand implements ICommand{
         if (isEmpty) {
             System.out.println("There are no products in the catalog.");
         } else {
-            System.out.println("Product list in the catalog:");
+            System.out.println("Catalog: ");
             for (Product product : products.values()) { //mostrar
-                System.out.println("- " + product);
+                System.out.println(product);
             }
         }
         return null;

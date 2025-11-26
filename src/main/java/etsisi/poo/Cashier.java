@@ -32,7 +32,6 @@ public class Cashier extends Users {
 
     @Override
     public String toString() {
-        return String.format("UW: %s, nombre: %s, email: %s"
-                , this.UW, getName(), getEmail());
+        return "Cash{identifier='" + UW + "', name='" + getName() + "', email='" + getEmail() + "'}";
     }
 }

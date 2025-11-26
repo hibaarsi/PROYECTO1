@@ -35,7 +35,7 @@ public class CLI {
             if(args.length>1) {
                 segundoArgumento = args[1];
             }else{
-                segundoArgumento="";
+                segundoArgumento=null;///""
             }
             keepRunning = startCommand(primerArgumento, segundoArgumento, args);
         }
@@ -49,7 +49,7 @@ public class CLI {
             while ((command = bufreader.readLine()) != null) {
                 System.out.print(PROMPT);
                 System.out.println(command);
-                String[] args = command.split(" ");
+                String[] args = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 String primerArgumento = args[0];
                 String segundoArgumento;
                 if(args.length>1) {
@@ -76,10 +76,22 @@ public class CLI {
         commandController.registerCommand(new ProdListCommand(catalog));
         commandController.registerCommand(new ProdRemoveCommand(catalog));
         commandController.registerCommand(new ProdUpdateCommand(catalog));
+
         commandController.registerCommand(new CashAddCommand(userController));
         commandController.registerCommand(new CashRemoveCommand(userController));
+        commandController.registerCommand(new CashListCommand(userController));
+        commandController.registerCommand(new CashTicketsCommand(userController));
+
         commandController.registerCommand(new ClientAddCommand(userController));
         commandController.registerCommand(new ClienteRemoveCommand(userController));
+        commandController.registerCommand(new ClientListCommand(userController));
+
+        commandController.registerCommand(new EchoCommand());
+        commandController.registerCommand(new HelpCommand());
+
+        commandController.registerCommand(new TicketNewCommand());
+
+
     }
 
     public static void printFromString(String message){

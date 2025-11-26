@@ -18,16 +18,14 @@ public class ClientListCommand implements ICommand{
         this.userController = userController;
     }
     public String execute(String[]args){
-        List<Client> clients= userController.getClientsSortedByName();//lista cliente ordenada por nombre
-        if(clients.isEmpty()){
-            System.out.println("Its empty");
-            return "It is empty";
+        List<Client> clients = userController.getClientsSortedByName();
+
+        System.out.println("Client:");
+
+        for (Client c : clients) {
+            System.out.println("  " + c);
         }
 
-        System.out.println("list of registered clients:");
-        for(Client c: clients){
-            System.out.println(c);
-        }
-        return clients.toString() ;
+        return "client list: ok";
     }
 }

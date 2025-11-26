@@ -26,6 +26,7 @@ public class CashRemoveCommand implements ICommand {
         String uw = args[2];
 
         boolean encontrar = false;
+
         for (Cashier c : userController.getCashiersSortedByName()) {
             if (!encontrar && c.getID().equals(uw)) {
                 encontrar = true;
@@ -33,11 +34,10 @@ public class CashRemoveCommand implements ICommand {
         }
 
         if (!encontrar) {
-            System.out.println("Cashier not found");
             return "Cashier not found";
         }
         userController.removeCashier(uw);
-        return "Cashier removed";
+        return "cash remove: ok";
     }
 
 }

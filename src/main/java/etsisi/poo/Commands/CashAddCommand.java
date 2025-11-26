@@ -16,25 +16,34 @@ public class CashAddCommand implements ICommand{
     }
 
     public String execute(String[]args){
-        if(args.length<5){
-            return "cashAdd <UW> <name> <email> ";
+        if (args.length == 5) {
+
+            String uw = args[2];
+            String name = args[3].replace("\"", "");
+            String email = args[4];
+
+            Cashier cashier = userController.createCashier(name, email, uw);
+
+            if (cashier == null) return "Error creating cashier";
+
+            userController.addCashier(cashier);
+            System.out.println(cashier);
+            return "cash add: ok";
+        }
+        if (args.length == 4) {
+
+            String name = args[2].replace("\"", "");
+            String email = args[3];
+
+            Cashier cashier = userController.createCashier(name, email, null);
+
+            if (cashier == null) return "Error creating cashier";
+
+            userController.addCashier(cashier);
+            System.out.println(cashier);
+            return "cash add: ok";
         }
 
-        String UW= args[2];
-        String name =args[3];
-        String email=args[4];
-
-
-
-        Cashier cashier= userController.createCashier(name,email,UW);
-
-        if(cashier==null){
-            return "Cashier could not be created";
-
-        }
-
-        userController.addCashier(cashier);
-        System.out.println("Cashier added");
-        return "Cashier" +cashier.getName() + "added with " +cashier.getID();
+        return "cash add <UW> \"<name>\" <email>";
     }
 }

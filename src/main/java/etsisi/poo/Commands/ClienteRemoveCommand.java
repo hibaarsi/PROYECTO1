@@ -22,7 +22,6 @@ public class ClienteRemoveCommand implements ICommand {
         }
 
         String dni=args[2];
-
         boolean found = false;
 
         for (Client c : userController.getClientsSortedByName()) {//recorre la lista de cliente nombre, para ver si existe el DNI puesto
@@ -33,9 +32,8 @@ public class ClienteRemoveCommand implements ICommand {
         if (!found) {
             return "Client not found.";
         }
-
         userController.removeClient(dni);
-     return "Client removed";
+        return "Client remove: ok";
 
     }
 }

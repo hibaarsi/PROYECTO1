@@ -17,32 +17,32 @@ public class ClientAddCommand implements ICommand {
         return"add";
     }
     public String execute(String[] args) {
-        if (args.length < 6) { //mirar
-            return "Use: clientadd <name> <DNI> <email> <UW>";
+        if (args.length != 6) {
+            return "Use: client add \"<name>\" <DNI> <email> <UW_cashier>";
         }
         //guarda los datos del cliente
-        String name = args[2];
+        String name = args[2].replace("\"", "");
         String dni = args[3];
         String email = args[4];
         String uw = args[5];
 
         // Buscar el cajero asociado
-        Cashier cashier = null;
-        for (Cashier c : userController.getCashiersSortedByName()) {
-            if (cashier == null && c.getID().equals(uw)) { //si no se ha encontrado o no coincide el UW
-                cashier = c;//se guarda
-            }
-        }
+        Cashier cashier = userController.getCashier(uw);
 
-        if (cashier == null) {//si no se ha encontrado
+        if (cashier == null) {
             return "Cashier not found";
         }
 
         Client client = userController.createClient(name, email, dni, cashier);
-        if (client != null) {//lo añadimos al mapa
-            userController.addClient(client);
-            return "Client added";
-        } else return "Client could not be created";
+
+        if (client == null) {
+            return "Client could not be created";
+        }
+
+        userController.addClient(client);
+
+        System.out.println(client);
+        return "client add: ok";
 
     }
 }

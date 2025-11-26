@@ -22,16 +22,14 @@ public class CashListCommand implements ICommand {
         List<Cashier> cashiers=userController.getCashiersSortedByName();//lista de cajeros ordenada por nombre
 
         if(cashiers.isEmpty()){
-            System.out.println("cash list: ok");
             return "cash list: ok";
         }
 
-
+        System.out.println("Cash:");
         for(Cashier c: cashiers){
             System.out.println(" "+c);
         }
 
-        System.out.println("cash list: ok");
         return "cash list: ok";
     }
 }

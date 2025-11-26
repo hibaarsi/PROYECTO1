@@ -9,7 +9,8 @@ public class EchoCommand implements ICommand{
     public String getSegundoArgumento(){return null;}
 
     public String execute(String[] args) {
-        if (args.length > 1) {
+
+       if (args.length > 1) {
             String text = String.join(" ",
                     Arrays.copyOfRange(args, 1, args.length));
             CLI.printFromString("echo" + text + "\n");
@@ -17,5 +18,8 @@ public class EchoCommand implements ICommand{
             System.out.println("echo \"\"");
         }
         return null;
+
+
+
     }
 }
