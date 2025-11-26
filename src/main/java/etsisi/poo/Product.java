@@ -46,6 +46,10 @@ public abstract class Product {
         return price;
     }
 
+    public Category getCategory() {
+        return null;
+    }
+
     // 🔹 Setters con validaciones
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) System.out.println(NOT_EMPTY);

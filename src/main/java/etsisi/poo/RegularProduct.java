@@ -8,6 +8,7 @@ public class RegularProduct extends Product {
         this.category = category;
     }
 
+    @Override
     public Category getCategory() {
         return category;
     }
