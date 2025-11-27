@@ -9,12 +9,15 @@ public class ProdRemoveCommand implements ICommand {
     public ProdRemoveCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-    public String getPrimerArgumento(){
+
+    public String getPrimerArgumento() {
         return "prod";
     }
-    public String getSegundoArgumento(){
-        return"remove";
+
+    public String getSegundoArgumento() {
+        return "remove";
     }
+
     public String execute(String[] args) {
         if (args.length != 3) {
             System.out.println("Not valid");

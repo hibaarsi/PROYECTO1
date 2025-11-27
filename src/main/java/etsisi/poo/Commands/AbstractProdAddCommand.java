@@ -52,7 +52,7 @@ public abstract class AbstractProdAddCommand implements ICommand {
 
         } catch (Exception e) {
             System.out.println("Error processing ->" + getPrimerArgumento() + " " + getSegundoArgumento() +
-                            " ->" + e.getMessage());
+                    " ->" + e.getMessage());
         }
         return null;
     }

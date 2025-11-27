@@ -5,18 +5,20 @@ import etsisi.poo.Product;
 
 import java.util.Map;
 
-public class ProdListCommand implements ICommand{
+public class ProdListCommand implements ICommand {
 
     private final Catalog catalog;
 
     public ProdListCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-    public String getPrimerArgumento(){
+
+    public String getPrimerArgumento() {
         return "prod";
     }
-    public String getSegundoArgumento(){
-        return"list";
+
+    public String getSegundoArgumento() {
+        return "list";
     }
 
     public String execute(String[] args) {
@@ -28,7 +30,7 @@ public class ProdListCommand implements ICommand{
         } else {
             System.out.println("Catalog: ");
             for (Product product : products.values()) { //mostrar
-                System.out.println("\t"+product);
+                System.out.println("\t" + product);
             }
             System.out.println("prod list: ok\n");
         }

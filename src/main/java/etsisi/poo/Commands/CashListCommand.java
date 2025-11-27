@@ -11,23 +11,25 @@ public class CashListCommand implements ICommand {
     public CashListCommand(UserController userController) {
         this.userController = userController;
     }
-    public String getPrimerArgumento(){
+
+    public String getPrimerArgumento() {
         return "cash";
     }
-    public String getSegundoArgumento(){
-        return"list";
+
+    public String getSegundoArgumento() {
+        return "list";
     }
 
-    public String execute(String[]args){
-        List<Cashier> cashiers=userController.getCashiersSortedByName();//lista de cajeros ordenada por nombre
+    public String execute(String[] args) {
+        List<Cashier> cashiers = userController.getCashiersSortedByName();//lista de cajeros ordenada por nombre
 
-        if(cashiers.isEmpty()){
+        if (cashiers.isEmpty()) {
             return "cash list: ok\n";
         }
 
         System.out.println("Cash:");
-        for(Cashier c: cashiers){
-            System.out.println(" "+c);
+        for (Cashier c : cashiers) {
+            System.out.println(" " + c);
         }
 
         return "cash list: ok\n";

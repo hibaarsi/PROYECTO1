@@ -10,12 +10,15 @@ public class ClientAddCommand implements ICommand {
     public ClientAddCommand(UserController userController) {
         this.userController = userController;
     }
-    public String getPrimerArgumento(){
+
+    public String getPrimerArgumento() {
         return "client";
     }
-    public String getSegundoArgumento(){
-        return"add";
+
+    public String getSegundoArgumento() {
+        return "add";
     }
+
     public String execute(String[] args) {
         if (args.length != 6) {
             return "Use: client add \"<name>\" <DNI> <email> <UW_cashier>";

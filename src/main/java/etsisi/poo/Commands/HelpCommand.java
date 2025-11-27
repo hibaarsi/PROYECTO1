@@ -2,14 +2,20 @@ package etsisi.poo.Commands;
 
 import etsisi.poo.CLI;
 
-public class HelpCommand implements ICommand{
+public class HelpCommand implements ICommand {
     private static final String SPACE = "    ";
     private static final String HELP_CATEGORIES =
             "Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n";
     private static final String HELP_DISCOUNTS =
             "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \nELECTRONICS 3%.\n";
-    public String getPrimerArgumento(){return "help";}
-    public String getSegundoArgumento(){return null;}
+
+    public String getPrimerArgumento() {
+        return "help";
+    }
+
+    public String getSegundoArgumento() {
+        return null;
+    }
 
     public String execute(String[] args) {
         StringBuilder sb = new StringBuilder();

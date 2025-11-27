@@ -23,7 +23,8 @@ public class CLI {
         this.catalog = new Catalog();
         registerCommands();
     }
-    public void run(){
+
+    public void run() {
         Scanner sc = new Scanner(System.in);
         boolean keepRunning = true;
         while (keepRunning) {
@@ -32,16 +33,17 @@ public class CLI {
             String[] args = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             String primerArgumento = args[0];
             String segundoArgumento;
-            if(args.length>1) {
+            if (args.length > 1) {
                 segundoArgumento = args[1];
-            }else{
-                segundoArgumento=null;///""
+            } else {
+                segundoArgumento = null;///""
             }
             keepRunning = startCommand(primerArgumento, segundoArgumento, args);
         }
         sc.close();
     }
-    public void runfromFile(String fileName){
+
+    public void runfromFile(String fileName) {
         try (FileReader fileReader = new FileReader(fileName);
              BufferedReader bufreader = new BufferedReader(fileReader)) {
 
@@ -52,23 +54,24 @@ public class CLI {
                 String[] args = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 String primerArgumento = args[0];
                 String segundoArgumento;
-                if(args.length>1) {
+                if (args.length > 1) {
                     segundoArgumento = args[1];
-                }else{
-                    segundoArgumento="";
+                } else {
+                    segundoArgumento = "";
                 }
-                startCommand(primerArgumento,segundoArgumento,args);
+                startCommand(primerArgumento, segundoArgumento, args);
             }
 
         } catch (IOException e) {
             System.out.println("No encontrado tal archivo");
         }
     }
-    public boolean startCommand(String primerArgumento, String segundoArgumento, String[] args){
+
+    public boolean startCommand(String primerArgumento, String segundoArgumento, String[] args) {
         return commandController.executeCommand(primerArgumento, segundoArgumento, args);
     }
 
-    private void registerCommands(){
+    private void registerCommands() {
         commandController.registerCommand(new ProdAddCommand(catalog));
         commandController.registerCommand(new ProdAddCustomizableCommand(catalog));
         commandController.registerCommand(new ProdAddFoodCommand(catalog));
@@ -94,7 +97,7 @@ public class CLI {
 
     }
 
-    public static void printFromString(String message){
+    public static void printFromString(String message) {
         System.out.println(message);
     }
 }

@@ -2,24 +2,28 @@ package etsisi.poo.Commands;
 
 import etsisi.poo.TicketController;
 
-public class TicketListCommand implements ICommand{
+public class TicketListCommand implements ICommand {
     private final TicketController ticketController;
-    TicketListCommand(TicketController ticketController){
-        this.ticketController=ticketController;
+
+    TicketListCommand(TicketController ticketController) {
+        this.ticketController = ticketController;
     }
-    public String execute (String[] args){
-        if (args!=null && args.length>0){
+
+    public String execute(String[] args) {
+        if (args != null && args.length > 0) {
             return "Usage: ticket list";
 
         }
-            ticketController.listTickets();
-            return "";
+        ticketController.listTickets();
+        return "";
 
     }
-    public String getPrimerArgumento(){
-        return  "ticket";
+
+    public String getPrimerArgumento() {
+        return "ticket";
     }
-    public String getSegundoArgumento(){
+
+    public String getSegundoArgumento() {
         return "list";
     }
 //cuando se ponga lo de implements hay que sobreescribir los metodos getName getSurname y execute,

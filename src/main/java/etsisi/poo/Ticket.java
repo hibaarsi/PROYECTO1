@@ -80,7 +80,7 @@ public class Ticket {
     }
 
     public double totalWithDiscount() {
-       if (products.isEmpty()) {
+        if (products.isEmpty()) {
             return 0;
         }
         double total = 0;

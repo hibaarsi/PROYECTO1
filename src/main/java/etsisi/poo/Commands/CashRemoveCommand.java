@@ -9,11 +9,13 @@ public class CashRemoveCommand implements ICommand {
     public CashRemoveCommand(UserController userController) {
         this.userController = userController;
     }
-    public String getPrimerArgumento(){
+
+    public String getPrimerArgumento() {
         return "cash";
     }
-    public String getSegundoArgumento(){
-        return"remove";
+
+    public String getSegundoArgumento() {
+        return "remove";
     }
 
     public String execute(String[] args) {

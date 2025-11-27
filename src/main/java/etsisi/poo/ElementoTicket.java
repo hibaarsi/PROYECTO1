@@ -10,11 +10,13 @@ public class ElementoTicket {
         this.product = product;
         this.quantity = quantity;
     }
-    public Product getProduct(){
+
+    public Product getProduct() {
         return product;
     }
-    public int getQuantity(){
+
+    public int getQuantity() {
         return quantity;
     }
-    
+
 }

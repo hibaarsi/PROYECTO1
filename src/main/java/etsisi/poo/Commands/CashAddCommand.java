@@ -3,19 +3,22 @@ package etsisi.poo.Commands;
 import etsisi.poo.Cashier;
 import etsisi.poo.UserController;
 
-public class CashAddCommand implements ICommand{
+public class CashAddCommand implements ICommand {
     private UserController userController;
-    public CashAddCommand(UserController userController){
-        this.userController=userController;
-    }
-    public String getPrimerArgumento(){
-        return "cash";
-    }
-    public String getSegundoArgumento(){
-        return"add";
+
+    public CashAddCommand(UserController userController) {
+        this.userController = userController;
     }
 
-    public String execute(String[]args){
+    public String getPrimerArgumento() {
+        return "cash";
+    }
+
+    public String getSegundoArgumento() {
+        return "add";
+    }
+
+    public String execute(String[] args) {
         if (args.length == 5) {
 
             String uw = args[2];

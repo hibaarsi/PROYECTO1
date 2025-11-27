@@ -1,4 +1,5 @@
 package etsisi.poo.Commands;
+
 import etsisi.poo.Catalog;
 import etsisi.poo.Product;
 
@@ -8,12 +9,15 @@ public class ProdUpdateCommand implements ICommand {
     public ProdUpdateCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-    public String getPrimerArgumento(){
+
+    public String getPrimerArgumento() {
         return "prod";
     }
-    public String getSegundoArgumento(){
-        return"update";
+
+    public String getSegundoArgumento() {
+        return "update";
     }
+
     public String execute(String[] args) {
         if (args.length != 5) {//mirar
             return "Not valid";

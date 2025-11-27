@@ -14,18 +14,21 @@ public class UserController {
         this.ticketController = ticketController;
 
     }
-    public Client getClient(String clientID){
-        if (clientMap.containsKey(clientID)){
+
+    public Client getClient(String clientID) {
+        if (clientMap.containsKey(clientID)) {
             return clientMap.get(clientID);
         }
         return null;    // Si no lo encuentra devuelve null
     }
-    public Cashier getCashier(String cashierID){
-        if (cashierMap.containsKey(cashierID)){
+
+    public Cashier getCashier(String cashierID) {
+        if (cashierMap.containsKey(cashierID)) {
             return cashierMap.get(cashierID);
         }
         return null;    // Si no lo encuentra devuelve null
     }
+
     public Client createClient(String name, String email, String DNI, Cashier cashier) {
         if (clientMap.containsKey(DNI)) {
             System.out.println("El cliente ya existe.");

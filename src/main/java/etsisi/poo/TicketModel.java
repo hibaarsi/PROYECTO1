@@ -37,9 +37,11 @@ public class TicketModel {
         this.openDate = LocalDateTime.now();
         this.elementos = new ArrayList<>();
     }
+
     public List<ElementoTicket> getElementos() {//para leer desde fuera las lineas del ticket
         return elementos;
     }
+
     public double getTotal() { //calculo del total bruto del ticket
         double total = 0.0;
         for (ElementoTicket e : elementos) {
@@ -49,6 +51,7 @@ public class TicketModel {
         }
         return total;
     }
+
     private String generateId() {
         String baseId = LocalDate.now().format(DATE_FORMATTER);
         Random random = new Random();
@@ -60,7 +63,7 @@ public class TicketModel {
         return newId;
     }
 
-    public void addProduct(Product product,int cantidad) {// mejorar dependiendo de qur producto meto
+    public void addProduct(Product product, int cantidad) {// mejorar dependiendo de qur producto meto
         if (isClosed()) {
             System.out.println("No se pueden añadir productos, esta cerrado");
         }
@@ -72,7 +75,7 @@ public class TicketModel {
                 }
             }
         }
-        ElementoTicket elemento = new ElementoTicket(product,cantidad);
+        ElementoTicket elemento = new ElementoTicket(product, cantidad);
         elementos.add(elemento);
         products.add(product);
         if (ticketStatus == TicketStatus.VACIO)
