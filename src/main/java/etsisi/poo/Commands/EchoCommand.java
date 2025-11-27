@@ -18,7 +18,7 @@ public class EchoCommand implements ICommand {
         if (args.length > 1) {
             String text = String.join(" ",
                     Arrays.copyOfRange(args, 1, args.length));
-            CLI.printFromString("echo" + text + "\n");
+            CLI.printFromString(text + "\n");
         } else {
             System.out.println("echo \"\"");
         }

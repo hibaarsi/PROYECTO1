@@ -18,8 +18,8 @@ public class CLI {
 
     public CLI() {
         this.commandController = new CommandController();
-        this.userController = new UserController(new TicketController());
         this.ticketController = new TicketController();
+        this.userController = new UserController(ticketController);
         this.catalog = new Catalog();
         registerCommands();
     }
@@ -57,7 +57,7 @@ public class CLI {
                 if (args.length > 1) {
                     segundoArgumento = args[1];
                 } else {
-                    segundoArgumento = "";
+                    segundoArgumento =null;
                 }
                 startCommand(primerArgumento, segundoArgumento, args);
             }
@@ -91,6 +91,7 @@ public class CLI {
 
         commandController.registerCommand(new EchoCommand());
         commandController.registerCommand(new HelpCommand());
+        commandController.registerCommand(new ExitCommand());
 
         commandController.registerCommand(new TicketNewCommand());
         commandController.registerCommand(new TicketListCommand(this.ticketController));

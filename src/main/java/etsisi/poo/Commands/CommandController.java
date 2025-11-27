@@ -25,7 +25,9 @@ public class CommandController {
             System.out.println(comandoexecute);
 
         }
-        return !(primerArgumento.equals("exit"));
+      boolean exit=  primerArgumento.equals("exit");
+
+        return !exit;
 
     }
 }
