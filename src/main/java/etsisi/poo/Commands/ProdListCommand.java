@@ -30,6 +30,7 @@ public class ProdListCommand implements ICommand{
             for (Product product : products.values()) { //mostrar
                 System.out.println("\t"+product);
             }
+            System.out.println("prod list: ok\n");
         }
         return null;
     }

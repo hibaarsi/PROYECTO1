@@ -33,7 +33,7 @@ public class ClienteRemoveCommand implements ICommand {
             return "Client not found.";
         }
         userController.removeClient(dni);
-        return "Client remove: ok";
+        return "Client remove: ok\n";
 
     }
 }

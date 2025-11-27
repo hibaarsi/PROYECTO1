@@ -28,7 +28,7 @@ public class CashAddCommand implements ICommand{
 
             userController.addCashier(cashier);
             System.out.println(cashier);
-            return "cash add: ok";
+            return "cash add: ok\n";
         }
         if (args.length == 4) {
 

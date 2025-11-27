@@ -22,7 +22,7 @@ public class CashListCommand implements ICommand {
         List<Cashier> cashiers=userController.getCashiersSortedByName();//lista de cajeros ordenada por nombre
 
         if(cashiers.isEmpty()){
-            return "cash list: ok";
+            return "cash list: ok\n";
         }
 
         System.out.println("Cash:");
@@ -30,6 +30,6 @@ public class CashListCommand implements ICommand {
             System.out.println(" "+c);
         }
 
-        return "cash list: ok";
+        return "cash list: ok\n";
     }
 }

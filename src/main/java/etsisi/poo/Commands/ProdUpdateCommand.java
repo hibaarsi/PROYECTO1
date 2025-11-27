@@ -32,7 +32,7 @@ public class ProdUpdateCommand implements ICommand {
             boolean ok = catalog.updateProduct(id, field, value);//actualiza el producto en el catalog
             if (ok) {
                 System.out.println(product);
-                System.out.println("prod update: ok");
+                System.out.println("prod update: ok\n");
             } else {
                 switch (field) {
                     case "CATEGORY":
