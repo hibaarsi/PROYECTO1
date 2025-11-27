@@ -124,7 +124,6 @@ public class TicketController {
             List<TicketModel> lista = ticketsByCashier.get(cashierId);// Obtener su lista de tickets
             if (lista == null || lista.isEmpty()) {
                 continue;            // Si el cajero no tiene tickets o está vacío, lo saltamos para que no se pare la impresion
-
             }
             lista.sort(Comparator.comparing(TicketModel::getId));//se ordenar los tickets del cajero por su ID de ticket
             for (TicketModel t : lista) {//se muestra la info de cada ticket
@@ -171,6 +170,51 @@ public class TicketController {
         double totalDiscount = 0.0;
 
         System.out.println("Ticket : " + ticket.getId());
+        elementos.sort((e1, e2) -> e1.getProduct().getName().compareToIgnoreCase(e2.getProduct().getName()));
+        //ordenar las lineas por nombre
+
+        //recorrer de nuevo para imprimir cada linea y calcular totales
+        for (ElementoTicket e : elementos) {
+            Product p = e.getProduct();
+            int cantidad = e.getQuantity();
+            double unitPrice = p.getPrice();
+
+            double perUnitDiscount = 0.0;
+            boolean tieneDescuento = false;
+
+            if (p instanceof RegularProduct) {//si hereda de regular product
+                Category cat = ((RegularProduct) p).getCategory(); //para que pueda usar el get cayegory
+                int udsCategoria = unidadesPorCategoria.getOrDefault(cat, 0);
+
+                // Si hay 2 o más uds en esa categoría en el ticet se aplica el desciemto
+                if (udsCategoria >= 2) {
+                    perUnitDiscount = unitPrice * cat.getDiscount();
+                    tieneDescuento = true;
+                }
+            }
+
+            // se imprime una linea por unidad
+            for (int i = 0; i < cantidad; i++) {
+                if (tieneDescuento) {
+                    System.out.printf("  %s **discount -%.1f%n", p, perUnitDiscount);
+                } else {
+                    System.out.println("  " + p);
+                }
+            }
+
+            // Actualizamos totales
+            double linePrice = unitPrice * cantidad;
+            double lineDiscount = perUnitDiscount * cantidad;
+
+            totalPrice += linePrice;
+            totalDiscount += lineDiscount;
+        }
+
+        double finalPrice = totalPrice - totalDiscount;
+
+        System.out.printf("  Total price: %.1f%n", totalPrice);
+        System.out.printf("  Total discount: %.1f%n", totalDiscount);
+        System.out.printf("  Final Price: %.1f%n", finalPrice);
 
     }
 }
