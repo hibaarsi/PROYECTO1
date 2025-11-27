@@ -5,7 +5,7 @@ import etsisi.poo.TicketController;
 public class TicketListCommand implements ICommand {
     private final TicketController ticketController;
 
-    TicketListCommand(TicketController ticketController) {
+    public TicketListCommand(TicketController ticketController) {
         this.ticketController = ticketController;
     }
 

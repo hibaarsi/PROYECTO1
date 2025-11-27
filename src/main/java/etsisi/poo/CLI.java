@@ -93,7 +93,7 @@ public class CLI {
         commandController.registerCommand(new HelpCommand());
 
         commandController.registerCommand(new TicketNewCommand());
-
+        commandController.registerCommand(new TicketListCommand(this.ticketController));
 
     }
 
