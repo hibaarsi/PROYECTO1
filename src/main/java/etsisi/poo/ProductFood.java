@@ -15,7 +15,8 @@ public class ProductFood extends Product implements EventProduct {
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
         if (!hasEnoughPlanning()) {
-            System.out.println("Warning: FoodProduct does not meet 3-day planning rule");
+            //System.out.println("Warning: FoodProduct does not meet 3-day planning rule");
+            throw new IllegalArgumentException("Error adding product");
         }
     }
 

@@ -51,7 +51,8 @@ public abstract class AbstractProdAddCommand implements ICommand {
             }
 
         } catch (Exception e) {
-            System.out.println("Invalid command: " + e.getMessage());
+            System.out.println("Error processing ->" + getPrimerArgumento() + " " + getSegundoArgumento() +
+                            " ->" + e.getMessage());
         }
         return null;
     }

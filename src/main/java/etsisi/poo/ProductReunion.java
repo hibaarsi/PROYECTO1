@@ -14,7 +14,9 @@ public class ProductReunion extends Product implements EventProduct {
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
         if (!hasEnoughPlanning()) { //comprara el tiempo que falta entre LocalDateTime.now() y eventdate
-            System.out.println("Warning: MeetingProduct does not meet 12-hour planning rule"); //si se pasa de 12h
+            //System.out.println("Warning: MeetingProduct does not meet 12-hour planning rule");
+            throw new IllegalArgumentException("Error adding product");
+
         }
     }
 

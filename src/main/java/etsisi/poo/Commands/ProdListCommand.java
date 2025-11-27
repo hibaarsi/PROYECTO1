@@ -28,7 +28,7 @@ public class ProdListCommand implements ICommand{
         } else {
             System.out.println("Catalog: ");
             for (Product product : products.values()) { //mostrar
-                System.out.println(product);
+                System.out.println("\t"+product);
             }
         }
         return null;
