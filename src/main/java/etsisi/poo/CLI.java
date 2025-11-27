@@ -88,7 +88,6 @@ public class CLI {
         commandController.registerCommand(new ClientAddCommand(userController));
         commandController.registerCommand(new ClienteRemoveCommand(userController));
         commandController.registerCommand(new ClientListCommand(userController));
-
         commandController.registerCommand(new EchoCommand());
         commandController.registerCommand(new HelpCommand());
         commandController.registerCommand(new ExitCommand());

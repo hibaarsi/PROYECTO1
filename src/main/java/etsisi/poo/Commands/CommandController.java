@@ -7,10 +7,15 @@ public class CommandController {
     private Map<String, ICommand> commands = new HashMap<>();
 
     public void registerCommand(ICommand command) {
-        //para que identifique la primera y segunda parte del comando
-        String key = command.getPrimerArgumento() + ":" + command.getSegundoArgumento();//para que identifique la primera y segunda parte del comando
+        String key;
+        if (command.getSegundoArgumento() == null) {
+            key = command.getPrimerArgumento();
+        } else {
+            key = command.getPrimerArgumento() + ":" + command.getSegundoArgumento();
+        }
         commands.put(key, command);
     }
+
 
     public boolean executeCommand(String primerArgumento, String segundoArgumento, String[] args) {
         String key = primerArgumento + ":" + segundoArgumento;//construye una clave unica de texto que se refiere al comando ej ticket:print
@@ -30,4 +35,6 @@ public class CommandController {
         return !exit;
 
     }
+
+
 }
