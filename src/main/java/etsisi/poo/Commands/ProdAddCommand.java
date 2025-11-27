@@ -1,9 +1,6 @@
 package etsisi.poo.Commands;
 
-import etsisi.poo.Catalog;
-import etsisi.poo.Category;
-import etsisi.poo.Product;
-import etsisi.poo.RegularProduct;
+import etsisi.poo.*;
 
 public class ProdAddCommand extends AbstractProdAddCommand {
     public ProdAddCommand(Catalog catalog) {
@@ -24,6 +21,11 @@ public class ProdAddCommand extends AbstractProdAddCommand {
         String name = parseName(args[3]);
         Category category = Category.valueOf(args[4].toUpperCase());
         double price = parsePrice(args[5]);
+
+        if (args.length == 7) { //si es personalizable
+            int maxPersonal = parseId(args[6]);
+            return new ProductPersonalized(id, name, category, price, maxPersonal);
+        }
 
         return new RegularProduct(id, name, category, price);
     }

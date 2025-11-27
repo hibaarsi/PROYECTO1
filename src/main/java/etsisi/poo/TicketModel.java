@@ -67,9 +67,9 @@ public class TicketModel {
         if (isClosed()) {
             System.out.println("No se pueden añadir productos, esta cerrado");
         }
-        if (product instanceof ProductFood || product instanceof ProductReunion) {
+        if (product instanceof ProductFood || product instanceof ProductMeeting) {
             for (Product p : products) {
-                if (p instanceof ProductFood || p instanceof ProductReunion) {
+                if (p instanceof ProductFood || p instanceof ProductMeeting) {
                     System.out.println("No se pueden añadir productos de tipo comida o reunion");
                     return;
                 }

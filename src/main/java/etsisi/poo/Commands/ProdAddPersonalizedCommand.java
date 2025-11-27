@@ -4,9 +4,9 @@ package etsisi.poo.Commands;
 import etsisi.poo.Catalog;
 import etsisi.poo.Category;
 import etsisi.poo.Product;
-import etsisi.poo.ProductCustomizable;
+import etsisi.poo.ProductPersonalized;
 
-public class ProdAddCustomizableCommand extends AbstractProdAddCommand {
+public class ProdAddPersonalizedCommand extends AbstractProdAddCommand {
     public String getPrimerArgumento() {
         return "prod";
     }
@@ -15,7 +15,7 @@ public class ProdAddCustomizableCommand extends AbstractProdAddCommand {
         return "addCustomizable";
     }
 
-    public ProdAddCustomizableCommand(Catalog catalog) {
+    public ProdAddPersonalizedCommand(Catalog catalog) {
         super(catalog);
     }
 
@@ -31,7 +31,7 @@ public class ProdAddCustomizableCommand extends AbstractProdAddCommand {
             throw new IllegalArgumentException("This category cannot be customized");
         }
 
-        return new ProductCustomizable(id, name, category, price, maxTexts);
+        return new ProductPersonalized(id, name, category, price, maxTexts);
     }
 
     private boolean isCustomizableCategory(Category category) {

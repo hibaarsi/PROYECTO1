@@ -2,12 +2,12 @@ package etsisi.poo.Commands;
 
 import etsisi.poo.Catalog;
 import etsisi.poo.Product;
-import etsisi.poo.ProductReunion;
+import etsisi.poo.ProductMeeting;
 
 import java.time.*;
 
-public class ProdAddReunionCommand extends AbstractProdAddCommand {
-    public ProdAddReunionCommand(Catalog catalog) {
+public class ProdAddMeetingCommand extends AbstractProdAddCommand {
+    public ProdAddMeetingCommand(Catalog catalog) {
         super(catalog);
     }
 
@@ -28,12 +28,12 @@ public class ProdAddReunionCommand extends AbstractProdAddCommand {
         int maxPeople = Integer.parseInt(args[6]);
         LocalDateTime dateTime = date.atTime(LocalTime.MAX);
 
-        return new ProductReunion(id, name, price, dateTime, maxPeople);
+        return new ProductMeeting(id, name, price, dateTime, maxPeople);
     }
 
     @Override
     protected String getOkMessage() {
-        return "prod addMeeting: ok";
+        return "prod addMeeting: ok\n";
     }
 
 }

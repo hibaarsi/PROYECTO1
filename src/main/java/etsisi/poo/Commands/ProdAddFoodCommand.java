@@ -33,7 +33,7 @@ public class ProdAddFoodCommand extends AbstractProdAddCommand {
 
     @Override
     protected String getOkMessage() {
-        return "prod addFood: ok";
+        return "prod addFood: ok\n";
     }
 
 }

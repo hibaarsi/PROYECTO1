@@ -73,9 +73,9 @@ public class CLI {
 
     private void registerCommands() {
         commandController.registerCommand(new ProdAddCommand(catalog));
-        commandController.registerCommand(new ProdAddCustomizableCommand(catalog));
+        commandController.registerCommand(new ProdAddPersonalizedCommand(catalog));
         commandController.registerCommand(new ProdAddFoodCommand(catalog));
-        commandController.registerCommand(new ProdAddReunionCommand(catalog));
+        commandController.registerCommand(new ProdAddMeetingCommand(catalog));
         commandController.registerCommand(new ProdListCommand(catalog));
         commandController.registerCommand(new ProdRemoveCommand(catalog));
         commandController.registerCommand(new ProdUpdateCommand(catalog));

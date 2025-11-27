@@ -2,12 +2,19 @@ package etsisi.poo;
 
 import java.util.List;
 
-public interface Customizable {
-    int getMaxTexts();
+public interface Personalized {
+
+    int getMaxPersonal();
 
     default double getPriceWithTexts(double basePrice, int quantity, List<String> texts) {
-        int nTexts = (texts == null) ? 0 : texts.size();
-        if (nTexts > getMaxTexts()) {
+        int nTexts;
+        if (texts == null) {
+            nTexts = 0;
+        } else {
+            nTexts = texts.size();
+        }
+
+        if (nTexts > getMaxPersonal()) {
             throw new IllegalArgumentException("Too many customization texts");
         }
         double multiplier = 1 + 0.10 * nTexts;
