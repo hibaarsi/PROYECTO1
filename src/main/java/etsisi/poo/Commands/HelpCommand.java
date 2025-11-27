@@ -31,7 +31,7 @@ public class HelpCommand implements ICommand {
                 .append(SPACE).append("ticket add <ticketId><cashId> <prodId> <amount> [--p<txt> --p<txt>]\n")
                 .append(SPACE).append("ticket remove <ticketId><cashId> <prodId>\n")
                 .append(SPACE).append("ticket print <ticketId> <cashId>\n")
-                .append(SPACE).append("ticket list")
+                .append(SPACE).append("ticket list\n")
                 .append(SPACE).append("prod add <id> \"<name>\" <category> <price>\n")
                 .append(SPACE).append("prod update <id> NAME|CATEGORY|PRICE <value>\n")
                 .append(SPACE).append("prod addFood [<id>] \"<name>\" <price> <expiration:yyyy-MM-dd> <max_people>\n")
