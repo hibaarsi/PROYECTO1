@@ -82,7 +82,7 @@ public class CLI {
         commandController.registerCommand(new CashAddCommand(userController));
         commandController.registerCommand(new CashRemoveCommand(userController));
         commandController.registerCommand(new CashListCommand(userController));
-        commandController.registerCommand(new CashTicketsCommand(userController));
+        commandController.registerCommand(new CashTicketsCommand(this.userController));
 
         commandController.registerCommand(new ClientAddCommand(userController));
         commandController.registerCommand(new ClienteRemoveCommand(userController));
