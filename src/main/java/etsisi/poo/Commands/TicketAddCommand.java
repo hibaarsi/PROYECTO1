@@ -15,6 +15,7 @@ public class TicketAddCommand implements ICommand {
             String userId=args[4];
 
         }
+        return null;
     }
     public String getPrimerArgumento(){
         return "ticket";
