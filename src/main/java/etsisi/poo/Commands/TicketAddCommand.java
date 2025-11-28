@@ -8,6 +8,13 @@ public class TicketAddCommand implements ICommand {
     public TicketAddCommand(TicketController ticketController) {
         this.ticketController = ticketController;
     }
+    public String getPrimerArgumento(){
+        return "ticket";
+    }
+
+    public String getSegundoArgumento(){
+        return"add";
+    }
     public String execute(String[] args){
         if (args.length==6){//es que no ha puesto lo opcional de personalizacion
             String id= args[2];
@@ -17,11 +24,5 @@ public class TicketAddCommand implements ICommand {
         }
         return null;
     }
-    public String getPrimerArgumento(){
-        return "ticket";
-    }
 
-    public String getSegundoArgumento(){
-        return"add";
-    }
 }
