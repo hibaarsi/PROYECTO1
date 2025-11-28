@@ -20,22 +20,19 @@ public class ClienteRemoveCommand implements ICommand {
 
     public String execute(String[] args) {
         if (args.length < 3) {
-            return "Need the clienteremove <DNI>";
+            return "client remove <DNI>";
         }
 
         String dni = args[2];
-        boolean found = false;
+        Client client = userController.getClient(dni);
 
-        for (Client c : userController.getClientsSortedByName()) {//recorre la lista de cliente nombre, para ver si existe el DNI puesto
-            if (!found && c.getID().equals(dni)) {
-                found = true; //existe
-            }
+        if (client == null) {
+            return "Client not found";
         }
-        if (!found) {
-            return "Client not found.";
-        }
+
         userController.removeClient(dni);
-        return "Client remove: ok\n";
+
+        return "client remove: ok\n";
 
     }
 }
