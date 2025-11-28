@@ -57,7 +57,7 @@ public class TicketController {
              userController.getClient(userID).addTicket(tickets.get(ticketID));
          }
 
-     }*/
+    } */
     public TicketModel newTicket(String id) {
         TicketModel ticket;
         if (id == null) ticket = new TicketModel();

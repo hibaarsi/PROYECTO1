@@ -73,7 +73,6 @@ public class CLI {
 
     private void registerCommands() {
         commandController.registerCommand(new ProdAddCommand(catalog));
-        commandController.registerCommand(new ProdAddPersonalizedCommand(catalog));
         commandController.registerCommand(new ProdAddFoodCommand(catalog));
         commandController.registerCommand(new ProdAddMeetingCommand(catalog));
         commandController.registerCommand(new ProdListCommand(catalog));

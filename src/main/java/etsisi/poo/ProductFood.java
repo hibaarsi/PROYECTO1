@@ -11,12 +11,11 @@ public class ProductFood extends Product implements EventProduct {
     public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, price); // sin categoría
         if (maxPeople < 1 || maxPeople > 100){
-            System.out.println("maxPeople must be between 1 and 100\n"); //dejarlo o quitarlo?
+            throw new IllegalArgumentException("Error adding product\n");
         }
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
-        if (!hasEnoughPlanning()) {
-            //System.out.println("Warning: FoodProduct does not meet 3-day planning rule");
+        if (maxPeople < 1 || maxPeople > 100 || !hasEnoughPlanning()) {
             throw new IllegalArgumentException("Error adding product\n");
         }
     }
