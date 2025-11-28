@@ -91,7 +91,7 @@ public class CLI {
         commandController.registerCommand(new HelpCommand());
         commandController.registerCommand(new ExitCommand());
 
-        commandController.registerCommand(new TicketNewCommand());
+        commandController.registerCommand(new TicketNewCommand(this.ticketController, this.userController));
         commandController.registerCommand(new TicketListCommand(this.ticketController));
 
     }

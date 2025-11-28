@@ -25,7 +25,7 @@ public class TicketModel {
         this.id = id;
         this.elementos = new ArrayList<>();
         this.products = new ArrayList<>();
-        this.ticketStatus = TicketStatus.VACIO;
+        this.ticketStatus = TicketStatus.EMPTY;
         this.openDate = LocalDateTime.now();
 
     }
@@ -33,7 +33,7 @@ public class TicketModel {
     public TicketModel() {
         this.id = generateId();
         this.products = new ArrayList<>();
-        this.ticketStatus = TicketStatus.VACIO;
+        this.ticketStatus = TicketStatus.EMPTY;
         this.openDate = LocalDateTime.now();
         this.elementos = new ArrayList<>();
     }
@@ -53,7 +53,7 @@ public class TicketModel {
     }
 
     private String generateId() {
-        String baseId = LocalDate.now().format(DATE_FORMATTER);
+        String baseId = LocalDateTime.now().format(DATE_FORMATTER);
         Random random = new Random();
         String newId;
         do {
@@ -78,8 +78,8 @@ public class TicketModel {
         ElementoTicket elemento = new ElementoTicket(product, cantidad);
         elementos.add(elemento);
         products.add(product);
-        if (ticketStatus == TicketStatus.VACIO)
-            ticketStatus = TicketStatus.ACTIVO;
+        if (ticketStatus == TicketStatus.EMPTY)
+            ticketStatus = TicketStatus.ACTIVE;
     }
 
     public void removeProduct(Product product) {// mejorar dependiendo d productos
@@ -88,13 +88,13 @@ public class TicketModel {
         }
         products.remove(product);
         if (products.isEmpty())
-            ticketStatus = TicketStatus.VACIO;
+            ticketStatus = TicketStatus.EMPTY;
 
     }
 
     public void close() {
         if (!isClosed()) {
-            ticketStatus = TicketStatus.CERRADO;
+            ticketStatus = TicketStatus.CLOSED;
             endDate = LocalDateTime.now();
             String cierre = "-" + endDate.format(DATE_FORMATTER);
             listaIds.remove(id);
@@ -105,7 +105,7 @@ public class TicketModel {
     }
 
     public boolean isClosed() {
-        return ticketStatus == TicketStatus.CERRADO;
+        return ticketStatus == TicketStatus.CLOSED;
     }
 
     public String getId() {
