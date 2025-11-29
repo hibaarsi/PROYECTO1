@@ -79,11 +79,13 @@ public class TicketModel {
                 }
             }
 
-            if (product instanceof ProductFood) //guardar las personas dentro del evento
+            if (product instanceof ProductFood) { //guardar las personas dentro del evento
                 ((ProductFood) product).setActualPeople(cantidad);
+            }
 
-            if (product instanceof ProductMeeting)
+            if (product instanceof ProductMeeting) {
                 ((ProductMeeting) product).setActualPeople(cantidad);
+            }
 
             double finalPrice = product.getPrice() * cantidad;
             product.setPrice(finalPrice);
@@ -91,8 +93,9 @@ public class TicketModel {
             elementos.add(new ElementoTicket(product, 1, personalizados)); //se añade 1 vez solo
             products.add(product);
 
-            if (ticketStatus == TicketStatus.EMPTY)
+            if (ticketStatus == TicketStatus.EMPTY) {
                 ticketStatus = TicketStatus.ACTIVE;
+            }
 
             return;
         }
@@ -100,8 +103,9 @@ public class TicketModel {
         ElementoTicket elemento = new ElementoTicket(product, cantidad, personalizados);
         elementos.add(elemento);
         products.add(product);
-        if (ticketStatus == TicketStatus.EMPTY)
+        if (ticketStatus == TicketStatus.EMPTY) {
             ticketStatus = TicketStatus.ACTIVE;
+        }
     }
 
     public void removeProduct(Product product) {// mejorar dependiendo d productos
@@ -113,7 +117,7 @@ public class TicketModel {
         Iterator<ElementoTicket> elementoTicket = elementos.iterator();
         while (elementoTicket.hasNext()) {
             ElementoTicket e = elementoTicket.next();
-            if (e.getProduct().getId()== product.getId()) {
+            if (e.getProduct().getId() == product.getId()) {
                 elementoTicket.remove();
             }
         }
@@ -122,7 +126,7 @@ public class TicketModel {
         Iterator<Product> producto = products.iterator();
         while (producto.hasNext()) {
             Product p = producto.next();
-            if (p.getId()== product.getId()) {
+            if (p.getId() == product.getId()) {
                 producto.remove();
             }
         }

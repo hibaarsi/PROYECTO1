@@ -24,7 +24,7 @@ public class TicketPrintCommand implements ICommand {
                 return "This ticket does not belong to cashier " + cashierId;
             }
             ticketController.printTicket(ticketId);
-            return "ticket print: ok";
+            return "ticket print: ok\n";
 
         }
     }
