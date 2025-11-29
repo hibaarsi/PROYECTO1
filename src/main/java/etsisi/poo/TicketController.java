@@ -197,7 +197,7 @@ public class TicketController {
             // se imprime una linea por unidad
             for (int i = 0; i < cantidad; i++) {
                 if (tieneDescuento) {
-                    System.out.printf("  %s **discount -%.1f%n", p, perUnitDiscount);
+                    System.out.printf("  %s **discount -%.2f%n", p, perUnitDiscount);
                 } else {
                     System.out.println("  " + p);
                 }
