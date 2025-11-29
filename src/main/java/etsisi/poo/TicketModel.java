@@ -63,7 +63,7 @@ public class TicketModel {
         return newId;
     }
 
-    public void addProduct(Product product, int cantidad) {// mejorar dependiendo de qur producto meto
+    public void addProduct(Product product, int cantidad,ArrayList<String> personalizados) {// mejorar dependiendo de qur producto meto
         if (isClosed()) {
             System.out.println("No se pueden añadir productos, esta cerrado");
         }
@@ -75,7 +75,7 @@ public class TicketModel {
                 }
             }
         }
-        ElementoTicket elemento = new ElementoTicket(product, cantidad);
+        ElementoTicket elemento = new ElementoTicket(product, cantidad,personalizados);
         elementos.add(elemento);
         products.add(product);
         if (ticketStatus == TicketStatus.EMPTY)

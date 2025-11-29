@@ -93,13 +93,13 @@ public class TicketController {
         return tickets.get(id);
     }
 
-    public boolean addProductToTicket(String ticketId, Product product, int cantidad) {
+    public boolean addProductToTicket(String ticketId, Product product, int cantidad,ArrayList<String> personalizados) {
         TicketModel ticket = getTicket(ticketId);
         if (ticket == null) {
             System.out.println("Ticket ID not found");
             return false;
         }
-        ticket.addProduct(product, cantidad);
+        ticket.addProduct(product, cantidad,personalizados);
         return true;
     }
 
