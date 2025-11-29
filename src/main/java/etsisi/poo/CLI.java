@@ -94,7 +94,7 @@ public class CLI {
         commandController.registerCommand(new TicketNewCommand(this.ticketController, this.userController));
         commandController.registerCommand(new TicketListCommand(this.ticketController));
         commandController.registerCommand(new TicketAddCommand(this.ticketController, this.userController,this.catalog));
-
+        commandController.registerCommand(new TicketPrintCommand(this.ticketController));
     }
 
     public static void printFromString(String message) {
