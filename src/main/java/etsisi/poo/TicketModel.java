@@ -72,7 +72,7 @@ public class TicketModel {
 
             for (ElementoTicket e : elementos) {
                 if (e.getProduct() instanceof ProductFood || e.getProduct() instanceof ProductMeeting) {
-                    System.out.println("No se pueden añadir productos de tipo comida o reunion");
+                    System.out.println("No se pueden añadir productos de tipo comida o reunion"); // mejor quitarlo
                     return;
                 }
             }
