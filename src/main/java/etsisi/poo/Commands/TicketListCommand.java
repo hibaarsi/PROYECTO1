@@ -15,7 +15,7 @@ public class TicketListCommand implements ICommand {
             return null;
         }
         ticketController.listTickets();
-        return "ticket list: ok";
+        return "ticket list: ok\n";
 
     }
 
