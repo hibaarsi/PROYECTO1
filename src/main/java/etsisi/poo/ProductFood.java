@@ -7,7 +7,7 @@ public class ProductFood extends Product implements EventProduct {
     private final LocalDateTime eventDate; //fecha del evento
     private final int maxPeople;
     private static final Duration MIN_PLANNING = Duration.ofDays(3); //el tiempo minimo de planificación son 3 dias
-//
+
     private int actualPeople = 0;
 
     public void setActualPeople(int n) {
