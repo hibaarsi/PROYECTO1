@@ -25,4 +25,22 @@ public class ElementoTicket {
         return personalizados;
     }
 
+    @Override
+    public String toString() {  //Prueba para los productos personalizados
+        if (product instanceof ProductPersonalized && personalizados != null && !personalizados.isEmpty()) {
+
+            return String.format(java.util.Locale.US,
+                    "{class:ProductPersonalized, id:%d, name:'%s', category:%s, price:%.1f, maxPersonal:%d, personalizationList:%s}",
+                    product.getId(),
+                    product.getName().replace("\"", ""),
+                    product.getCategory(),
+                    product.getPrice(),
+                    ((ProductPersonalized) product).getMaxPersonal(),
+                    personalizados
+            );
+        }
+
+        return product.toString();
+    }
+
 }
