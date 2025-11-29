@@ -88,7 +88,7 @@ public class TicketModel {
 
             elementos.add(new ElementoTicket(product, 1, personalizados)); //se añade 1 vez solo
             products.add(product);
-
+//
             if (ticketStatus == TicketStatus.EMPTY)
                 ticketStatus = TicketStatus.ACTIVE;
 
