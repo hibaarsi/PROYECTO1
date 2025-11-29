@@ -115,26 +115,27 @@ public class TicketController {
 
     public void listTickets() {
         if (ticketsByCashier.isEmpty()) {
-            System.out.println("No tickets");
             return;
         }
-        List<String> cashierIds = new ArrayList<>(ticketsByCashier.keySet());//cojes los ids
-        cashierIds.sort(String::compareTo);//se ordenan alfabeticamente los cajeros
-        for (String cashierId : cashierIds) {//recorrer los cajeros ya ordenados
-            List<TicketModel> lista = ticketsByCashier.get(cashierId);// Obtener su lista de tickets
-            if (lista == null || lista.isEmpty()) {
-                continue;            // Si el cajero no tiene tickets o está vacío, lo saltamos para que no se pare la impresion
-            }
-            lista.sort(Comparator.comparing(TicketModel::getId));//se ordenar los tickets del cajero por su ID de ticket
-            for (TicketModel t : lista) {//se muestra la info de cada ticket
-                System.out.println(
-                        "cashier=" + cashierId +
-                                ", ticketId=" + t.getId() +
-                                ", status=" + t.getTicketStatus()
-                );
+        System.out.println("Ticket List:");
+        List<TicketModel> allTickets = new ArrayList<>();//cojer los tickets de los cajeros
+        for (List<TicketModel> lista : ticketsByCashier.values()) {// recorrer la lista y añadirla al hashmap si existen
+            if (lista != null) {
+                allTickets.addAll(lista);
             }
         }
+        //ordenar de tal manera que primero salga empty y luego los closed
+        allTickets.sort((a,b)->{
+            int estadoOrden=a.getTicketStatus().compareTo(b.getTicketStatus());
+            if (estadoOrden!=0){
+                return estadoOrden;
+            }
+            return a.getId().compareTo(b.getId());
+        });
 
+        for (TicketModel t : allTickets) {
+            System.out.println("  " + t.getId() + " - " + t.getTicketStatus()); //Mostrar uno por línea con el formato
+        }
 
     }
 

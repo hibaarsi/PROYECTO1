@@ -10,12 +10,12 @@ public class TicketListCommand implements ICommand {
     }
 
     public String execute(String[] args) {
-        if (args != null && args.length > 0) {
-            return "Usage: ticket list";
-
+        if (args == null || args.length !=2) {
+            System.out.println("Usage: ticket list");
+            return null;
         }
         ticketController.listTickets();
-        return "";
+        return "ticket list: ok";
 
     }
 
