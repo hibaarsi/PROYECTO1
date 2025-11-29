@@ -50,6 +50,6 @@ public class TicketNewCommand implements ICommand {
         System.out.println("Total price: 0.0\n" +
                 "  Total discount: 0.0\n" +
                 "  Final Price: 0.0");
-       return "ticket new: ok";
+       return "ticket new: ok\n";
     }
 }

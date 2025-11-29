@@ -18,6 +18,7 @@ public class EchoCommand implements ICommand {
             String text = String.join(" ",
                     Arrays.copyOfRange(args, 1, args.length));
             CLI.printFromString(text);
+            System.out.println();
         } else {
             System.out.println("echo \"\"");
         }
