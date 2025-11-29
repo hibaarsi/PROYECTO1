@@ -73,7 +73,6 @@ public class CLI {
 
     private void registerCommands() {
         commandController.registerCommand(new ProdAddCommand(catalog));
-        commandController.registerCommand(new ProdAddPersonalizedCommand(catalog));
         commandController.registerCommand(new ProdAddFoodCommand(catalog));
         commandController.registerCommand(new ProdAddMeetingCommand(catalog));
         commandController.registerCommand(new ProdListCommand(catalog));
@@ -83,18 +82,18 @@ public class CLI {
         commandController.registerCommand(new CashAddCommand(userController));
         commandController.registerCommand(new CashRemoveCommand(userController));
         commandController.registerCommand(new CashListCommand(userController));
-        commandController.registerCommand(new CashTicketsCommand(userController));
+        commandController.registerCommand(new CashTicketsCommand(this.userController));
 
         commandController.registerCommand(new ClientAddCommand(userController));
         commandController.registerCommand(new ClienteRemoveCommand(userController));
         commandController.registerCommand(new ClientListCommand(userController));
-
         commandController.registerCommand(new EchoCommand());
         commandController.registerCommand(new HelpCommand());
         commandController.registerCommand(new ExitCommand());
 
-        commandController.registerCommand(new TicketNewCommand());
+        commandController.registerCommand(new TicketNewCommand(this.ticketController, this.userController));
         commandController.registerCommand(new TicketListCommand(this.ticketController));
+        commandController.registerCommand(new TicketAddCommand(this.ticketController, this.userController,this.catalog));
 
     }
 

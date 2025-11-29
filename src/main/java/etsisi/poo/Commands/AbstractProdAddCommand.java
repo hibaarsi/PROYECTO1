@@ -47,7 +47,8 @@ public abstract class AbstractProdAddCommand implements ICommand {
                 System.out.println(product);
                 System.out.println(getOkMessage());
             } else {
-                System.out.println("Product could not be added");
+                System.out.println("Error processing ->" + getPrimerArgumento() + " " + getSegundoArgumento()
+                        + " ->Error adding product");
             }
 
         } catch (Exception e) {

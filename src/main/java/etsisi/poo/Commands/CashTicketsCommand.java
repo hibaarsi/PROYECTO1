@@ -38,13 +38,13 @@ public class CashTicketsCommand implements ICommand {
 
         // lista de tickets del cajero
         if (cashier.getTickets().isEmpty()) {
-            return "cash tickets: ok";
+            return "cash tickets: ok\n";
         }
 
         for (TicketModel t : cashier.getTickets()) {
             System.out.println("  " + t.getId() + "->" + t.getTicketStatus());
         }
 
-        return "cash tickets: ok";
+        return "cash tickets: ok\n";
     }
 }

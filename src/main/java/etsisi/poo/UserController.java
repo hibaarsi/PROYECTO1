@@ -1,5 +1,6 @@
 package etsisi.poo;
 
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -25,8 +26,7 @@ public class UserController {
     public Cashier getCashier(String cashierID) {
         if (cashierMap.containsKey(cashierID)) {
             return cashierMap.get(cashierID);
-        }
-        return null;    // Si no lo encuentra devuelve null
+        }else return null; // Si no lo encuentra devuelve null
     }
 
     public Client createClient(String name, String email, String DNI, Cashier cashier) {
@@ -74,10 +74,12 @@ public class UserController {
     public Cashier createCashier(String name, String email, String UW) {
         if (UW == null) {
             UW = generateCashierID();
-            return new Cashier(name, email, UW);
+           Cashier cashier= new Cashier(name, email, UW);
+           return cashier;
         } else {
             if (properFormatUW(UW)) {
-                return new Cashier(name, email, UW);
+                Cashier cashier= new Cashier(name, email, UW);
+                return cashier;
             } else {
                 return null;
             }

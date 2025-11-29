@@ -36,9 +36,10 @@ public class CommandController {
         }
         //si sigue sin ir pues es que no es un comando bien escrito
         if (command==null){
-            System.out.println("Comando no encontrado");
+            System.out.println("Comando no encontrado\n");
             return true; //para que la app se siga ejecutando
         }
+
         String comandoExecute=command.execute(args);
         if (comandoExecute!=null){
             System.out.println(comandoExecute);

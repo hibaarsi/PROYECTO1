@@ -5,19 +5,25 @@ import java.time.*;
 public class ProductMeeting extends Product implements EventProduct {
     private final LocalDateTime eventDate; //cuando es la reunion
     private final int maxPeople;
-    private static final Duration MIN_PLANNING = Duration.ofHours(12); //tiempo min de antelacion para programarla
+    private static final Duration MIN_PLANNING = Duration.ofHours(12); //el tiempo minimo de planificación son 12h
+
+    private int actualPeople = 0;
+
+    public void setActualPeople(int n) {
+        this.actualPeople = n;
+    }
+
+    public int getActualPeople() {
+        return actualPeople;
+    }
 
     public ProductMeeting(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, price);
-        if (maxPeople < 1 || maxPeople > 100) {
-            throw new IllegalArgumentException("maxPeople must be between 1 and 100\n"); //dejarlo o quitarlo?
-        }
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
-        if (!hasEnoughPlanning()) { //comprara el tiempo que falta entre LocalDateTime.now() y eventdate
-            //System.out.println("Warning: MeetingProduct does not meet 12-hour planning rule");
-            throw new IllegalArgumentException("Error adding product\n");
 
+        if (maxPeople < 1 || maxPeople > 100 || !hasEnoughPlanning()) {
+            throw new IllegalArgumentException("Error adding product\n");
         }
     }
 
@@ -38,8 +44,8 @@ public class ProductMeeting extends Product implements EventProduct {
 
     @Override
     public String toString() {
-        return String.format(java.util.Locale.US, "{class:Meeting, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d}",
-                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople);
+        return String.format(java.util.Locale.US, "{class:Meeting, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d, actual people in event:%d}",
+                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople, actualPeople);
     }
 }
 

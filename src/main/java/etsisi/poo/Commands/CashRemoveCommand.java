@@ -33,7 +33,7 @@ public class CashRemoveCommand implements ICommand {
             if (!encontrar && c.getID().equals(uw)) {
                 encontrar = true;
             }
-        }
+        }//cambiar, buscar por id en el hashmap
 
         if (!encontrar) {
             return "Cashier not found";

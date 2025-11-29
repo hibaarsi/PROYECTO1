@@ -3,7 +3,7 @@ package etsisi.poo.Commands;
 import etsisi.poo.Catalog;
 import etsisi.poo.Product;
 
-import java.util.Map;
+import java.util.*;
 
 public class ProdListCommand implements ICommand {
 
@@ -24,13 +24,15 @@ public class ProdListCommand implements ICommand {
     public String execute(String[] args) {
         Map<Integer, Product> products = catalog.getProducts(); //copia del mapa de productos
 
-        boolean isEmpty = products.isEmpty();
-        if (isEmpty) {
-            System.out.println("There are no products in the catalog.");
+        if (products.isEmpty()) {
+            System.out.println("There are no products in the catalog.\n");
         } else {
             System.out.println("Catalog: ");
-            for (Product product : products.values()) { //mostrar
-                System.out.println("\t" + product);
+            //El TreeMap ordena automáticamente las entradas por la clave (ID del producto).
+            TreeMap<Integer, Product> organizedProducts = new TreeMap<>(products);
+
+            for (Product p : organizedProducts.values()) {
+                System.out.println("  " + p);
             }
             System.out.println("prod list: ok\n");
         }

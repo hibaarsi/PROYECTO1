@@ -1,6 +1,6 @@
 package etsisi.poo;
 
 public enum TicketStatus {
-    VACIO, ACTIVO, CERRADO;
+    EMPTY, ACTIVE, CLOSED;
 
 }

@@ -14,11 +14,11 @@ public class EchoCommand implements ICommand {
     }
 
     public String execute(String[] args) {
-
         if (args.length > 1) {
             String text = String.join(" ",
                     Arrays.copyOfRange(args, 1, args.length));
             CLI.printFromString(text);
+            System.out.println();
         } else {
             System.out.println("echo \"\"");
         }
