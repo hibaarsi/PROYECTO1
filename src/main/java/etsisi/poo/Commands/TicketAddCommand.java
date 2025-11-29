@@ -60,7 +60,7 @@ public class TicketAddCommand implements ICommand {
                     }
                 }
                 ticket.addProduct(product, quantity, personalizations);
-                ticketController.printTicket(ticketId);
+                ticketController.printTicketInfo(ticket);
             } catch (NumberFormatException e) {
                 return "Invalid number format for product ID or quantity";
             } catch (Exception e) {

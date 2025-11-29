@@ -138,15 +138,10 @@ public class TicketController {
         }
 
     }
-
-    public void printTicket(String ticketId) {
-        TicketModel ticket = getTicket(ticketId);
-        if (ticket == null) {
+    public void printTicketInfo(TicketModel ticket){
+        if(ticket==null){
             System.out.println("Ticket ID not found");
             return;
-        }
-        if (!ticket.isClosed()) {// primero se cierra el ticket si no esta cerrado
-            ticket.close();
         }
         List<ElementoTicket> elementos = ticket.getElementos();
         if (elementos.isEmpty()) { //segundo se van coger cada linea del ticket
@@ -218,4 +213,16 @@ public class TicketController {
         System.out.printf("  Final Price: %.1f%n", finalPrice);
 
     }
+    public void printTicket(String ticketId){
+        TicketModel ticket = getTicket(ticketId);
+        if (ticket == null) {
+            System.out.println("Ticket ID not found");
+            return;
+        }
+        if (!ticket.isClosed()) {// primero se cierra el ticket si no esta cerrado
+            ticket.close();
+        }
+        printTicketInfo(ticket);
+    }
+
 }

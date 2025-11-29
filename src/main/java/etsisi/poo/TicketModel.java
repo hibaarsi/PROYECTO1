@@ -65,7 +65,8 @@ public class TicketModel {
 
     public void addProduct(Product product, int cantidad, ArrayList<String> personalizados) {// mejorar dependiendo de qur producto meto
         if (isClosed()) {
-            System.out.println("No se pueden añadir productos, esta cerrado");
+            System.out.println("You cant add more products, its closed");
+            return;
         }
 
         if (product instanceof ProductFood || product instanceof ProductMeeting) {
@@ -104,7 +105,8 @@ public class TicketModel {
 
     public void removeProduct(Product product) {// mejorar dependiendo d productos
         if (isClosed()) {
-            System.out.println("No se pueden eliminar productos, esta cerrado");
+            System.out.println("You cant add morw products, its closed");
+            return;
         }
         products.remove(product);
         if (products.isEmpty())
