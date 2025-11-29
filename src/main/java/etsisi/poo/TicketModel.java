@@ -63,19 +63,39 @@ public class TicketModel {
         return newId;
     }
 
-    public void addProduct(Product product, int cantidad,ArrayList<String> personalizados) {// mejorar dependiendo de qur producto meto
+    public void addProduct(Product product, int cantidad, ArrayList<String> personalizados) {// mejorar dependiendo de qur producto meto
         if (isClosed()) {
             System.out.println("No se pueden añadir productos, esta cerrado");
         }
+
         if (product instanceof ProductFood || product instanceof ProductMeeting) {
-            for (Product p : products) {
-                if (p instanceof ProductFood || p instanceof ProductMeeting) {
+
+            for (ElementoTicket e : elementos) {
+                if (e.getProduct() instanceof ProductFood || e.getProduct() instanceof ProductMeeting) {
                     System.out.println("No se pueden añadir productos de tipo comida o reunion");
                     return;
                 }
             }
+
+            if (product instanceof ProductFood) //guardar las personas dentro del evento
+                ((ProductFood) product).setActualPeople(cantidad);
+
+            if (product instanceof ProductMeeting)
+                ((ProductMeeting) product).setActualPeople(cantidad);
+
+            double finalPrice = product.getPrice() * cantidad;
+            product.setPrice(finalPrice);
+
+            elementos.add(new ElementoTicket(product, 1, personalizados)); //se añade 1 vez solo
+            products.add(product);
+
+            if (ticketStatus == TicketStatus.EMPTY)
+                ticketStatus = TicketStatus.ACTIVE;
+
+            return;
         }
-        ElementoTicket elemento = new ElementoTicket(product, cantidad,personalizados);
+
+        ElementoTicket elemento = new ElementoTicket(product, cantidad, personalizados);
         elementos.add(elemento);
         products.add(product);
         if (ticketStatus == TicketStatus.EMPTY)

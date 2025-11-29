@@ -7,6 +7,16 @@ public class ProductMeeting extends Product implements EventProduct {
     private final int maxPeople;
     private static final Duration MIN_PLANNING = Duration.ofHours(12); //el tiempo minimo de planificación son 12h
 
+    private int actualPeople = 0;
+
+    public void setActualPeople(int n) {
+        this.actualPeople = n;
+    }
+
+    public int getActualPeople() {
+        return actualPeople;
+    }
+
     public ProductMeeting(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, price);
         this.eventDate = eventDate;
@@ -34,8 +44,8 @@ public class ProductMeeting extends Product implements EventProduct {
 
     @Override
     public String toString() {
-        return String.format(java.util.Locale.US, "{class:Meeting, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d}",
-                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople);
+        return String.format(java.util.Locale.US, "{class:Meeting, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d, actual people in event:%d}",
+                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople, actualPeople);
     }
 }
 
