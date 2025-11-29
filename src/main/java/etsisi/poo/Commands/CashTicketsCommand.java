@@ -24,8 +24,7 @@ public class CashTicketsCommand implements ICommand {
     public String execute(String[] args) {
 
         if (args.length < 3) { //comprueba si paso el id del cajero
-            System.out.println("Usage: cash tickets <UW>");
-            return null;
+            return "Usage: cash tickets <UW>";
         }
         String uw = args[2]; //id
 

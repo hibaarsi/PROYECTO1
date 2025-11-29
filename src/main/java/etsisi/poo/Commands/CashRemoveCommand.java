@@ -20,26 +20,16 @@ public class CashRemoveCommand implements ICommand {
 
     public String execute(String[] args) {
         //el código UW
-        if (args.length < 3) {
-            return "cash remove <UW>";
-        }
+        if (args.length < 3) return "Need: cash remove <UW>";
 
-        // Guardamos el código UW
         String uw = args[2];
 
-        boolean encontrar = false;
+        Cashier c = userController.getCashier(uw);
+        if (c == null) return "Cashier not found";
 
-        for (Cashier c : userController.getCashiersSortedByName()) {
-            if (!encontrar && c.getID().equals(uw)) {
-                encontrar = true;
-            }
-        }//cambiar, buscar por id en el hashmap
-
-        if (!encontrar) {
-            return "Cashier not found";
-        }
         userController.removeCashier(uw);
-        return "cash remove: ok";
+
+        return "cash remove: ok\n";
     }
 
 }

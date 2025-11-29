@@ -45,7 +45,7 @@ public class ClientAddCommand implements ICommand {
         userController.addClient(client);
 
         System.out.println(client);
-        return "client add: ok";
+        return "client add: ok\n";
 
     }
 }

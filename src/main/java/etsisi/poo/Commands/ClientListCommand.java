@@ -21,14 +21,10 @@ public class ClientListCommand implements ICommand {
     }
 
     public String execute(String[] args) {
-        List<Client> clients = userController.getClientsSortedByName();
-
         System.out.println("Client:");
 
-        for (Client c : clients) {
-            System.out.println("  " + c);
-        }
+        userController.listClients();
 
-        return "client list: ok";
+        return "client list: ok\n";
     }
 }
