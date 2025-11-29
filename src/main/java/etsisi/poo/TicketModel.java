@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -108,6 +109,24 @@ public class TicketModel {
             System.out.println("You cant add morw products, its closed");
             return;
         }
+        // con iteradores primero lo eliminados de ls lista de elementos todas las instancias y de los productos
+        Iterator<ElementoTicket> elementoTicket = elementos.iterator();
+        while (elementoTicket.hasNext()) {
+            ElementoTicket e = elementoTicket.next();
+            if (e.getProduct().getId()== product.getId()) {
+                elementoTicket.remove();
+            }
+        }
+
+
+        Iterator<Product> producto = products.iterator();
+        while (producto.hasNext()) {
+            Product p = producto.next();
+            if (p.getId()== product.getId()) {
+                producto.remove();
+            }
+        }
+
         products.remove(product);
         if (products.isEmpty())
             ticketStatus = TicketStatus.EMPTY;
