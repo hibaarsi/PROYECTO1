@@ -23,6 +23,7 @@ public class CashListCommand implements ICommand {
     public String execute(String[] args) {
 
         System.out.println("Cash:");
+
         userController.listCashier();
 
         return "cash list: ok\n";

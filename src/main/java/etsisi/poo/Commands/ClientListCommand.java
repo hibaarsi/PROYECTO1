@@ -24,7 +24,6 @@ public class ClientListCommand implements ICommand {
         System.out.println("Client:");
 
         userController.listClients();
-
         return "client list: ok\n";
     }
 }

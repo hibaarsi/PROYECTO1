@@ -19,7 +19,7 @@ public class CashRemoveCommand implements ICommand {
     }
 
     public String execute(String[] args) {
-        //el código UW
+        //el código uw
         if (args.length < 3) return "Need: cash remove <UW>";
 
         String uw = args[2];

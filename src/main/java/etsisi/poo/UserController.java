@@ -13,7 +13,6 @@ public class UserController {
         this.clientMap = new HashMap<>();
         this.cashierMap = new HashMap<>();
         this.ticketController = ticketController;
-
     }
 
     public Client getClient(String clientID) {

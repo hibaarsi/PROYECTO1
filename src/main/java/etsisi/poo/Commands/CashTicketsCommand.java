@@ -27,7 +27,6 @@ public class CashTicketsCommand implements ICommand {
             return "Usage: cash tickets <UW>";
         }
         String uw = args[2]; //id
-
         Cashier cashier = userController.getCashier(uw);
 
         if (cashier == null) {
