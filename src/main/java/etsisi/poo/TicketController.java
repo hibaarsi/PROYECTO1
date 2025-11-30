@@ -192,7 +192,7 @@ public class TicketController {
             // se imprime una linea por unidad
             for (int i = 0; i < cantidad; i++) {
                 if (tieneDescuento) {
-                    System.out.printf("  %s **discount -%.2f%n", p, perUnitDiscount);
+                    System.out.printf("  %s **discount -%.3f%n", p, perUnitDiscount);
                 } else {
                     System.out.println("  " + p);
                 }
@@ -208,9 +208,9 @@ public class TicketController {
 
         double finalPrice = totalPrice - totalDiscount;
 
-        System.out.printf("  Total price: %.1f%n", totalPrice);
-        System.out.printf("  Total discount: %.1f%n", totalDiscount);
-        System.out.printf("  Final Price: %.1f%n", finalPrice);
+        System.out.printf("  Total price: %.3f%n", totalPrice);
+        System.out.printf("  Total discount: %.3f%n", totalDiscount);
+        System.out.printf("  Final Price: %.3f%n", finalPrice);
 
     }
     public void printTicket(String ticketId){

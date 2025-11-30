@@ -34,10 +34,11 @@ public class TicketAddCommand implements ICommand {
                 int quantity = Integer.parseInt(args[5]);
 
                 ArrayList<String> personalizations = new ArrayList<>();
-                for (int i = 7; i < args.length; i++) {
-                    if (args[i].equals("--p")) {
-                        if (i + 1 < args.length) {
-                            personalizations.add(args[++i]);
+                for (int i = 6; i < args.length; i++) {
+                    if (args[i].startsWith("--p")) {
+                        String personalization = args[i].substring(3); // despues de --p empieza la personalizacion
+                        if (!personalization.isEmpty()) {
+                            personalizations.add(personalization);
                         }
                     }
                 }
