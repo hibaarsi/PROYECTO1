@@ -47,7 +47,12 @@ public class ProductFood extends Product implements EventProduct {
 
     @Override
     public String toString() {
-        return String.format(java.util.Locale.US,"{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d, actual people in event:%d}",
-                id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople, actualPeople);
+        if(actualPeople>0){
+            return String.format(java.util.Locale.US,"{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d, actual people in event:%d}",
+                    id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople, actualPeople);
+        }else
+            return String.format(java.util.Locale.US,"{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d}",
+                    id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople);
+
     }
 }
