@@ -5,20 +5,20 @@ import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
 
 public class CashAddCommand implements ICommand {
-    private UserController userController;
+    private final UserController userController;
 
     public CashAddCommand(UserController userController) {
         this.userController = userController;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "cash";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "add";
     }
-
+    @Override
     public String execute(String[] args) {
         if (args.length == 5) {
 
@@ -27,24 +27,19 @@ public class CashAddCommand implements ICommand {
             String email = args[4];
 
             Cashier cashier = userController.createCashier(name, email, uw);
-
             if (cashier == null) return "Error creating cashier";
 
             userController.addCashier(cashier);
             System.out.println(cashier);
             return "cash add: ok\n";
-        }
-        if (args.length == 4) {
+        } else if (args.length == 4) {
 
             String name = args[2].replace("\"", "");
             String email = args[3];
-
             Cashier cashier = userController.createCashier(name, email, null);
-
             if (cashier == null) return "Error creating cashier";
 
             userController.addCashier(cashier);
-
             System.out.println(cashier);
             return "cash add: ok\n";
         }

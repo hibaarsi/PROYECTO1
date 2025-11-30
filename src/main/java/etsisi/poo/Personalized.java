@@ -15,7 +15,8 @@ public interface Personalized {
         }
 
         if (nTexts > getMaxPersonal()) {
-            throw new IllegalArgumentException("Too many customization texts");
+            System.out.println("Too many customization texts.Use max: " +getMaxPersonal());
+
         }
         double multiplier = 1 + (0.10 * nTexts);
         return basePrice * multiplier * quantity;

@@ -6,8 +6,8 @@ import etsisi.poo.TicketController;
 import etsisi.poo.UserController;
 
 public class CashRemoveCommand implements ICommand {
-    private UserController userController;
-    private TicketController ticketController;
+    private final UserController userController;
+    private final TicketController ticketController;
 
     // Al haber separado TicketController y UserController hay que llamar a los metodos
     // removeTicketsFromCashier y removeCashier de ambos controladores.
@@ -16,15 +16,15 @@ public class CashRemoveCommand implements ICommand {
         this.userController = userController;
         this.ticketController = ticketController;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "cash";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "remove";
     }
-
+    @Override
     public String execute(String [] args){
         if (args.length != 3){
             return "Usage: cash remove <id>";
@@ -36,7 +36,7 @@ public class CashRemoveCommand implements ICommand {
         }
         ticketController.removeTicketsFromCashier(cashier);
         userController.removeCashier(cashierId);
-        return "cash remove: ok";
+        return "cash remove: ok\n";
     }
 
 }

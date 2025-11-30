@@ -22,8 +22,6 @@ public class ElementoTicket {
         return quantity;
     }
 
-    public ArrayList<String> getPersonalizados() {
-        return personalizados;
-    }
+
 
 }

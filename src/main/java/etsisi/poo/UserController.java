@@ -109,6 +109,7 @@ public class UserController {
 
     public void listCashier() {
         List<Cashier> sortedCashier = getCashiersSortedByName();
+        System.out.println("Cash: ");
         for (Cashier c : sortedCashier) {
             System.out.println(" " + c);
         }

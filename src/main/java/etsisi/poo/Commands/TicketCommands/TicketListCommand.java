@@ -12,6 +12,13 @@ public class TicketListCommand implements ICommand {
     public TicketListCommand(TicketController ticketController) {
         this.ticketController = ticketController;
     }
+    public String getPrimerArgumento() {
+        return "ticket";
+    }
+
+    public String getSegundoArgumento() {
+        return "list";
+    }
 
     /*public String execute(String[] args) {
         if (args == null || args.length != 2) {
@@ -28,16 +35,10 @@ public class TicketListCommand implements ICommand {
         for (TicketModel t : tickets) {
             System.out.println("  " + t.getId() + " - " + t.getTicketStatus());
         }
-        return "ticket list: ok";
+        return "ticket list: ok\n";
     }
 
-    public String getPrimerArgumento() {
-        return "ticket";
-    }
 
-    public String getSegundoArgumento() {
-        return "list";
-    }
 
 
 }

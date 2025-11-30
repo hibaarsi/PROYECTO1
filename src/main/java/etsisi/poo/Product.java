@@ -11,7 +11,6 @@ public abstract class Product {
     private static final String NOT_EMPTY = "It can't be empty";
     private static final String SIZE_LIMIT_MESSAGE = "No more than 100 characters";
     private static final String PRICE_RESTRICTION = "Be greater than 0";
-
     //Mensajes de formato
     private static final String PRODUCT_FORMAT = "{class:Product, id:%d, name:'%s', category:%s, price:%.1f}";
 
@@ -28,11 +27,9 @@ public abstract class Product {
         if (price <= 0) System.out.println(PRICE_RESTRICTION);
         this.id = id;
         this.name = name.trim();
-
         this.price = price;
     }
 
-    // 🔹 Getters
     public int getId() {
         return id;
     }
@@ -40,17 +37,13 @@ public abstract class Product {
     public String getName() {
         return name;
     }
-
-
     public double getPrice() {
         return price;
     }
-
     public Category getCategory() {
         return null;
     }
 
-    // 🔹 Setters con validaciones
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) System.out.println(NOT_EMPTY);
         if (name.length() > MAX_NAME_LENGTH) System.out.println(SIZE_LIMIT_MESSAGE);
@@ -63,7 +56,6 @@ public abstract class Product {
         this.price = price;
     }
 
-    // 🔹 equals y hashCode
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
@@ -76,7 +68,6 @@ public abstract class Product {
         return Integer.hashCode(id);
     }
 
-    // 🔹 toString limpio y con formato definido
     @Override
     public String toString() {
         String cleanName = name.replace("\"", ""); // elimina comillas dobles

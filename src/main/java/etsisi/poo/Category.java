@@ -12,8 +12,5 @@ public enum Category {
         return discount;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
 
 }

@@ -4,26 +4,22 @@ import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
 
 public class CashListCommand implements ICommand {
-    private UserController userController;
+    private final UserController userController;
 
     public CashListCommand(UserController userController) {
         this.userController = userController;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "cash";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "list";
     }
-
+    @Override
     public String execute(String[] args) {
-
-        System.out.println("Cash:");
-
         userController.listCashier();
-
         return "cash list: ok\n";
     }
 }

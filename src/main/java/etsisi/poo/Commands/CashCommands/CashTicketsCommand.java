@@ -6,12 +6,13 @@ import etsisi.poo.TicketModel;
 import etsisi.poo.UserController;
 
 public class CashTicketsCommand implements ICommand {
-    private UserController userController;
+    private final UserController userController;
 
     public CashTicketsCommand(UserController userController) {
         this.userController = userController;
     }
 
+    @Override
     public String getPrimerArgumento() {
         return "cash";
     }
