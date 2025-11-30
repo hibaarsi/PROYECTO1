@@ -43,8 +43,9 @@ public class CashAddCommand implements ICommand {
             if (cashier == null) return "Error creating cashier";
 
             userController.addCashier(cashier);
+
             System.out.println(cashier);
-            return "cash add: ok";
+            return "cash add: ok\n";
         }
 
         return "cash add <UW> \"<name>\" <email>";

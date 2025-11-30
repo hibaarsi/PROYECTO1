@@ -13,48 +13,37 @@ public class UserController {
         this.clientMap = new HashMap<>();
         this.cashierMap = new HashMap<>();
         this.ticketController = ticketController;
-
     }
 
     public Client getClient(String clientID) {
-        if (clientMap.containsKey(clientID)) {
-            return clientMap.get(clientID);
-        }
-        return null;    // Si no lo encuentra devuelve null
+        return clientMap.get(clientID);
+        // Si no lo encuentra devuelve null
     }
 
     public Cashier getCashier(String cashierID) {
-        if (cashierMap.containsKey(cashierID)) {
-            return cashierMap.get(cashierID);
-        }else return null; // Si no lo encuentra devuelve null
+        return cashierMap.get(cashierID);
+        // Si no lo encuentra devuelve null
     }
 
     public Client createClient(String name, String email, String DNI, Cashier cashier) {
         if (clientMap.containsKey(DNI)) {
-            System.out.println("El cliente ya existe.");
             return null;
         }
         if (!cashierMap.containsKey(cashier.getID())) {
-            System.out.println("El cajero no existe.");
             return null;
         }
+
         return new Client(name, email, DNI, cashier);
     }
 
     public void addClient(Client client) {
-        if (client == null) {
-            System.out.println("El cliente no puede ser nulo.");
-        } else {
+        if (client != null) {
             clientMap.put(client.getID(), client);
         }
     }
 
     public void removeClient(String DNI) {
-        if (!clientMap.containsKey(DNI)) {
-            System.out.println("El cliente no está registrado.");
-        } else {
-            clientMap.remove(DNI);
-        }
+        clientMap.remove(DNI);
     }
 
     public void listClients() {
@@ -74,42 +63,35 @@ public class UserController {
     public Cashier createCashier(String name, String email, String UW) {
         if (UW == null) {
             UW = generateCashierID();
-           Cashier cashier= new Cashier(name, email, UW);
-           return cashier;
-        } else {
-            if (properFormatUW(UW)) {
-                Cashier cashier= new Cashier(name, email, UW);
-                return cashier;
-            } else {
-                return null;
-            }
+            return new Cashier(name, email, UW);
         }
-
+        if (!properFormatUW(UW)) {
+            return null;
+        }
+        return new Cashier(name, email, UW);
     }
 
     public void addCashier(Cashier cashier) {
-        if (cashier == null) {
-            System.out.println("El cajero no puede ser nulo.");
-        } else {
+        if (cashier != null) {
             cashierMap.put(cashier.getID(), cashier);
         }
     }
 
     public void removeCashier(String UW) {
-        if (!cashierMap.containsKey(UW)) {
-            System.out.println("El cajero no está registrado.");
-        } else {
-            ticketController.removeTicketsFromCashier(cashierMap.get(UW));
-            // Aqui hay que borrar también lso tickets del cajero.
-            // Lo pongo cuando esté hecho en TicketController
-            cashierMap.remove(UW);
-        }
+        Cashier c = cashierMap.get(UW);
+
+        if (c == null) return;
+        // Aqui hay que borrar también lso tickets del cajero.
+        // Lo pongo cuando esté hecho en TicketController
+        ticketController.removeTicketsFromCashier(c);
+        cashierMap.remove(UW);
     }
+
 
     public void listCashier() {
         List<Cashier> sortedCashier = getCashiersSortedByName();
         for (Cashier c : sortedCashier) {
-            System.out.println(c);
+            System.out.println(" " + c);
         }
     }
 

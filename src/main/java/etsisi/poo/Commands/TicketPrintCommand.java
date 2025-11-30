@@ -12,19 +12,19 @@ public class TicketPrintCommand implements ICommand {
 
 
     public String execute(String[] args) {
-        if (args.length != 2) {
+        if (args == null || args.length < 4) {
             return "Usage: ticket print <ticketId> <cashierId>";
 
         } else {
-            String ticketId = args[0];
-            String cashierId = args[1];
+            String ticketId = args[2];
+            String cashierId = args[3];
             TicketModel ticket = ticketController.getTicket(ticketId);
             if (ticket == null) return "Ticket ID not found";
             if (!ticketController.cashierHasTicket(cashierId, ticket)) {//comprobar q el cajero tiene este ticket
                 return "This ticket does not belong to cashier " + cashierId;
             }
             ticketController.printTicket(ticketId);
-            return "ticket print: ok";
+            return "ticket print: ok\n";
 
         }
     }

@@ -93,13 +93,13 @@ public class TicketController {
         return tickets.get(id);
     }
 
-    public boolean addProductToTicket(String ticketId, Product product, int cantidad,ArrayList<String> personalizados) {
+    public boolean addProductToTicket(String ticketId, Product product, int cantidad, ArrayList<String> personalizados) {
         TicketModel ticket = getTicket(ticketId);
         if (ticket == null) {
             System.out.println("Ticket ID not found");
             return false;
         }
-        ticket.addProduct(product, cantidad,personalizados);
+        ticket.addProduct(product, cantidad, personalizados);
         return true;
     }
 
@@ -125,9 +125,9 @@ public class TicketController {
             }
         }
         //ordenar de tal manera que primero salga empty y luego los closed
-        allTickets.sort((a,b)->{
-            int estadoOrden=a.getTicketStatus().compareTo(b.getTicketStatus());
-            if (estadoOrden!=0){
+        allTickets.sort((a, b) -> {
+            int estadoOrden = a.getTicketStatus().compareTo(b.getTicketStatus());
+            if (estadoOrden != 0) {
                 return estadoOrden;
             }
             return a.getId().compareTo(b.getId());
@@ -139,14 +139,10 @@ public class TicketController {
 
     }
 
-    public void printTicket(String ticketId) {
-        TicketModel ticket = getTicket(ticketId);
+    public void printTicketInfo(TicketModel ticket) {
         if (ticket == null) {
             System.out.println("Ticket ID not found");
             return;
-        }
-        if (!ticket.isClosed()) {// primero se cierra el ticket si no esta cerrado
-            ticket.close();
         }
         List<ElementoTicket> elementos = ticket.getElementos();
         if (elementos.isEmpty()) { //segundo se van coger cada linea del ticket
@@ -197,7 +193,7 @@ public class TicketController {
             // se imprime una linea por unidad
             for (int i = 0; i < cantidad; i++) {
                 if (tieneDescuento) {
-                    System.out.printf("  %s **discount -%.1f%n", p, perUnitDiscount);
+                    System.out.printf("  %s **discount -%.3f%n", p, perUnitDiscount);
                 } else {
                     System.out.println("  " + p);
                 }
@@ -213,9 +209,22 @@ public class TicketController {
 
         double finalPrice = totalPrice - totalDiscount;
 
-        System.out.printf("  Total price: %.1f%n", totalPrice);
-        System.out.printf("  Total discount: %.1f%n", totalDiscount);
-        System.out.printf("  Final Price: %.1f%n", finalPrice);
+        System.out.printf("  Total price: %.3f%n", totalPrice);
+        System.out.printf("  Total discount: %.3f%n", totalDiscount);
+        System.out.printf("  Final Price: %.3f%n", finalPrice);
 
     }
+
+    public void printTicket(String ticketId) {
+        TicketModel ticket = getTicket(ticketId);
+        if (ticket == null) {
+            System.out.println("Ticket ID not found");
+            return;
+        }
+        if (!ticket.isClosed()) {// primero se cierra el ticket si no esta cerrado
+            ticket.close();
+        }
+        printTicketInfo(ticket);
+    }
+
 }

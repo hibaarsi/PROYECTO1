@@ -57,7 +57,7 @@ public class CLI {
                 if (args.length > 1) {
                     segundoArgumento = args[1];
                 } else {
-                    segundoArgumento =null;
+                    segundoArgumento = null;
                 }
                 startCommand(primerArgumento, segundoArgumento, args);
             }
@@ -93,8 +93,9 @@ public class CLI {
 
         commandController.registerCommand(new TicketNewCommand(this.ticketController, this.userController));
         commandController.registerCommand(new TicketListCommand(this.ticketController));
-        commandController.registerCommand(new TicketAddCommand(this.ticketController, this.userController,this.catalog));
-
+        commandController.registerCommand(new TicketAddCommand(this.ticketController, this.userController, this.catalog));
+        commandController.registerCommand(new TicketPrintCommand(this.ticketController));
+        commandController.registerCommand(new TicketRemoveCommand(this.ticketController, this.userController, this.catalog));
     }
 
     public static void printFromString(String message) {

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -65,23 +66,37 @@ public class TicketModel {
 
     public void addProduct(Product product, int cantidad, ArrayList<String> personalizados) {// mejorar dependiendo de qur producto meto
         if (isClosed()) {
-            System.out.println("No se pueden añadir productos, esta cerrado");
+            System.out.println("You cant add more products, its closed");
+            return;
         }
-
-        if (product instanceof ProductFood || product instanceof ProductMeeting) {
+        if (product instanceof ProductPersonalized && personalizados != null && !personalizados.isEmpty()) {
+            ProductPersonalized pp = (ProductPersonalized) product;
+            ProductPersonalized productWithPersonalization = new ProductPersonalized(
+                    pp.getId(),
+                    pp.getName(),
+                    pp.getCategory(),
+                    pp.getBasePrice(), // Precio base sin personalizaciones
+                    pp.getMaxPersonal()
+            );
+            productWithPersonalization.setPersonalizations(personalizados);
+            elementos.add(new ElementoTicket(productWithPersonalization, cantidad, personalizados));
+            products.add(productWithPersonalization);
+        } else if (product instanceof ProductFood || product instanceof ProductMeeting) {
 
             for (ElementoTicket e : elementos) {
                 if (e.getProduct() instanceof ProductFood || e.getProduct() instanceof ProductMeeting) {
-                    System.out.println("No se pueden añadir productos de tipo comida o reunion");
+                    System.out.println("No se pueden añadir productos de tipo comida o reunion"); // mejor quitarlo
                     return;
                 }
             }
 
-            if (product instanceof ProductFood) //guardar las personas dentro del evento
+            if (product instanceof ProductFood) { //guardar las personas dentro del evento
                 ((ProductFood) product).setActualPeople(cantidad);
+            }
 
-            if (product instanceof ProductMeeting)
+            if (product instanceof ProductMeeting) {
                 ((ProductMeeting) product).setActualPeople(cantidad);
+            }
 
             double finalPrice = product.getPrice() * cantidad;
             product.setPrice(finalPrice);
@@ -89,23 +104,41 @@ public class TicketModel {
             elementos.add(new ElementoTicket(product, 1, personalizados)); //se añade 1 vez solo
             products.add(product);
 
-            if (ticketStatus == TicketStatus.EMPTY)
-                ticketStatus = TicketStatus.ACTIVE;
-
+        } else {
+            ElementoTicket elemento = new ElementoTicket(product, cantidad, personalizados);
+            elementos.add(elemento);
+            products.add(product);
             return;
         }
 
-        ElementoTicket elemento = new ElementoTicket(product, cantidad, personalizados);
-        elementos.add(elemento);
-        products.add(product);
-        if (ticketStatus == TicketStatus.EMPTY)
+        if (ticketStatus == TicketStatus.EMPTY) {
             ticketStatus = TicketStatus.ACTIVE;
+        }
     }
 
     public void removeProduct(Product product) {// mejorar dependiendo d productos
         if (isClosed()) {
-            System.out.println("No se pueden eliminar productos, esta cerrado");
+            System.out.println("You cant add more products, its closed");
+            return;
         }
+        // con iteradores primero lo eliminados de ls lista de elementos todas las instancias y de los productos
+        Iterator<ElementoTicket> elementoTicket = elementos.iterator();
+        while (elementoTicket.hasNext()) {
+            ElementoTicket e = elementoTicket.next();
+            if (e.getProduct().getId() == product.getId()) {
+                elementoTicket.remove();
+            }
+        }
+
+
+        Iterator<Product> producto = products.iterator();
+        while (producto.hasNext()) {
+            Product p = producto.next();
+            if (p.getId() == product.getId()) {
+                producto.remove();
+            }
+        }
+
         products.remove(product);
         if (products.isEmpty())
             ticketStatus = TicketStatus.EMPTY;

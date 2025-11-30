@@ -31,7 +31,6 @@ public class ClientAddCommand implements ICommand {
 
         // Buscar el cajero asociado
         Cashier cashier = userController.getCashier(uw);
-
         if (cashier == null) {
             return "Cashier not found";
         }
@@ -45,7 +44,7 @@ public class ClientAddCommand implements ICommand {
         userController.addClient(client);
 
         System.out.println(client);
-        return "client add: ok";
+        return "client add: ok\n";
 
     }
 }

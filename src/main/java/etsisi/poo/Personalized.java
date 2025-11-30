@@ -17,7 +17,7 @@ public interface Personalized {
         if (nTexts > getMaxPersonal()) {
             throw new IllegalArgumentException("Too many customization texts");
         }
-        double multiplier = 1 + 0.10 * nTexts;
+        double multiplier = 1 + (0.10 * nTexts);
         return basePrice * multiplier * quantity;
     }
 }

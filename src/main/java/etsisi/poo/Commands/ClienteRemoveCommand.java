@@ -23,6 +23,7 @@ public class ClienteRemoveCommand implements ICommand {
             return "client remove <DNI>";
         }
 
+
         String dni = args[2];
         Client client = userController.getClient(dni);
 
