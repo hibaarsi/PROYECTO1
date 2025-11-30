@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductPersonalized extends RegularProduct implements Personalized {
-
     private final int maxPersonal;
     private List<String> personalizationList = new ArrayList<>();
 
@@ -31,7 +30,6 @@ public class ProductPersonalized extends RegularProduct implements Personalized 
 
     public double getBasePrice() {
         return super.getPrice();
-
     }
 
     @Override
@@ -48,7 +46,5 @@ public class ProductPersonalized extends RegularProduct implements Personalized 
         } else
             return String.format("{class:ProductPersonalized, id:%d, name:'%s', category:%s, price:%.1f, maxPersonal:%d, personalizationList:%s}",
                     id, name, getCategory(), price, maxPersonal, getPersonalizations());
-
-
     }
 }

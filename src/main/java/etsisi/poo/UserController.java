@@ -1,6 +1,5 @@
 package etsisi.poo;
 
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -8,27 +7,24 @@ public class UserController {
     private Map<String, Client> clientMap;     // La clave es el DNI
     private Map<String, Cashier> cashierMap;   // La clave es el código UW
 
-
     public UserController() {
         this.clientMap = new HashMap<>();
         this.cashierMap = new HashMap<>();
-
     }
 
     public Client getClient(String clientID) {
         return clientMap.get(clientID);
-        // Si no lo encuentra devuelve null
     }
 
     public Cashier getCashier(String cashierID) {
         return cashierMap.get(cashierID);
-        // Si no lo encuentra devuelve null
     }
 
     public Client createClient(String name, String email, String DNI, Cashier cashier) {
         if (clientMap.containsKey(DNI)) {
             System.out.println("Ya hay un cliente con ese DNI");
         }
+
         if (!cashierMap.containsKey(cashier.getID())) {
             System.out.println("El cajero no existe");
         }
@@ -49,6 +45,7 @@ public class UserController {
     public void removeTicketFromAnyClient(TicketModel ticket) {
         Iterator<Client> it = this.clientMap.values().iterator();
         boolean found = false;
+
         while (it.hasNext() && !found) {
             Client client = it.next();
             if (client.getTickets().remove(ticket)) {
@@ -56,6 +53,7 @@ public class UserController {
             }
         }
     }
+
     public void listClients() {
         List<Client> sortedClients = getClientsSortedByName();
         System.out.println("Client:");
@@ -76,9 +74,11 @@ public class UserController {
             UW = generateCashierID();
             return new Cashier(name, email, UW);
         }
+
         if (!properFormatUW(UW)) {
             return null;
         }
+
         return new Cashier(name, email, UW);
     }
 
@@ -112,7 +112,8 @@ public class UserController {
         cashierList.sort(Comparator.comparing(Cashier::getName));
         return cashierList;
     }
-    public List<Cashier> getCashiersSortedByID(){
+
+    public List<Cashier> getCashiersSortedByID() {
         List<Cashier> cashierList = new ArrayList<>(this.cashierMap.values());
         cashierList.sort(Comparator.comparing(Cashier::getID));
         return cashierList;
@@ -129,6 +130,7 @@ public class UserController {
         if (!UW.startsWith("UW")) {
             return false;
         }
+
         if (UW.length() != 9) {
             return false;
         } else {
@@ -139,7 +141,7 @@ public class UserController {
                 }
             }
         }
+
         return true;
     }
-
 }

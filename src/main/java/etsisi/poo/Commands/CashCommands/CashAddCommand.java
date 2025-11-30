@@ -10,14 +10,17 @@ public class CashAddCommand implements ICommand {
     public CashAddCommand(UserController userController) {
         this.userController = userController;
     }
+
     @Override
     public String getPrimerArgumento() {
         return "cash";
     }
+
     @Override
     public String getSegundoArgumento() {
         return "add";
     }
+
     @Override
     public String execute(String[] args) {
         if (args.length == 5) {
@@ -32,6 +35,7 @@ public class CashAddCommand implements ICommand {
             userController.addCashier(cashier);
             System.out.println(cashier);
             return "cash add: ok\n";
+
         } else if (args.length == 4) {
 
             String name = args[2].replace("\"", "");

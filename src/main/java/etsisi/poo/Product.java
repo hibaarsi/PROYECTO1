@@ -11,6 +11,7 @@ public abstract class Product {
     private static final String NOT_EMPTY = "It can't be empty";
     private static final String SIZE_LIMIT_MESSAGE = "No more than 100 characters";
     private static final String PRICE_RESTRICTION = "Be greater than 0";
+
     //Mensajes de formato
     private static final String PRODUCT_FORMAT = "{class:Product, id:%d, name:'%s', category:%s, price:%.1f}";
 
@@ -37,9 +38,11 @@ public abstract class Product {
     public String getName() {
         return name;
     }
+
     public double getPrice() {
         return price;
     }
+
     public Category getCategory() {
         return null;
     }
@@ -73,7 +76,4 @@ public abstract class Product {
         String cleanName = name.replace("\"", ""); // elimina comillas dobles
         return String.format(PRODUCT_FORMAT, id, cleanName, price);
     }
-
-
 }
-

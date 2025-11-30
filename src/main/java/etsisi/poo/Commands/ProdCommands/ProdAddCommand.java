@@ -6,10 +6,12 @@ public class ProdAddCommand extends AbstractProdAddCommand {
     public ProdAddCommand(Catalog catalog) {
         super(catalog);
     }
+
     @Override
     public String getPrimerArgumento() {
         return "prod";
     }
+
     @Override
     public String getSegundoArgumento() {
         return "add";

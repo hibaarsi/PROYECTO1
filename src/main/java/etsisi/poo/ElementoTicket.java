@@ -21,7 +21,4 @@ public class ElementoTicket {
     public int getQuantity() {
         return quantity;
     }
-
-
-
 }

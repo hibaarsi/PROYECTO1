@@ -16,24 +16,29 @@ public class CashRemoveCommand implements ICommand {
         this.userController = userController;
         this.ticketController = ticketController;
     }
+
     @Override
     public String getPrimerArgumento() {
         return "cash";
     }
+
     @Override
     public String getSegundoArgumento() {
         return "remove";
     }
+
     @Override
-    public String execute(String [] args){
-        if (args.length != 3){
+    public String execute(String[] args) {
+        if (args.length != 3) {
             return "Usage: cash remove <id>";
         }
         String cashierId = args[2];
         Cashier cashier = userController.getCashier(cashierId);
-        if (cashier == null){
+
+        if (cashier == null) {
             return "Cajero no encontrado";
         }
+
         ticketController.removeTicketsFromCashier(cashier);
         userController.removeCashier(cashierId);
         return "cash remove: ok\n";

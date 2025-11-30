@@ -10,14 +10,17 @@ public class ProdUpdateCommand implements ICommand {
     public ProdUpdateCommand(Catalog catalog) {
         this.catalog = catalog;
     }
+
     @Override
     public String getPrimerArgumento() {
         return "prod";
     }
+
     @Override
     public String getSegundoArgumento() {
         return "update";
     }
+
     @Override
     public String execute(String[] args) {
         if (args.length != 5) {//mirar
@@ -50,9 +53,9 @@ public class ProdUpdateCommand implements ICommand {
                         System.out.printf("Unknown field: %s%n", field);
                 }
             }
-
         } catch (NumberFormatException e) {
             System.out.println("Invalid ID format");
+
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid argument");
         }

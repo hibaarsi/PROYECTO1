@@ -9,17 +9,20 @@ public class CashListCommand implements ICommand {
     public CashListCommand(UserController userController) {
         this.userController = userController;
     }
+
     @Override
     public String getPrimerArgumento() {
         return "cash";
     }
+
     @Override
     public String getSegundoArgumento() {
         return "list";
     }
+
     @Override
     public String execute(String[] args) {
-        if(args.length!=2){
+        if (args.length != 2) {
             return "cash list";
         }
         userController.listCashier();

@@ -11,6 +11,4 @@ public enum Category {
     public double getDiscount() {
         return discount;
     }
-
-
 }

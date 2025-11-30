@@ -9,10 +9,12 @@ public class EchoCommand implements ICommand {
     public String getPrimerArgumento() {
         return "echo";
     }
+
     @Override
     public String getSegundoArgumento() {
         return null;
     }
+
     @Override
     public String execute(String[] args) {
         if (args.length > 1) {
@@ -20,11 +22,10 @@ public class EchoCommand implements ICommand {
                     Arrays.copyOfRange(args, 1, args.length));
             CLI.printFromString(text);
             System.out.println();
+
         } else {
             System.out.println("echo \"\"");
         }
         return null;
-
-
     }
 }

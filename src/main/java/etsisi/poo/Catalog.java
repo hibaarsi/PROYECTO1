@@ -75,12 +75,7 @@ public class Catalog {
         }
     }
 
-
-
     public boolean existProduct(int id) {
         return items.containsKey(id);
     }
-
-
 }
-

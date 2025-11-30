@@ -46,6 +46,5 @@ public class CommandController {
         //salir si el usuario ha escrito exit
         boolean exit = primerArgumento.equals("exit");
         return !exit;
-
     }
 }

@@ -19,13 +19,11 @@ public class TicketModel {
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
 
     public TicketModel(String id) {
-
         this.id = id;
         this.elementos = new ArrayList<>();
         this.products = new ArrayList<>();
         this.ticketStatus = TicketStatus.EMPTY;
         this.openDate = LocalDateTime.now();
-
     }
 
     public List<ElementoTicket> getElementos() {//para leer desde fuera las lineas del ticket
@@ -49,11 +47,12 @@ public class TicketModel {
         return baseId + "-" + String.format("%05d", random.nextInt(100000));
     }
 
-    public void addProduct(Product product, int cantidad, ArrayList<String> personalizados) {// mejorar dependiendo de qur producto meto
+    public void addProduct(Product product, int cantidad, ArrayList<String> personalizados) {
         if (isClosed()) {
             System.out.println("You cant add more products, its closed");
             return;
         }
+
         if (product instanceof ProductPersonalized && personalizados != null && !personalizados.isEmpty()) {
             ProductPersonalized pp = (ProductPersonalized) product;
             ProductPersonalized productWithPersonalization = new ProductPersonalized(
@@ -66,8 +65,8 @@ public class TicketModel {
             productWithPersonalization.setPersonalizations(personalizados);
             elementos.add(new ElementoTicket(productWithPersonalization, cantidad, personalizados));
             products.add(productWithPersonalization);
-        } else if (product instanceof ProductFood || product instanceof ProductMeeting) {
 
+        } else if (product instanceof ProductFood || product instanceof ProductMeeting) {
             for (ElementoTicket e : elementos) {
                 if (e.getProduct() instanceof ProductFood || e.getProduct() instanceof ProductMeeting) {
                     System.out.println("No se pueden añadir productos de tipo comida o reunion"); // mejor quitarlo
@@ -75,7 +74,7 @@ public class TicketModel {
                 }
             }
 
-            if (product instanceof ProductFood) { //guardar las personas dentro del evento
+            if (product instanceof ProductFood) {
                 ((ProductFood) product).setActualPeople(cantidad);
             }
 
@@ -135,7 +134,6 @@ public class TicketModel {
             endDate = LocalDateTime.now();
             String cierre = "-" + endDate.format(DATE_FORMATTER);
             id += cierre;
-
         }
     }
 
@@ -150,6 +148,4 @@ public class TicketModel {
     public TicketStatus getTicketStatus() {
         return ticketStatus;
     }
-
-
 }

@@ -3,22 +3,22 @@ package etsisi.poo;
 import java.util.*;
 
 public class TicketController {
-
     private Map<String, TicketModel> tickets; //este es el mapa global
     private UserController userController;
+
     public TicketController(UserController userController) {
         this.tickets = new HashMap<>();
         this.userController = userController;
     }
+
     private String generateUniqueId() {
         String newId = "";
         boolean unique = false;
 
         while (!unique) {
-            // 1. Generamos el ID candidato (Lógica de fecha + random)
-            // Puedes tener un método estático en TicketModel para esto si quieres reutilizar lógica
+            //Generamos el ID candidato (Lógica de fecha + random)
             newId = TicketModel.calculateID();
-            // 2. VERIFICACIÓN CONTRA EL MAPA (Solo el Controller puede hacer esto)
+            //VERIFICACIÓN CONTRA EL MAPA (Solo el Controller puede hacer esto)
             if (!tickets.containsKey(newId)) {
                 unique = true;
             }
@@ -41,22 +41,24 @@ public class TicketController {
     public void removeTicketsFromCashier(Cashier cashier) {
         if (cashier == null) return;
         List<TicketModel> ticketsOfCashier = cashier.getTickets();
-        for (TicketModel t : ticketsOfCashier){
+
+        for (TicketModel t : ticketsOfCashier) {
             tickets.remove(t.getId());
             userController.removeTicketFromAnyClient(t);
         }
     }
 
-
-    public TicketModel newTicket(String ticketID, String cashierID, String userID) throws Exception{
+    public TicketModel newTicket(String ticketID, String cashierID, String userID) throws Exception {
         Cashier cashier = userController.getCashier(cashierID);
-        if (cashier == null){
+        if (cashier == null) {
             throw new Exception("No se encontro el ID del cajero.");
         }
+
         Client client = userController.getClient(userID);
-        if (client == null){
+        if (client == null) {
             throw new Exception("No se encontro el ID del cliente.");
         }
+
         String finalID = ticketID;
         if (finalID == null) {
             finalID = generateUniqueId();
@@ -66,13 +68,11 @@ public class TicketController {
 
         TicketModel ticket = new TicketModel(finalID);
 
-        tickets.put(ticketID,ticket);
+        tickets.put(ticketID, ticket);
         cashier.addTicket(ticket);
         client.addTicket(ticket);
         return ticket;
     }
-
-
 
 
     public boolean cashierHasTicket(String cashierId, TicketModel ticket) {//comprueba si un ticket pertenece al cajero
@@ -86,24 +86,26 @@ public class TicketController {
 
     public boolean addProductToTicket(String ticketId, Product product, int cantidad, ArrayList<String> personalizados) {
         TicketModel ticket = getTicket(ticketId);
-        if(ticket ==null || ticket.isClosed()){
+        if (ticket == null || ticket.isClosed()) {
             return false;
         }
+
         ticket.addProduct(product, cantidad, personalizados);
-      return true;
+        return true;
     }
 
     public boolean removeProductFromTicket(String ticketId, Product product) {
         TicketModel ticket = getTicket(ticketId);
-        if(ticket==null || ticket.isClosed()){
+        if (ticket == null || ticket.isClosed()) {
             return false;
         }
+
         ticket.removeProduct(product);
         return true;
 
     }
 
-    public List<TicketModel> getTicketsSortedByCashierId(){
+    public List<TicketModel> getTicketsSortedByCashierId() {
         List<TicketModel> sortedTickets = new ArrayList<>();
 
         List<Cashier> cashiers = userController.getCashiersSortedByID();
@@ -115,7 +117,8 @@ public class TicketController {
         }
         return sortedTickets;
     }
-    public void listAllTickets(){
+
+    public void listAllTickets() {
         System.out.println("Ticket List:");
         List<TicketModel> tickets = getTicketsSortedByCashierId();
         for (TicketModel t : tickets) {
@@ -128,11 +131,13 @@ public class TicketController {
             System.out.println("Ticket ID not found");
             return;
         }
+
         List<ElementoTicket> elementos = ticket.getElementos();
         if (elementos.isEmpty()) { //segundo se van coger cada linea del ticket
             System.out.println("Its empty");
             return;
         }
+
         Map<Category, Integer> unidadesPorCategoria = new HashMap<>();//para contar cuantas unidades hay por categoria
         //en vez de usar contadores que es ineficiente usamos un hashmap
         for (ElementoTicket e : elementos) {
@@ -143,10 +148,9 @@ public class TicketController {
                 Category category = ((RegularProduct) p).getCategory();//pasa de product a regular product porq el get categori solo esta en regular product
                 int actual = unidadesPorCategoria.getOrDefault(category, 0);//busca la clave categoria que es la categoria de cada prod
                 unidadesPorCategoria.put(category, actual + cantidad);//actualiza el mapa sumando la cantidad actual+nuevas uds
-
-
             }
         }
+
         double totalPrice = 0.0;
         double totalDiscount = 0.0;
 
@@ -196,10 +200,9 @@ public class TicketController {
         System.out.printf("  Total price: %.3f%n", totalPrice);
         System.out.printf("  Total discount: %.3f%n", totalDiscount);
         System.out.printf("  Final Price: %.3f%n", finalPrice);
-
     }
 
-    public void swapIdInMapWhenClose(String oldTicketId){
+    public void swapIdInMapWhenClose(String oldTicketId) {
         TicketModel ticket = tickets.get(oldTicketId);
 
         if (ticket == null) {
@@ -210,24 +213,25 @@ public class TicketController {
         //Lo borramos del mapa usando la clave vieja (antes de que cambie)
         tickets.remove(oldTicketId);
 
-        // 3. UPDATE: El modelo actualiza su estado y calcula su nuevo ID internamente
+        //UPDATE: El modelo actualiza su estado y calcula su nuevo ID internamente
         ticket.close();
 
         // Lo volvemos a insertar en el mapa con la nueva clave
         // Como 'ticket' es una referencia al objeto, ticket.getId() ya devuelve el nuevo valor
         tickets.put(ticket.getId(), ticket);
     }
+
     public void printTicket(String ticketId) {
         TicketModel ticket = getTicket(ticketId);
         if (ticket == null) {
             System.out.println("Ticket ID not found");
             return;
         }
+
         if (!ticket.isClosed()) {// primero se cierra el ticket si no esta cerrado
             //ticket.close();
             swapIdInMapWhenClose(ticketId);
         }
         printTicketInfo(ticket);
     }
-
 }

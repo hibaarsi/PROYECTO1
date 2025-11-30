@@ -5,18 +5,18 @@ import etsisi.poo.Commands.ICommand;
 import etsisi.poo.Product;
 
 public abstract class AbstractProdAddCommand implements ICommand {
-
     protected final Catalog catalog;
 
     public AbstractProdAddCommand(Catalog catalog) {
         this.catalog = catalog;
     }
 
-    protected int parseId(String idStr) {     //protected para que solo se use en este paquete
+    protected int parseId(String idStr) { //protected para que solo se use en este paquete
         try {
             return Integer.parseInt(idStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid ID: must be an integer.");
+            System.out.println("Invalid ID: must be an integer.");
+            return -1;
         }
     }
 
@@ -30,7 +30,8 @@ public abstract class AbstractProdAddCommand implements ICommand {
             if (value <= 0) throw new IllegalArgumentException("Price must be positive.");
             return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid price: must be a number.");
+            System.out.println("Invalid price: must be a number.");
+            return -1;
         }
     }
 

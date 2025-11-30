@@ -10,14 +10,17 @@ public class ProdRemoveCommand implements ICommand {
     public ProdRemoveCommand(Catalog catalog) {
         this.catalog = catalog;
     }
+
     @Override
     public String getPrimerArgumento() {
         return "prod";
     }
+
     @Override
     public String getSegundoArgumento() {
         return "remove";
     }
+
     @Override
     public String execute(String[] args) {
         if (args.length != 3) {
@@ -36,8 +39,8 @@ public class ProdRemoveCommand implements ICommand {
 
         } catch (NumberFormatException e) { //en caso de que el ID no es un num valido
             return "Invalid ID format";
-
         }
+
         return null;
     }
 }

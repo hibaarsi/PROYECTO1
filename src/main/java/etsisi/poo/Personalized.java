@@ -15,7 +15,7 @@ public interface Personalized {
         }
 
         if (nTexts > getMaxPersonal()) {
-            System.out.println("Too many customization texts.Use max: " +getMaxPersonal());
+            System.out.println("Too many customization texts.Use max: " + getMaxPersonal());
 
         }
         double multiplier = 1 + (0.10 * nTexts);

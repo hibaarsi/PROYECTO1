@@ -1,7 +1,6 @@
 package etsisi.poo;
 
 public abstract class Users {
-
     private String name;
     private String email;
 

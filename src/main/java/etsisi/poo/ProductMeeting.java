@@ -3,10 +3,9 @@ package etsisi.poo;
 import java.time.*;
 
 public class ProductMeeting extends Product implements EventProduct {
-    private final LocalDateTime eventDate; //cuando es la reunion
+    private final LocalDateTime eventDate; //fecha del evento
     private final int maxPeople;
     private static final Duration MIN_PLANNING = Duration.ofHours(12); //el tiempo minimo de planificación son 12h
-
     private int actualPeople = 0;
 
     public void setActualPeople(int n) {

@@ -16,7 +16,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 
-//revisar
 public class CLI {
     private CommandController commandController;
     private UserController userController;
@@ -36,17 +35,20 @@ public class CLI {
     public void run() {
         Scanner sc = new Scanner(System.in);
         boolean keepRunning = true;
+
         while (keepRunning) {
             System.out.print(PROMPT);
             String command = sc.nextLine();
             String[] args = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             String primerArgumento = args[0];
             String segundoArgumento;
+
             if (args.length > 1) {
                 segundoArgumento = args[1];
             } else {
-                segundoArgumento = null;///""
+                segundoArgumento = null;
             }
+
             keepRunning = startCommand(primerArgumento, segundoArgumento, args);
         }
         sc.close();
@@ -63,14 +65,15 @@ public class CLI {
                 String[] args = command.split(" (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 String primerArgumento = args[0];
                 String segundoArgumento;
+
                 if (args.length > 1) {
                     segundoArgumento = args[1];
                 } else {
                     segundoArgumento = null;
                 }
+
                 startCommand(primerArgumento, segundoArgumento, args);
             }
-
         } catch (IOException e) {
             System.out.println("No encontrado tal archivo");
         }
@@ -89,7 +92,7 @@ public class CLI {
         commandController.registerCommand(new ProdUpdateCommand(catalog));
 
         commandController.registerCommand(new CashAddCommand(userController));
-        commandController.registerCommand(new CashRemoveCommand(userController,ticketController));
+        commandController.registerCommand(new CashRemoveCommand(userController, ticketController));
         commandController.registerCommand(new CashListCommand(userController));
         commandController.registerCommand(new CashTicketsCommand(this.userController));
 

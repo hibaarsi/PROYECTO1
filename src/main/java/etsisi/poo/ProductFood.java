@@ -7,8 +7,17 @@ public class ProductFood extends Product implements EventProduct {
     private final LocalDateTime eventDate; //fecha del evento
     private final int maxPeople;
     private static final Duration MIN_PLANNING = Duration.ofDays(3); //el tiempo minimo de planificación son 3 dias
-
     private int actualPeople = 0;
+
+    public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
+        super(id, name, price); // sin categoría
+        this.eventDate = eventDate;
+        this.maxPeople = maxPeople;
+
+        if (maxPeople < 1 || maxPeople > 100 || !hasEnoughPlanning()) {
+            System.out.println("Error adding product\n");
+        }
+    }
 
     public void setActualPeople(int n) {
         this.actualPeople = n;
@@ -16,18 +25,6 @@ public class ProductFood extends Product implements EventProduct {
 
     public int getActualPeople() {
         return actualPeople;
-    }
-
-    public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
-        super(id, name, price); // sin categoría
-        if (maxPeople < 1 || maxPeople > 100) {
-            System.out.println("Error adding product\n");
-        }
-        this.eventDate = eventDate;
-        this.maxPeople = maxPeople;
-        if (maxPeople < 1 || maxPeople > 100 || !hasEnoughPlanning()) {
-            System.out.println("Error adding product\n");
-        }
     }
 
     @Override
