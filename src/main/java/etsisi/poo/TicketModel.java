@@ -122,7 +122,7 @@ public class TicketModel {
         }
 
         if (ticketStatus == TicketStatus.EMPTY) {
-            ticketStatus = TicketStatus.ACTIVE;
+            ticketStatus = TicketStatus.OPEN;
         }
     }
 
