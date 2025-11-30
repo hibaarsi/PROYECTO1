@@ -93,13 +93,13 @@ public class TicketController {
         return tickets.get(id);
     }
 
-    public boolean addProductToTicket(String ticketId, Product product, int cantidad,ArrayList<String> personalizados) {
+    public boolean addProductToTicket(String ticketId, Product product, int cantidad, ArrayList<String> personalizados) {
         TicketModel ticket = getTicket(ticketId);
         if (ticket == null) {
             System.out.println("Ticket ID not found");
             return false;
         }
-        ticket.addProduct(product, cantidad,personalizados);
+        ticket.addProduct(product, cantidad, personalizados);
         return true;
     }
 
@@ -125,9 +125,9 @@ public class TicketController {
             }
         }
         //ordenar de tal manera que primero salga empty y luego los closed
-        allTickets.sort((a,b)->{
-            int estadoOrden=a.getTicketStatus().compareTo(b.getTicketStatus());
-            if (estadoOrden!=0){
+        allTickets.sort((a, b) -> {
+            int estadoOrden = a.getTicketStatus().compareTo(b.getTicketStatus());
+            if (estadoOrden != 0) {
                 return estadoOrden;
             }
             return a.getId().compareTo(b.getId());
@@ -138,8 +138,9 @@ public class TicketController {
         }
 
     }
-    public void printTicketInfo(TicketModel ticket){
-        if(ticket==null){
+
+    public void printTicketInfo(TicketModel ticket) {
+        if (ticket == null) {
             System.out.println("Ticket ID not found");
             return;
         }
@@ -213,7 +214,8 @@ public class TicketController {
         System.out.printf("  Final Price: %.3f%n", finalPrice);
 
     }
-    public void printTicket(String ticketId){
+
+    public void printTicket(String ticketId) {
         TicketModel ticket = getTicket(ticketId);
         if (ticket == null) {
             System.out.println("Ticket ID not found");

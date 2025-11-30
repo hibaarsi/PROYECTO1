@@ -69,7 +69,7 @@ public class TicketModel {
             System.out.println("You cant add more products, its closed");
             return;
         }
-        if(product instanceof ProductPersonalized && personalizados != null && !personalizados.isEmpty()){
+        if (product instanceof ProductPersonalized && personalizados != null && !personalizados.isEmpty()) {
             ProductPersonalized pp = (ProductPersonalized) product;
             ProductPersonalized productWithPersonalization = new ProductPersonalized(
                     pp.getId(),
@@ -78,8 +78,8 @@ public class TicketModel {
                     pp.getBasePrice(), // Precio base sin personalizaciones
                     pp.getMaxPersonal()
             );
-                productWithPersonalization.setPersonalizations(personalizados);
-            elementos.add(new ElementoTicket(productWithPersonalization, cantidad,personalizados));
+            productWithPersonalization.setPersonalizations(personalizados);
+            elementos.add(new ElementoTicket(productWithPersonalization, cantidad, personalizados));
             products.add(productWithPersonalization);
         } else if (product instanceof ProductFood || product instanceof ProductMeeting) {
 
@@ -104,7 +104,7 @@ public class TicketModel {
             elementos.add(new ElementoTicket(product, 1, personalizados)); //se añade 1 vez solo
             products.add(product);
 
-        }else {
+        } else {
             ElementoTicket elemento = new ElementoTicket(product, cantidad, personalizados);
             elementos.add(elemento);
             products.add(product);
@@ -118,7 +118,7 @@ public class TicketModel {
 
     public void removeProduct(Product product) {// mejorar dependiendo d productos
         if (isClosed()) {
-            System.out.println("You cant add morw products, its closed");
+            System.out.println("You cant add more products, its closed");
             return;
         }
         // con iteradores primero lo eliminados de ls lista de elementos todas las instancias y de los productos

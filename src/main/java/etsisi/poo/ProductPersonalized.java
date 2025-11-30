@@ -28,7 +28,8 @@ public class ProductPersonalized extends RegularProduct implements Personalized 
     public double getPrice() {
         return getPriceWithTexts(getBasePrice(), 1, personalizationList);
     }
-    public double getBasePrice(){
+
+    public double getBasePrice() {
         return super.getPrice();
 
     }
@@ -40,12 +41,13 @@ public class ProductPersonalized extends RegularProduct implements Personalized 
 
     @Override
     public String toString() {
-        double price= getPrice();
-       if(personalizationList.isEmpty()) {
+        double price = getPrice();
+        if (personalizationList.isEmpty()) {
             return String.format(java.util.Locale.US, "{class:ProductPersonalized, id:%d, name:'%s', category:%s, price:%.1f, maxPersonal:%d}",
                     id, name.replace("\"", ""), getCategory(), price, maxPersonal);
-        }else return String.format("{class:ProductPersonalized, id:%d, name:'%s', category:%s, price:%.1f, maxPersonal:%d, personalizationList:%s}",
-                id, name, getCategory(), price, maxPersonal, getPersonalizations());
+        } else
+            return String.format("{class:ProductPersonalized, id:%d, name:'%s', category:%s, price:%.1f, maxPersonal:%d, personalizationList:%s}",
+                    id, name, getCategory(), price, maxPersonal, getPersonalizations());
 
 
     }

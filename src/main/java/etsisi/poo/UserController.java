@@ -63,7 +63,7 @@ public class UserController {
     public Cashier createCashier(String name, String email, String UW) {
         if (UW == null) {
             UW = generateCashierID();
-           return new Cashier(name, email, UW);
+            return new Cashier(name, email, UW);
         }
         if (!properFormatUW(UW)) {
             return null;
@@ -81,8 +81,8 @@ public class UserController {
         Cashier c = cashierMap.get(UW);
 
         if (c == null) return;
-            // Aqui hay que borrar también lso tickets del cajero.
-            // Lo pongo cuando esté hecho en TicketController
+        // Aqui hay que borrar también lso tickets del cajero.
+        // Lo pongo cuando esté hecho en TicketController
         ticketController.removeTicketsFromCashier(c);
         cashierMap.remove(UW);
     }
@@ -91,7 +91,7 @@ public class UserController {
     public void listCashier() {
         List<Cashier> sortedCashier = getCashiersSortedByName();
         for (Cashier c : sortedCashier) {
-            System.out.println(" "+c);
+            System.out.println(" " + c);
         }
     }
 

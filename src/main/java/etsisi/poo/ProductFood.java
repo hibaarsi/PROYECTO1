@@ -20,7 +20,7 @@ public class ProductFood extends Product implements EventProduct {
 
     public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, price); // sin categoría
-        if (maxPeople < 1 || maxPeople > 100){
+        if (maxPeople < 1 || maxPeople > 100) {
             throw new IllegalArgumentException("Error adding product\n");
         }
         this.eventDate = eventDate;
@@ -47,12 +47,12 @@ public class ProductFood extends Product implements EventProduct {
 
     @Override
     public String toString() {
-        if(actualPeople>0){
-            return String.format(java.util.Locale.US,"{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d, actual people in event:%d}",
+        if (actualPeople > 0) {
+            return String.format(java.util.Locale.US, "{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d, actual people in event:%d}",
                     id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople, actualPeople);
-        }else
-            return String.format(java.util.Locale.US,"{class:Food, id:%d, name:'%s', price:%.1f, date of Event:%s, max people allowed:%d}",
-                    id, name.replace("\"", ""), price, eventDate.toLocalDate(), maxPeople);
+        } else
+            return String.format(java.util.Locale.US, "{class:Food, id:%d, name:'%s', price:0.0, date of Event:%s, max people allowed:%d}",
+                    id, name.replace("\"", ""), eventDate.toLocalDate(), maxPeople);
 
     }
 }
