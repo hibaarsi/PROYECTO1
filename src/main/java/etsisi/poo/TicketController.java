@@ -169,6 +169,13 @@ public class TicketController {
         }
         return sortedTickets;
     }
+    public void listAllTickets(){
+        System.out.println("Ticket List:");
+        List<TicketModel> tickets = getTicketsSortedByCashierId();
+        for (TicketModel t : tickets) {
+            System.out.println("  " + t.getId() + " - " + t.getTicketStatus());
+        }
+    }
 
     public void printTicketInfo(TicketModel ticket) {
         if (ticket == null) {

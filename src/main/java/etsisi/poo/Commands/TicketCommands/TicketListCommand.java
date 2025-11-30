@@ -30,11 +30,7 @@ public class TicketListCommand implements ICommand {
 
     }*/
     public String execute(String[] args) {
-        System.out.println("Ticket List:");
-        List<TicketModel> tickets = ticketController.getTicketsSortedByCashierId();
-        for (TicketModel t : tickets) {
-            System.out.println("  " + t.getId() + " - " + t.getTicketStatus());
-        }
+        ticketController.listAllTickets();
         return "ticket list: ok\n";
     }
 
