@@ -1,6 +1,7 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.ProdCommands;
 
 import etsisi.poo.Catalog;
+import etsisi.poo.Commands.ICommand;
 import etsisi.poo.Product;
 
 import java.util.*;

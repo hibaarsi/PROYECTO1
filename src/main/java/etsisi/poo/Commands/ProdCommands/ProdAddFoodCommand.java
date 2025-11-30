@@ -1,13 +1,13 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.ProdCommands;
 
 import etsisi.poo.Catalog;
 import etsisi.poo.Product;
-import etsisi.poo.ProductMeeting;
+import etsisi.poo.ProductFood;
 
 import java.time.*;
 
-public class ProdAddMeetingCommand extends AbstractProdAddCommand {
-    public ProdAddMeetingCommand(Catalog catalog) {
+public class ProdAddFoodCommand extends AbstractProdAddCommand {
+    public ProdAddFoodCommand(Catalog catalog) {
         super(catalog);
     }
 
@@ -16,7 +16,7 @@ public class ProdAddMeetingCommand extends AbstractProdAddCommand {
     }
 
     public String getSegundoArgumento() {
-        return "addMeeting";
+        return "addFood";
     }
 
     @Override
@@ -28,12 +28,12 @@ public class ProdAddMeetingCommand extends AbstractProdAddCommand {
         int maxPeople = Integer.parseInt(args[6]);
         LocalDateTime dateTime = date.atTime(LocalTime.MAX);
 
-        return new ProductMeeting(id, name, price, dateTime, maxPeople);
+        return new ProductFood(id, name, price, dateTime, maxPeople);
     }
 
     @Override
     protected String getOkMessage() {
-        return "prod addMeeting: ok\n";
+        return "prod addFood: ok\n";
     }
 
 }

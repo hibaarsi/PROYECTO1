@@ -1,5 +1,6 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.TicketCommands;
 
+import etsisi.poo.Commands.ICommand;
 import etsisi.poo.TicketController;
 import etsisi.poo.TicketModel;
 

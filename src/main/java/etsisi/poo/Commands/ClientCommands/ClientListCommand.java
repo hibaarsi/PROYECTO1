@@ -1,9 +1,7 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.ClientCommands;
 
-import etsisi.poo.Client;
+import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
-
-import java.util.List;
 
 public class ClientListCommand implements ICommand {
     private UserController userController;

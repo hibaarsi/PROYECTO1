@@ -1,6 +1,7 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.TicketCommands;
 
 import etsisi.poo.*;
+import etsisi.poo.Commands.ICommand;
 
 public class TicketRemoveCommand implements ICommand {
     private final TicketController ticketController;

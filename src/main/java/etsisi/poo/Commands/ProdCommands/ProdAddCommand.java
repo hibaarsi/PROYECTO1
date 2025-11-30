@@ -1,4 +1,4 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.ProdCommands;
 
 import etsisi.poo.*;
 

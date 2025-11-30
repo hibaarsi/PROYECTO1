@@ -1,6 +1,7 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.ClientCommands;
 
 import etsisi.poo.Client;
+import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
 
 public class ClienteRemoveCommand implements ICommand {

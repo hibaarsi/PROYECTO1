@@ -1,9 +1,9 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.TicketCommands;
 
 import etsisi.poo.*;
+import etsisi.poo.Commands.ICommand;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TicketAddCommand implements ICommand {
     private final TicketController ticketController;

@@ -1,9 +1,7 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.CashCommands;
 
-import etsisi.poo.Cashier;
+import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
-
-import java.util.List;
 
 public class CashListCommand implements ICommand {
     private UserController userController;

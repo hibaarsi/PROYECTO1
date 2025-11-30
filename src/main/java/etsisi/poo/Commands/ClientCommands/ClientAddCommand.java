@@ -1,7 +1,8 @@
-package etsisi.poo.Commands;
+package etsisi.poo.Commands.ClientCommands;
 
 import etsisi.poo.Cashier;
 import etsisi.poo.Client;
+import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
 
 public class ClientAddCommand implements ICommand {

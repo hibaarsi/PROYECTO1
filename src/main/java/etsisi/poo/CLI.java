@@ -1,6 +1,15 @@
 package etsisi.poo;
 
 import etsisi.poo.Commands.*;
+import etsisi.poo.Commands.CashCommands.CashAddCommand;
+import etsisi.poo.Commands.CashCommands.CashListCommand;
+import etsisi.poo.Commands.CashCommands.CashRemoveCommand;
+import etsisi.poo.Commands.CashCommands.CashTicketsCommand;
+import etsisi.poo.Commands.ClientCommands.ClientAddCommand;
+import etsisi.poo.Commands.ClientCommands.ClientListCommand;
+import etsisi.poo.Commands.ClientCommands.ClienteRemoveCommand;
+import etsisi.poo.Commands.ProdCommands.*;
+import etsisi.poo.Commands.TicketCommands.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
