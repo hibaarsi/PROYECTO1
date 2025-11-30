@@ -4,11 +4,11 @@ import etsisi.poo.*;
 
 public class TicketNewCommand implements ICommand {
     private final TicketController ticketController;
-    private final UserController userController;
 
-    public TicketNewCommand(TicketController ticketController, UserController userController) {
+
+    // Ahora no tiene userController
+    public TicketNewCommand(TicketController ticketController) {
         this.ticketController = ticketController;
-        this.userController = userController;
     }
 
     public String getPrimerArgumento() {
@@ -19,7 +19,7 @@ public class TicketNewCommand implements ICommand {
         return "new";
     }
 
-    public String execute(String[] args) {
+    /*public String execute(String[] args) {
         if (args.length != 4 && args.length != 5) {
             return "Usage: ticket new <ticketId> <cashierId> <clientId>";
         }
@@ -51,5 +51,38 @@ public class TicketNewCommand implements ICommand {
                 "  Total discount: 0.0\n" +
                 "  Final Price: 0.0");
         return "ticket new: ok\n";
+    }*/
+    public String execute(String[] args) {
+        String ticketID = null;
+        String cashierID;
+        String clientID;
+        if (args.length != 4 && args.length != 5) {
+            return "Usage: ticket new [<id>] <cashId> <userId>";
+        }
+        try {
+            if (args.length == 4) {
+                cashierID = args[2];
+                clientID = args[3];
+            } else {
+                ticketID = args[2];
+                cashierID = args[3];
+                clientID = args[4];
+            }
+            //ticketController.newTicket(ticketID, cashierID, clientID);
+            TicketModel ticket = ticketController.newTicket(ticketID, cashierID, clientID);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("Ticket : ").append(ticket.getId()).append("\n");
+            sb.append("  Total price: 0.0").append("\n");
+            sb.append("  Total discount: 0.0").append("\n");
+            sb.append("  Final Price: 0.0").append("\n");
+            sb.append("ticket new: ok");
+
+            return sb.toString();
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }
+

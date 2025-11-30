@@ -1,13 +1,19 @@
 package etsisi.poo.Commands;
 
 import etsisi.poo.Cashier;
+import etsisi.poo.TicketController;
 import etsisi.poo.UserController;
 
 public class CashRemoveCommand implements ICommand {
     private UserController userController;
+    private TicketController ticketController;
 
-    public CashRemoveCommand(UserController userController) {
+    // Al haber separado TicketController y UserController hay que llamar a los metodos
+    // removeTicketsFromCashier y removeCashier de ambos controladores.
+
+    public CashRemoveCommand(UserController userController, TicketController ticketController) {
         this.userController = userController;
+        this.ticketController = ticketController;
     }
 
     public String getPrimerArgumento() {
@@ -18,18 +24,18 @@ public class CashRemoveCommand implements ICommand {
         return "remove";
     }
 
-    public String execute(String[] args) {
-        //el código uw
-        if (args.length < 3) return "Need: cash remove <UW>";
-
-        String uw = args[2];
-
-        Cashier c = userController.getCashier(uw);
-        if (c == null) return "Cashier not found";
-
-        userController.removeCashier(uw);
-
-        return "cash remove: ok\n";
+    public String execute(String [] args){
+        if (args.length != 3){
+            return "Usage: cash remove <id>";
+        }
+        String cashierId = args[2];
+        Cashier cashier = userController.getCashier(cashierId);
+        if (cashier == null){
+            return "Cajero no encontrado";
+        }
+        ticketController.removeTicketsFromCashier(cashier);
+        userController.removeCashier(cashierId);
+        return "cash remove: ok";
     }
 
 }

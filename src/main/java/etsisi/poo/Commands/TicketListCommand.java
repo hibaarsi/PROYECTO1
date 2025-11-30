@@ -1,6 +1,9 @@
 package etsisi.poo.Commands;
 
 import etsisi.poo.TicketController;
+import etsisi.poo.TicketModel;
+
+import java.util.List;
 
 public class TicketListCommand implements ICommand {
     private final TicketController ticketController;
@@ -9,7 +12,7 @@ public class TicketListCommand implements ICommand {
         this.ticketController = ticketController;
     }
 
-    public String execute(String[] args) {
+    /*public String execute(String[] args) {
         if (args == null || args.length != 2) {
             System.out.println("Usage: ticket list");
             return null;
@@ -17,6 +20,14 @@ public class TicketListCommand implements ICommand {
         ticketController.listTickets();
         return "ticket list: ok\n";
 
+    }*/
+    public String execute(String[] args) {
+        System.out.println("Ticket List:");
+        List<TicketModel> tickets = ticketController.getTicketsSortedByCashierId();
+        for (TicketModel t : tickets) {
+            System.out.println("  " + t.getId() + " - " + t.getTicketStatus());
+        }
+        return "ticket list: ok";
     }
 
     public String getPrimerArgumento() {

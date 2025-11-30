@@ -1,6 +1,7 @@
 package etsisi.poo;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Client extends Users {
@@ -22,6 +23,8 @@ public class Client extends Users {
     public void removeTicket(TicketModel ticket) {
         this.tickets.remove(ticket);
     }
+
+    public List<TicketModel> getTickets(){return this.tickets;}
 
     public Cashier getCashier() {
         return this.cashier;

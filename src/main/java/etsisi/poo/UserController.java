@@ -7,12 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserController {
     private Map<String, Client> clientMap;     // La clave es el DNI
     private Map<String, Cashier> cashierMap;   // La clave es el código UW
-    private TicketController ticketController;
+    //private TicketController ticketController;
 
-    public UserController(TicketController ticketController) {
+    public UserController() {
         this.clientMap = new HashMap<>();
         this.cashierMap = new HashMap<>();
-        this.ticketController = ticketController;
+        //this.ticketController = ticketController;
     }
 
     public Client getClient(String clientID) {
@@ -46,6 +46,16 @@ public class UserController {
         clientMap.remove(DNI);
     }
 
+    public void removeTicketFromAnyClient(TicketModel ticket) {
+        Iterator<Client> it = this.clientMap.values().iterator();
+        boolean found = false;
+        while (it.hasNext() && !found) {
+            Client client = it.next();
+            if (client.getTickets().remove(ticket)) {
+                found = true;
+            }
+        }
+    }
     public void listClients() {
         List<Client> sortedClients = getClientsSortedByName();
         for (Client c : sortedClients) {
@@ -77,7 +87,7 @@ public class UserController {
         }
     }
 
-    public void removeCashier(String UW) {
+    /*public void removeCashier(String UW) {
         Cashier c = cashierMap.get(UW);
 
         if (c == null) return;
@@ -85,6 +95,15 @@ public class UserController {
         // Lo pongo cuando esté hecho en TicketController
         ticketController.removeTicketsFromCashier(c);
         cashierMap.remove(UW);
+    }*/
+
+    // Este removeCashier solo borra el cajero del mapa sin borrar los tickets asociados
+    public void removeCashier(String UW) {
+        if (!cashierMap.containsKey(UW)) {
+            System.out.println("El cajero no está registrado.");
+        } else {
+            cashierMap.remove(UW);
+        }
     }
 
 
@@ -98,6 +117,11 @@ public class UserController {
     public List<Cashier> getCashiersSortedByName() {
         List<Cashier> cashierList = new ArrayList<>(this.cashierMap.values());
         cashierList.sort(Comparator.comparing(Cashier::getName));
+        return cashierList;
+    }
+    public List<Cashier> getCashiersSortedByID(){
+        List<Cashier> cashierList = new ArrayList<>(this.cashierMap.values());
+        cashierList.sort(Comparator.comparing(Cashier::getID));
         return cashierList;
     }
 
@@ -124,4 +148,5 @@ public class UserController {
         }
         return true;
     }
+
 }

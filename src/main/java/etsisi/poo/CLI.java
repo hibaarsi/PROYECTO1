@@ -18,8 +18,8 @@ public class CLI {
 
     public CLI() {
         this.commandController = new CommandController();
-        this.ticketController = new TicketController();
-        this.userController = new UserController(ticketController);
+        this.userController = new UserController();
+        this.ticketController = new TicketController(userController);
         this.catalog = new Catalog();
         registerCommands();
     }
@@ -80,7 +80,7 @@ public class CLI {
         commandController.registerCommand(new ProdUpdateCommand(catalog));
 
         commandController.registerCommand(new CashAddCommand(userController));
-        commandController.registerCommand(new CashRemoveCommand(userController));
+        commandController.registerCommand(new CashRemoveCommand(userController,ticketController));
         commandController.registerCommand(new CashListCommand(userController));
         commandController.registerCommand(new CashTicketsCommand(this.userController));
 
@@ -91,7 +91,7 @@ public class CLI {
         commandController.registerCommand(new HelpCommand());
         commandController.registerCommand(new ExitCommand());
 
-        commandController.registerCommand(new TicketNewCommand(this.ticketController, this.userController));
+        commandController.registerCommand(new TicketNewCommand(this.ticketController));
         commandController.registerCommand(new TicketListCommand(this.ticketController));
         commandController.registerCommand(new TicketAddCommand(this.ticketController, this.userController, this.catalog));
         commandController.registerCommand(new TicketPrintCommand(this.ticketController));
