@@ -18,6 +18,9 @@ public class ClientListCommand implements ICommand {
     }
     @Override
     public String execute(String[] args) {
+        if(args.length !=2){
+            return "client list";
+        }
         userController.listClients();
         return "client list: ok\n";
     }

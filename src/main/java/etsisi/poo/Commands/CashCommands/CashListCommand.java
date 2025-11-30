@@ -19,6 +19,9 @@ public class CashListCommand implements ICommand {
     }
     @Override
     public String execute(String[] args) {
+        if(args.length!=2){
+            return "cash list";
+        }
         userController.listCashier();
         return "cash list: ok\n";
     }
