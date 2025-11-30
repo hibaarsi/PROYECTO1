@@ -6,20 +6,20 @@ import etsisi.poo.Commands.ICommand;
 import etsisi.poo.UserController;
 
 public class ClientAddCommand implements ICommand {
-    private UserController userController;
+    private final UserController userController;
 
     public ClientAddCommand(UserController userController) {
         this.userController = userController;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "client";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "add";
     }
-
+    @Override
     public String execute(String[] args) {
         if (args.length != 6) {
             return "Use: client add \"<name>\" <DNI> <email> <UW_cashier>";
@@ -43,7 +43,6 @@ public class ClientAddCommand implements ICommand {
         }
 
         userController.addClient(client);
-
         System.out.println(client);
         return "client add: ok\n";
 

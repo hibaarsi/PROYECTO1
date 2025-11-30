@@ -13,15 +13,15 @@ public class ProdListCommand implements ICommand {
     public ProdListCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "prod";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "list";
     }
-
+    @Override
     public String execute(String[] args) {
         Map<Integer, Product> products = catalog.getProducts(); //copia del mapa de productos
 

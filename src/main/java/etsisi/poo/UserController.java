@@ -58,6 +58,7 @@ public class UserController {
     }
     public void listClients() {
         List<Client> sortedClients = getClientsSortedByName();
+        System.out.println("Client:");
         for (Client c : sortedClients) {
             System.out.println(c);
         }

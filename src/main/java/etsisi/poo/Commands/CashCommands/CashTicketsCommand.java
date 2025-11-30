@@ -25,22 +25,19 @@ public class CashTicketsCommand implements ICommand {
     @Override
     public String execute(String[] args) {
 
-        if (args.length < 3) { //comprueba si paso el id del cajero
+        if (args.length != 3) {
             return "Usage: cash tickets <UW>";
         }
-        String uw = args[2]; //id
+        String uw = args[2];
         Cashier cashier = userController.getCashier(uw);
-
         if (cashier == null) {
             return "Cashier not found";
         }
         System.out.println("Tickets: ");
 
-        // lista de tickets del cajero
         if (cashier.getTickets().isEmpty()) {
             return "cash tickets: ok\n";
         }
-
         for (TicketModel t : cashier.getTickets()) {
             System.out.println("  " + t.getId() + "->" + t.getTicketStatus());
         }

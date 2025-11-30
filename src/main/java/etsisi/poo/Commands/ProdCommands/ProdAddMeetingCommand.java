@@ -10,11 +10,11 @@ public class ProdAddMeetingCommand extends AbstractProdAddCommand {
     public ProdAddMeetingCommand(Catalog catalog) {
         super(catalog);
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "prod";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "addMeeting";
     }

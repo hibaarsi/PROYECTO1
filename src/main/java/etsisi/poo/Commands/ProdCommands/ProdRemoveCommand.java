@@ -5,26 +5,24 @@ import etsisi.poo.Commands.ICommand;
 import etsisi.poo.Product;
 
 public class ProdRemoveCommand implements ICommand {
-    private Catalog catalog;
+    private final Catalog catalog;
 
     public ProdRemoveCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "prod";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "remove";
     }
-
+    @Override
     public String execute(String[] args) {
         if (args.length != 3) {
-            System.out.println("Not valid");
-            return null;
+            return "prod remove <id>";
         }
-
         try {
             int id = Integer.parseInt(args[2]);//el arg a numero entero, seria el ID
             Product removed = catalog.removeProduct(id); //intenta eliminar
@@ -33,11 +31,12 @@ public class ProdRemoveCommand implements ICommand {
                 System.out.printf("Product with id %d does not exist%n", id);
             } else {
                 System.out.println(removed);
-                System.out.println("prod remove: ok");
+                return "prod remove: ok\n";
             }
 
-        } catch (NumberFormatException e) {//en caso de que el ID no es un num valido
-            System.out.println("Invalid ID format");
+        } catch (NumberFormatException e) { //en caso de que el ID no es un num valido
+            return "Invalid ID format";
+
         }
         return null;
     }

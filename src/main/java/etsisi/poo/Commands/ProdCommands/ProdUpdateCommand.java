@@ -5,20 +5,20 @@ import etsisi.poo.Commands.ICommand;
 import etsisi.poo.Product;
 
 public class ProdUpdateCommand implements ICommand {
-    private Catalog catalog;
+    private final Catalog catalog;
 
     public ProdUpdateCommand(Catalog catalog) {
         this.catalog = catalog;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "prod";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "update";
     }
-
+    @Override
     public String execute(String[] args) {
         if (args.length != 5) {//mirar
             return "Not valid";
