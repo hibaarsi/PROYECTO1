@@ -21,12 +21,12 @@ public class ProductFood extends Product implements EventProduct {
     public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
         super(id, name, price); // sin categoría
         if (maxPeople < 1 || maxPeople > 100) {
-            throw new IllegalArgumentException("Error adding product\n");
+            System.out.println("Error adding product\n");
         }
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
         if (maxPeople < 1 || maxPeople > 100 || !hasEnoughPlanning()) {
-            throw new IllegalArgumentException("Error adding product\n");
+            System.out.println("Error adding product\n");
         }
     }
 

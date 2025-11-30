@@ -7,7 +7,6 @@ public class TicketRemoveCommand implements ICommand {
     private final TicketController ticketController;
     private final UserController userController;
     private final Catalog catalog;
-
     public TicketRemoveCommand(TicketController ticketController, UserController userController, Catalog catalog) {
         this.ticketController = ticketController;
         this.userController = userController;
@@ -47,9 +46,10 @@ public class TicketRemoveCommand implements ICommand {
         if (product == null) {
             return "Product ID not found";
         }
-        ticket.removeProduct(product);
+        boolean remove=ticketController.removeProductFromTicket(ticketId,product);
+        if(!remove) return "Product not removed";
         ticketController.printTicketInfo(ticket);
-        return "ticket remove: ok";
+        return "ticket remove: ok\n";
 
     }
 }

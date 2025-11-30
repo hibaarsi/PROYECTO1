@@ -20,9 +20,7 @@ public class CommandController {
 
     public boolean executeCommand(String primerArgumento, String segundoArgumento, String[] args) {
         ICommand command = null;
-
         String key;
-
         //primero se intenta con un comando de dos args
         if (segundoArgumento != null) {
             key = primerArgumento + ":" + segundoArgumento;

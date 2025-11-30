@@ -71,37 +71,9 @@ public class TicketController {
         client.addTicket(ticket);
         return ticket;
     }
-    /*
-    public TicketModel newTicket(String id) {
-        TicketModel ticket;
-        if (id == null) ticket = new TicketModel();
-        else ticket = new TicketModel(id);
-        tickets.put(ticket.getId(), ticket);
-        return ticket;
-
-    }*/
 
 
-    //el metodo registra un ticket nuevo en la estructura del mapa tickets by cashier
-    //y añade el ticket a la lista interna del mapa Cashier
-    /*public void associateTicketToCashier(Cashier cashier, TicketModel ticket) {//hay que llamar a este cuando se cree el ticket
-        if (cashier == null || ticket == null) return;
-        String cashierId = cashier.getID();
-        List<TicketModel> lista = ticketsByCashier.get(cashierId);//coje la lista de tickets del cajero
-        if (lista == null) {//si el cajero aun no tiene lista asociada, se crea una
-            lista = new ArrayList<>();
-            ticketsByCashier.put(cashierId, lista);
-        }
-        lista.add(ticket);//añadimos el ticket a la lista de ids y cajeros
-        cashier.addTicket(ticket);//añadirmos el ticket a la lista del cajero interna la que se crea en cashier
-        //esta lista es para si borras el cajero que se borren todos sus tickets
-    }
-    */
-    /*public boolean cashierHasTicket(String cashierId, TicketModel ticket) {//comprueba si un ticket pertenece al cajero
-        List<TicketModel> lista = ticketsByCashier.get(cashierId);
-        if (lista == null) return false;
-        return lista.contains(ticket);
-    }*/
+
 
     public boolean cashierHasTicket(String cashierId, TicketModel ticket) {//comprueba si un ticket pertenece al cajero
         List<TicketModel> cashierTickets = userController.getCashier(cashierId).getTickets();
@@ -114,49 +86,23 @@ public class TicketController {
 
     public boolean addProductToTicket(String ticketId, Product product, int cantidad, ArrayList<String> personalizados) {
         TicketModel ticket = getTicket(ticketId);
-        if (ticket == null) {
-            System.out.println("Ticket ID not found");
+        if(ticket ==null || ticket.isClosed()){
             return false;
         }
         ticket.addProduct(product, cantidad, personalizados);
-        return true;
+      return true;
     }
 
     public boolean removeProductFromTicket(String ticketId, Product product) {
         TicketModel ticket = getTicket(ticketId);
-        if (ticket == null) {
-            System.out.println("Ticket ID not found");
+        if(ticket==null || ticket.isClosed()){
             return false;
         }
         ticket.removeProduct(product);
         return true;
+
     }
 
-    /*public void listTickets() {
-        if (ticketsByCashier.isEmpty()) {
-            return;
-        }
-        System.out.println("Ticket List:");
-        List<TicketModel> allTickets = new ArrayList<>();//cojer los tickets de los cajeros
-        for (List<TicketModel> lista : ticketsByCashier.values()) {// recorrer la lista y añadirla al hashmap si existen
-            if (lista != null) {
-                allTickets.addAll(lista);
-            }
-        }
-        //ordenar de tal manera que primero salga empty y luego los closed
-        allTickets.sort((a, b) -> {
-            int estadoOrden = a.getTicketStatus().compareTo(b.getTicketStatus());
-            if (estadoOrden != 0) {
-                return estadoOrden;
-            }
-            return a.getId().compareTo(b.getId());
-        });
-
-        for (TicketModel t : allTickets) {
-            System.out.println("  " + t.getId() + " - " + t.getTicketStatus()); //Mostrar uno por línea con el formato
-        }
-
-    }*/
     public List<TicketModel> getTicketsSortedByCashierId(){
         List<TicketModel> sortedTickets = new ArrayList<>();
 

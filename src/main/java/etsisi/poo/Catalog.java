@@ -76,9 +76,6 @@ public class Catalog {
     }
 
 
-    public int size() {
-        return items.size();
-    }
 
     public boolean existProduct(int id) {
         return items.containsKey(id);

@@ -7,12 +7,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserController {
     private Map<String, Client> clientMap;     // La clave es el DNI
     private Map<String, Cashier> cashierMap;   // La clave es el código UW
-    //private TicketController ticketController;
+
 
     public UserController() {
         this.clientMap = new HashMap<>();
         this.cashierMap = new HashMap<>();
-        //this.ticketController = ticketController;
+
     }
 
     public Client getClient(String clientID) {
@@ -27,10 +27,10 @@ public class UserController {
 
     public Client createClient(String name, String email, String DNI, Cashier cashier) {
         if (clientMap.containsKey(DNI)) {
-            return null;
+            System.out.println("Ya hay un cliente con ese DNI");
         }
         if (!cashierMap.containsKey(cashier.getID())) {
-            return null;
+            System.out.println("El cajero no existe");
         }
 
         return new Client(name, email, DNI, cashier);
@@ -88,15 +88,6 @@ public class UserController {
         }
     }
 
-    /*public void removeCashier(String UW) {
-        Cashier c = cashierMap.get(UW);
-
-        if (c == null) return;
-        // Aqui hay que borrar también lso tickets del cajero.
-        // Lo pongo cuando esté hecho en TicketController
-        ticketController.removeTicketsFromCashier(c);
-        cashierMap.remove(UW);
-    }*/
 
     // Este removeCashier solo borra el cajero del mapa sin borrar los tickets asociados
     public void removeCashier(String UW) {

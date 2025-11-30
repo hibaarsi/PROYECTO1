@@ -12,23 +12,16 @@ public class TicketListCommand implements ICommand {
     public TicketListCommand(TicketController ticketController) {
         this.ticketController = ticketController;
     }
+    @Override
     public String getPrimerArgumento() {
         return "ticket";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "list";
     }
 
-    /*public String execute(String[] args) {
-        if (args == null || args.length != 2) {
-            System.out.println("Usage: ticket list");
-            return null;
-        }
-        ticketController.listTickets();
-        return "ticket list: ok\n";
-
-    }*/
+    @Override
     public String execute(String[] args) {
         ticketController.listAllTickets();
         return "ticket list: ok\n";

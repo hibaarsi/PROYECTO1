@@ -8,15 +8,15 @@ public class HelpCommand implements ICommand {
             "Categories: MERCH, STATIONERY, CLOTHES, BOOK, ELECTRONICS \n";
     private static final String HELP_DISCOUNTS =
             "Discounts if there are ≥2 units in the category: MERCH 0%, STATIONERY 5%, CLOTHES 7%, BOOK 10%, \nELECTRONICS 3%.\n";
-
+    @Override
     public String getPrimerArgumento() {
         return "help";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return null;
     }
-
+    @Override
     public String execute(String[] args) {
         StringBuilder sb = new StringBuilder();
         sb.append("Commands:\n")

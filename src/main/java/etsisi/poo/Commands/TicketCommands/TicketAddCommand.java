@@ -15,15 +15,15 @@ public class TicketAddCommand implements ICommand {
         this.userController = userController;
         this.catalog = catalog;
     }
-
+    @Override
     public String getPrimerArgumento() {
         return "ticket";
     }
-
+    @Override
     public String getSegundoArgumento() {
         return "add";
     }
-
+    @Override
     public String execute(String[] args) {
         if (args.length < 6) {
             return "Usage: ticket add <ticketId> <cashierId> <productId> <quantity> [--p personalization1 --p personalization2 ...]";
@@ -61,7 +61,8 @@ public class TicketAddCommand implements ICommand {
 
                 }
             }
-            ticket.addProduct(product, quantity, personalizations);
+           boolean add= ticketController.addProductToTicket(ticketId, product, quantity, personalizations);
+            if(!add) return "Product not added";
             ticketController.printTicketInfo(ticket);
         } catch (NumberFormatException e) {
             return "Invalid number format for product ID or quantity";

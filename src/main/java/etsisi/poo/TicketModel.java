@@ -17,12 +17,9 @@ public class TicketModel {
 
     private final List<ElementoTicket> elementos;
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
-    //private static ArrayList<String> listaIds = new ArrayList<>();
 
     public TicketModel(String id) {
-        /*if (listaIds.contains(id)) {
-            System.out.println("El id ya existe");
-        }*/
+
         this.id = id;
         this.elementos = new ArrayList<>();
         this.products = new ArrayList<>();
@@ -30,14 +27,6 @@ public class TicketModel {
         this.openDate = LocalDateTime.now();
 
     }
-
-    /*public TicketModel() {
-        this.id = generateId();
-        this.products = new ArrayList<>();
-        this.ticketStatus = TicketStatus.EMPTY;
-        this.openDate = LocalDateTime.now();
-        this.elementos = new ArrayList<>();
-    }*/
 
     public List<ElementoTicket> getElementos() {//para leer desde fuera las lineas del ticket
         return elementos;
@@ -53,25 +42,10 @@ public class TicketModel {
         return total;
     }
 
-    /*private String generateId() {
-        String baseId = LocalDateTime.now().format(DATE_FORMATTER);
-        Random random = new Random();
-        String newId;
-        do {
-            newId = baseId + "-" + String.format("%05d", random.nextInt(100000));
-        } while (listaIds.contains(newId));
-        listaIds.add(newId);
-        return newId;
-    }*/
     //Añadido ahora
     public static String calculateID() {
         String baseId = LocalDateTime.now().format(DATE_FORMATTER);
         Random random = new Random();
-        /*String newId;
-        do {
-            newId = baseId + "-" + String.format("%05d", random.nextInt(100000));
-        } while (listaIds.contains(newId));
-        listaIds.add(newId);*/
         return baseId + "-" + String.format("%05d", random.nextInt(100000));
     }
 
@@ -160,9 +134,8 @@ public class TicketModel {
             ticketStatus = TicketStatus.CLOSED;
             endDate = LocalDateTime.now();
             String cierre = "-" + endDate.format(DATE_FORMATTER);
-            //listaIds.remove(id);
             id += cierre;
-            //listaIds.add(id);
+
         }
     }
 

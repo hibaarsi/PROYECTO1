@@ -10,8 +10,16 @@ public class TicketPrintCommand implements ICommand {
     public TicketPrintCommand(TicketController ticketController) {
         this.ticketController = ticketController;
     }
+    @Override
+    public String getPrimerArgumento() {
+        return "ticket";
+    }
+    @Override
+    public String getSegundoArgumento() {
+        return "print";
+    }
 
-
+    @Override
     public String execute(String[] args) {
         if (args == null || args.length < 4) {
             return "Usage: ticket print <ticketId> <cashierId>";
@@ -30,11 +38,4 @@ public class TicketPrintCommand implements ICommand {
         }
     }
 
-    public String getPrimerArgumento() {
-        return "ticket";
-    }
-
-    public String getSegundoArgumento() {
-        return "print";
-    }
 }

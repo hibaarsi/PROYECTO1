@@ -23,7 +23,7 @@ public class ProductMeeting extends Product implements EventProduct {
         this.maxPeople = maxPeople;
 
         if (maxPeople < 1 || maxPeople > 100 || !hasEnoughPlanning()) {
-            throw new IllegalArgumentException("Error adding product\n");
+            System.out.println("Error adding product\n");
         }
     }
 
