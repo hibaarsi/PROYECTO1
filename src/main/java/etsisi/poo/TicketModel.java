@@ -30,17 +30,6 @@ public class TicketModel {
         return elementos;
     }
 
-    public double getTotal() { //calculo del total bruto del ticket
-        double total = 0.0;
-        for (ElementoTicket e : elementos) {
-            Product p = e.getProduct();   // asumo que ElementoTicket tiene getProduct()
-            int cantidad = e.getQuantity(); // y getCantidad()
-            total += p.getPrice() * cantidad;
-        }
-        return total;
-    }
-
-    //Añadido ahora
     public static String calculateID() {
         String baseId = LocalDateTime.now().format(DATE_FORMATTER);
         Random random = new Random();
@@ -59,7 +48,7 @@ public class TicketModel {
                     pp.getId(),
                     pp.getName(),
                     pp.getCategory(),
-                    pp.getBasePrice(), // Precio base sin personalizaciones
+                    pp.getBasePrice(), //precio base sin personalizaciones
                     pp.getMaxPersonal()
             );
             productWithPersonalization.setPersonalizations(personalizados);
@@ -69,7 +58,7 @@ public class TicketModel {
         } else if (product instanceof ProductFood || product instanceof ProductMeeting) {
             for (ElementoTicket e : elementos) {
                 if (e.getProduct() instanceof ProductFood || e.getProduct() instanceof ProductMeeting) {
-                    System.out.println("No se pueden añadir productos de tipo comida o reunion"); // mejor quitarlo
+                    System.out.println("No se pueden añadir productos de tipo comida o reunion");
                     return;
                 }
             }
@@ -99,12 +88,13 @@ public class TicketModel {
         }
     }
 
-    public void removeProduct(Product product) {// mejorar dependiendo d productos
+    public void removeProduct(Product product) {
         if (isClosed()) {
             System.out.println("You cant add more products, its closed");
             return;
         }
-        // con iteradores primero lo eliminados de ls lista de elementos todas las instancias y de los productos
+
+        // con iteradores primero lo eliminados de la lista de elementos todas las instancias y de los productos
         Iterator<ElementoTicket> elementoTicket = elementos.iterator();
         while (elementoTicket.hasNext()) {
             ElementoTicket e = elementoTicket.next();
@@ -112,7 +102,6 @@ public class TicketModel {
                 elementoTicket.remove();
             }
         }
-
 
         Iterator<Product> producto = products.iterator();
         while (producto.hasNext()) {

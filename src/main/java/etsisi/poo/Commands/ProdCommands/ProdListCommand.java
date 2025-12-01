@@ -32,7 +32,7 @@ public class ProdListCommand implements ICommand {
 
         } else {
             System.out.println("Catalog: ");
-            //El TreeMap ordena automáticamente las entradas por la clave (ID del producto).
+            //el TreeMap ordena automáticamente las entradas por la clave (ID del producto).
             TreeMap<Integer, Product> organizedProducts = new TreeMap<>(products);
 
             for (Product p : organizedProducts.values()) {

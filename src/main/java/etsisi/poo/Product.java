@@ -1,7 +1,5 @@
 package etsisi.poo;
 
-import java.sql.SQLOutput;
-
 public abstract class Product {
     //Constantes públicas
     public static final int MAX_NAME_LENGTH = 100;
@@ -15,12 +13,10 @@ public abstract class Product {
     //Mensajes de formato
     private static final String PRODUCT_FORMAT = "{class:Product, id:%d, name:'%s', category:%s, price:%.1f}";
 
-    //Atributos
     protected final int id; // es único
     protected String name;
     protected double price;
 
-    // 🔹 Constructor
     public Product(int id, String name, double price) {
         if (id <= 0) System.out.println(NEEDS_TO_BE_POSITIVE);
         if (name == null || name.trim().isEmpty()) System.out.println(NOT_EMPTY);

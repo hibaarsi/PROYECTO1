@@ -10,7 +10,7 @@ public interface EventProduct {
 
     Duration getMinPlanning(); //tiempo mínimo de planificación
 
-    default boolean hasEnoughPlanning() { //para ver si hay suficiente tiempo de planificación
+    default boolean hasEnoughPlanning() {
         return Duration.between(LocalDateTime.now(), getEventDate()).compareTo(getMinPlanning()) >= 0;
     }
 }

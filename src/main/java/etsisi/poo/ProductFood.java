@@ -3,10 +3,9 @@ package etsisi.poo;
 import java.time.*;
 
 public class ProductFood extends Product implements EventProduct {
-
-    private final LocalDateTime eventDate; //fecha del evento
+    private final LocalDateTime eventDate;
     private final int maxPeople;
-    private static final Duration MIN_PLANNING = Duration.ofDays(3); //el tiempo minimo de planificación son 3 dias
+    private static final Duration MIN_PLANNING = Duration.ofDays(3); //tiempo minimo de planificación 3 dias
     private int actualPeople = 0;
 
     public ProductFood(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {

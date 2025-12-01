@@ -9,9 +9,6 @@ public class CashRemoveCommand implements ICommand {
     private final UserController userController;
     private final TicketController ticketController;
 
-    // Al haber separado TicketController y UserController hay que llamar a los metodos
-    // removeTicketsFromCashier y removeCashier de ambos controladores.
-
     public CashRemoveCommand(UserController userController, TicketController ticketController) {
         this.userController = userController;
         this.ticketController = ticketController;

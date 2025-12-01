@@ -23,13 +23,13 @@ public class ProdUpdateCommand implements ICommand {
 
     @Override
     public String execute(String[] args) {
-        if (args.length != 5) {//mirar
+        if (args.length != 5) {
             return "Not valid";
         }
 
         try {
-            int id = Integer.parseInt(args[2]); //id del producto a entero
-            String field = args[3].toUpperCase(); //nombre del campo
+            int id = Integer.parseInt(args[2]);
+            String field = args[3].toUpperCase();
             String value = args[4].replace("\"", "");
 
             Product product = catalog.getProduct(id);
@@ -37,7 +37,7 @@ public class ProdUpdateCommand implements ICommand {
                 return "Product with id " + id + " does not exist";
             }
 
-            boolean ok = catalog.updateProduct(id, field, value);//actualiza el producto en el catalog
+            boolean ok = catalog.updateProduct(id, field, value);
             if (ok) {
                 System.out.println(product);
                 System.out.println("prod update: ok\n");

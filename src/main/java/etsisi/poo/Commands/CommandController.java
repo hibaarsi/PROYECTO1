@@ -32,6 +32,7 @@ public class CommandController {
             key = primerArgumento;
             command = commands.get(key);
         }
+
         //si sigue sin ir pues es que no es un comando bien escrito
         if (command == null) {
             System.out.println("Comando no encontrado\n");

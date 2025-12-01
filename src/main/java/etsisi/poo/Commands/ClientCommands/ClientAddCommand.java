@@ -27,13 +27,11 @@ public class ClientAddCommand implements ICommand {
         if (args.length != 6) {
             return "Use: client add \"<name>\" <DNI> <email> <UW_cashier>";
         }
-        //guarda los datos del cliente
         String name = args[2].replace("\"", "");
         String dni = args[3];
         String email = args[4];
         String uw = args[5];
 
-        // Buscar el cajero asociado
         Cashier cashier = userController.getCashier(uw);
         if (cashier == null) {
             return "Cashier not found";

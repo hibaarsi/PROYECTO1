@@ -27,7 +27,7 @@ public class ProdRemoveCommand implements ICommand {
             return "prod remove <id>";
         }
         try {
-            int id = Integer.parseInt(args[2]);//el arg a numero entero, seria el ID
+            int id = Integer.parseInt(args[2]);
             Product removed = catalog.removeProduct(id); //intenta eliminar
 
             if (removed == null) {
@@ -37,7 +37,7 @@ public class ProdRemoveCommand implements ICommand {
                 return "prod remove: ok\n";
             }
 
-        } catch (NumberFormatException e) { //en caso de que el ID no es un num valido
+        } catch (NumberFormatException e) {
             return "Invalid ID format";
         }
 

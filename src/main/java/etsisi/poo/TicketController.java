@@ -16,9 +16,7 @@ public class TicketController {
         boolean unique = false;
 
         while (!unique) {
-            //Generamos el ID candidato (Lógica de fecha + random)
             newId = TicketModel.calculateID();
-            //VERIFICACIÓN CONTRA EL MAPA (Solo el Controller puede hacer esto)
             if (!tickets.containsKey(newId)) {
                 unique = true;
             }
@@ -26,18 +24,6 @@ public class TicketController {
         return newId;
     }
 
-    // el que estaba antes
-    /*public void removeTicketsFromCashier(Cashier cashier) {
-        if (cashier == null) return;
-        String cashierId = cashier.getID();
-        List<TicketModel> lista = ticketsByCashier.remove(cashierId);//quitar la lista de tickets del cajero del mapa que esta en CASHIER
-        if (lista == null) return;//el cajero no tenia tickets ahi
-        for (TicketModel t : lista) {//borrar los tickets del mapa global
-            tickets.remove(t.getId());
-        }
-        cashier.getTickets().clear();//vaciar la lista interna del cajero
-    }*/
-    // Añadido ahora
     public void removeTicketsFromCashier(Cashier cashier) {
         if (cashier == null) return;
         List<TicketModel> ticketsOfCashier = cashier.getTickets();
@@ -75,7 +61,7 @@ public class TicketController {
     }
 
 
-    public boolean cashierHasTicket(String cashierId, TicketModel ticket) {//comprueba si un ticket pertenece al cajero
+    public boolean cashierHasTicket(String cashierId, TicketModel ticket) {
         List<TicketModel> cashierTickets = userController.getCashier(cashierId).getTickets();
         return cashierTickets.contains(ticket);
     }
@@ -133,21 +119,25 @@ public class TicketController {
         }
 
         List<ElementoTicket> elementos = ticket.getElementos();
-        if (elementos.isEmpty()) { //segundo se van coger cada linea del ticket
+        if (elementos.isEmpty()) {
             System.out.println("Its empty");
             return;
         }
 
-        Map<Category, Integer> unidadesPorCategoria = new HashMap<>();//para contar cuantas unidades hay por categoria
         //en vez de usar contadores que es ineficiente usamos un hashmap
+        Map<Category, Integer> unidadesPorCategoria = new HashMap<>();
+
         for (ElementoTicket e : elementos) {
             Product p = e.getProduct();
             int cantidad = e.getQuantity();
 
-            if (p instanceof RegularProduct) {//si extiende regular product es que es un producto con category y solo se coge esos
-                Category category = ((RegularProduct) p).getCategory();//pasa de product a regular product porq el get categori solo esta en regular product
-                int actual = unidadesPorCategoria.getOrDefault(category, 0);//busca la clave categoria que es la categoria de cada prod
-                unidadesPorCategoria.put(category, actual + cantidad);//actualiza el mapa sumando la cantidad actual+nuevas uds
+            if (p instanceof RegularProduct) {
+                //pasa de product a regular product porq el get category solo esta en regular product
+                Category category = ((RegularProduct) p).getCategory();
+                int actual = unidadesPorCategoria.getOrDefault(category, 0);//busca la clave categoria
+
+                //actualiza el mapa sumando la cantidad actual+nuevas uds
+                unidadesPorCategoria.put(category, actual + cantidad);
             }
         }
 
@@ -155,8 +145,9 @@ public class TicketController {
         double totalDiscount = 0.0;
 
         System.out.println("Ticket : " + ticket.getId());
-        elementos.sort((e1, e2) -> e1.getProduct().getName().compareToIgnoreCase(e2.getProduct().getName()));
         //ordenar las lineas por nombre
+        elementos.sort((e1, e2) ->
+                e1.getProduct().getName().compareToIgnoreCase(e2.getProduct().getName()));
 
         //recorrer de nuevo para imprimir cada linea y calcular totales
         for (ElementoTicket e : elementos) {
@@ -167,18 +158,17 @@ public class TicketController {
             double perUnitDiscount = 0.0;
             boolean tieneDescuento = false;
 
-            if (p instanceof RegularProduct) {//si hereda de regular product
-                Category cat = ((RegularProduct) p).getCategory(); //para que pueda usar el get cayegory
+            if (p instanceof RegularProduct) {
+                Category cat = ((RegularProduct) p).getCategory();
                 int udsCategoria = unidadesPorCategoria.getOrDefault(cat, 0);
 
-                // Si hay 2 o más uds en esa categoría en el ticet se aplica el desciemto
+                //si hay 2 o más uds en esa categoría se aplica el descuento
                 if (udsCategoria >= 2) {
                     perUnitDiscount = unitPrice * cat.getDiscount();
                     tieneDescuento = true;
                 }
             }
 
-            // se imprime una linea por unidad
             for (int i = 0; i < cantidad; i++) {
                 if (tieneDescuento) {
                     System.out.printf("  %s **discount -%.3f%n", p, perUnitDiscount);
@@ -187,7 +177,7 @@ public class TicketController {
                 }
             }
 
-            // Actualizamos totales
+            //actualizamos totales
             double linePrice = unitPrice * cantidad;
             double lineDiscount = perUnitDiscount * cantidad;
 
@@ -210,14 +200,12 @@ public class TicketController {
             return;
         }
 
-        //Lo borramos del mapa usando la clave vieja (antes de que cambie)
         tickets.remove(oldTicketId);
 
-        //UPDATE: El modelo actualiza su estado y calcula su nuevo ID internamente
+        //actualiza su estado y calcula su nuevo ID internamente
         ticket.close();
 
-        // Lo volvemos a insertar en el mapa con la nueva clave
-        // Como 'ticket' es una referencia al objeto, ticket.getId() ya devuelve el nuevo valor
+        //lo volvemos a insertar en el mapa con la nueva clave
         tickets.put(ticket.getId(), ticket);
     }
 
@@ -229,7 +217,6 @@ public class TicketController {
         }
 
         if (!ticket.isClosed()) {// primero se cierra el ticket si no esta cerrado
-            //ticket.close();
             swapIdInMapWhenClose(ticketId);
         }
         printTicketInfo(ticket);

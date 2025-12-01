@@ -20,7 +20,7 @@ public class RegularProduct extends Product {
     @Override
     public String toString() {
         return String.format(java.util.Locale.US,
-                "{class:Product, id:%d, name:'%s', category:%s, price:%.1f}", //para que aparezca punto
+                "{class:Product, id:%d, name:'%s', category:%s, price:%.1f}",
                 id, name.replace("\"", ""), category, price);
     }
 }

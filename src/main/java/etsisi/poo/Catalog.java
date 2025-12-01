@@ -13,7 +13,7 @@ public class Catalog {
         this.items = new HashMap<>();
     }
 
-    public boolean addProduct(Product product) { //true se ha añadido, false si hay id duplicado o limite
+    public boolean addProduct(Product product) {
         if (items.size() >= MAX_ELEMENTS) {
             return false; // límite alcanzado
         }
@@ -29,7 +29,7 @@ public class Catalog {
     }
 
     public Product getProduct(int id) {
-        return items.get(id);//el producto o null si no existe
+        return items.get(id);
     }
 
     public Product removeProduct(int id) {
@@ -73,9 +73,5 @@ public class Catalog {
             default:
                 return false; // campo desconocido
         }
-    }
-
-    public boolean existProduct(int id) {
-        return items.containsKey(id);
     }
 }

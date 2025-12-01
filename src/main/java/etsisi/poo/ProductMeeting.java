@@ -3,9 +3,9 @@ package etsisi.poo;
 import java.time.*;
 
 public class ProductMeeting extends Product implements EventProduct {
-    private final LocalDateTime eventDate; //fecha del evento
+    private final LocalDateTime eventDate;
     private final int maxPeople;
-    private static final Duration MIN_PLANNING = Duration.ofHours(12); //el tiempo minimo de planificación son 12h
+    private static final Duration MIN_PLANNING = Duration.ofHours(12); //tiempo minimo de planificación 12h
     private int actualPeople = 0;
 
     public void setActualPeople(int n) {
@@ -17,7 +17,7 @@ public class ProductMeeting extends Product implements EventProduct {
     }
 
     public ProductMeeting(int id, String name, double price, LocalDateTime eventDate, int maxPeople) {
-        super(id, name, price);
+        super(id, name, price); // sin categoría
         this.eventDate = eventDate;
         this.maxPeople = maxPeople;
 
