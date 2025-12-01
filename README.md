@@ -1,5 +1,8 @@
-Nuestro trabajo consiste en 5 clasess:
-App ( la vista), Catalog y Ticket ( los controladores ya que gestionan los productos y los productos comprados que se veran reflejados en un ticket respectivamente) 
-y Product y Category, que son los modelos, en donde los productos contienen siempre una categoría. 
-Dentro del proyecto tenemos puesto el UML que muestra todas las clases del proyecto utilizando fechas simples para demostrar la interacción entre las clases, sin entrar en tipos especificos
-de flechas como agregacion y composición, entre otras.
+En esta entrega, hemos ampliado el proyecto anterior en el que se centra principalmente en 3 clases diferentes: Usuarios,Productos y Tickets. 
+Los usuarios pueden ser Clientes o Cajeros, cada uno con sus atributos propios que hacen que se diferencien entre ellos. Los clientes guardan los tickets que compran mientras qur los cajeros crean los tickets ( implicando que si se borra un cajero, se borra todos sus tickets).
+Los productos están divididos en distintos tipos. que son Comida, Reeunion ( estos dos siendo de productos por persona), Personalizado y un Producto Regular, que es el producto común. Tenemos una clase abstracta llamada producto que la extienden la mayoría de estas clases ya que contienen lo mismo que producto. Los productos personalizables anteriormente mencionados contienen una lsita de textos que se aplica dentro de los productos para sus descuentos y restricciones. 
+Y finalmente, los tickets, que contienen una lista de productos que serán comprados, que tienen un estado (EMPTY,OPEN,CLOSED) que manejan todos esos productos con un id generado o creado, dependiendo de la situación. 
+Todas estas clases modelo anteriormente mencionadas tienen sus propios controladores que manejan las altas/bajas y otras operacione.
+Hemos aplicado el patron Command para manejar todos los comandos, con una interfaz ICommand, que contiene 3 operaciones: getprimerArgumento(), getSegundoArgumento() y execute() que son manejados por cada una de las clases comando que implementa la interfaz. Todas estas son manejadas en un controlador llamado CommandController, que nos ayuda a poder ponerlos en el CLI y finalmente imprimirlos en App2. 
+𝙉𝙐𝙀𝙎𝙏𝙍𝙊 𝙐𝙈𝙇
+Al tener un UML muy grande por aplicar el patron Command, hemos decidido dividirlo en 4 diagramas, cada uno centrado en una parte del sistema : el primero de los usuarios y sus comandos (Cajeros y clientes), el segundo de productos y sus comandos, el tercero tickets y sus comandos y el cuarto una vision general en el que se ve explicitamente el CLI con los controladores de esas mismas y los 3 comandos independientes que no dependen de ninguna clase modelo .
