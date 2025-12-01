@@ -9,3 +9,24 @@ Debido a que la aplicación contiene muchas clases ya que hemos aplicado el patr
 2.Productos y sus comandos.
 3.Tickets y sus comandos.
 4.Vista general, en la que se muestra explícitamente el CLI junto con sus controladores, además de los tres comandos independientes que no dependen de ninguna clase modelo.
+
+En cada una de ellas podemos destacar las relaciones mas importantes ( comoposiciones, relaciones con los controladores, entre otros):
+CASH/CLIENTS
+-UserController gestiona Clientes y Cajeros pero no controla la vida de ellos, haciendo que tengan una relacion de agregación con cliente y cajero
+-Los Client y los Cashier se extienden de la clase Users, que es abstracta
+-Los Clientes tienen una relacion de composición con Tickets,ya que si un cliente se elimina se eliminan los tickets con el.
+-Los cajeros tienen una relación de composición con tickets, ya que si un cajero se elimina, se elimina todos los tickets creado por él.
+-Todos los comandos de Cash/Client dependen de UserController, y CashRemoveCommand depende, además del UserController, de TicketController, para eliminar los tickets relacionados con ese cajero que eliminas.
+PRODUCT
+-Todos los tipos de productos (ProductFood,ProductMeeting,RegularProduct) extienden de la clase abstracta Producto
+-La clase ProductPersonalized se extiende de la clase RegularProduct
+-El Catalog (ProductController) contiene un mapa de productos, teniendo una relacion de agregación con producto ya que el producto puede existir por si solo fuera del catalogo
+-Todos los comandos de Producto dependen del Catalog
+TICKETS
+-TicketModsel tiene una lista de ElementoTickets, que no puede existir sin su Ticket, por lo que hay una relacion de composición, en el que el todo es el TicketModel.
+-Cada ElementoTicket tiene un Producto, cantidad y lista de personaliaciones (para los productos personalizables)
+-TicketController tiene un mapa de tickets, por lo que tiene una relacion de agregación con TicketModel
+-Los comandos dependen de TicketController, UserController y Catalog en este caso ya que el ticket maneja todo dentro en los comandos
+GENERAL
+-CommandController gestiona todos los comandos.
+-EL CLI tiene una relacion de composición con todos los controllers (UserController,TicketCaontroller,Catalog y CommandController)
