@@ -42,8 +42,7 @@ public class TicketModel {
             return;
         }
 
-        if (product instanceof ProductPersonalized && personalizados != null && !personalizados.isEmpty()) {
-            ProductPersonalized pp = (ProductPersonalized) product;
+        if (product instanceof ProductPersonalized pp && personalizados != null && !personalizados.isEmpty()) {
             ProductPersonalized productWithPersonalization = new ProductPersonalized(
                     pp.getId(),
                     pp.getName(),
@@ -55,21 +54,15 @@ public class TicketModel {
             elementos.add(new ElementoTicket(productWithPersonalization, cantidad, personalizados));
             products.add(productWithPersonalization);
 
-        } else if (product instanceof ProductFood || product instanceof ProductMeeting) {
+        } else if (product instanceof EventProducts) {
             for (ElementoTicket e : elementos) {
-                if (e.getProduct() instanceof ProductFood || e.getProduct() instanceof ProductMeeting) {
+                if (e.getProduct() instanceof EventProducts) {
                     System.out.println("No se pueden añadir productos de tipo comida o reunion");
                     return;
                 }
             }
 
-            if (product instanceof ProductFood) {
-                ((ProductFood) product).setActualPeople(cantidad);
-            }
-
-            if (product instanceof ProductMeeting) {
-                ((ProductMeeting) product).setActualPeople(cantidad);
-            }
+            ((EventProducts) product).setActualPeople(cantidad);
 
             double finalPrice = product.getPrice() * cantidad;
             product.setPrice(finalPrice);

@@ -3,7 +3,7 @@ package etsisi.poo;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public interface EventProduct {
+public interface IEventProduct {
     LocalDateTime getEventDate();
 
     int getMaxPeople();

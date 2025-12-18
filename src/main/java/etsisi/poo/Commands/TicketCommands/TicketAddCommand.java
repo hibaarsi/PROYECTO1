@@ -54,7 +54,7 @@ public class TicketAddCommand implements ICommand {
             Cashier cashier = userController.getCashier(cashierId);
             if (cashier == null) return "Cashier not found";
 
-            if (product instanceof ProductMeeting || product instanceof ProductFood) {
+            if (product instanceof EventProducts) {
                 for (ElementoTicket elementoTicket : ticket.getElementos()) {
                     if (elementoTicket.getProduct().getId() == productId)
                         return "Product already in ticket";

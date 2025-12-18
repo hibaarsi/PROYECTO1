@@ -1,14 +1,16 @@
 package etsisi.poo.Commands.ProdCommands;
 
-import etsisi.poo.Catalog;
-import etsisi.poo.Product;
-import etsisi.poo.ProductMeeting;
-
+import etsisi.poo.*;
 import java.time.*;
 
-public class ProdAddMeetingCommand extends AbstractProdAddCommand {
-    public ProdAddMeetingCommand(Catalog catalog) {
+public class ProdAddEventCommand extends AbstractProdAddCommand {
+    private final EventType eventType;
+    private final String secondArg;
+
+    public ProdAddEventCommand(Catalog catalog, EventType eventType, String secondArg) {
         super(catalog);
+        this.eventType = eventType;
+        this.secondArg = secondArg;
     }
 
     @Override
@@ -18,24 +20,31 @@ public class ProdAddMeetingCommand extends AbstractProdAddCommand {
 
     @Override
     public String getSegundoArgumento() {
-        return "addMeeting";
+        return secondArg;
     }
 
     @Override
     protected Product createProduct(String[] args) {
-        int id = Integer.parseInt(args[2]);
+        int id = parseId(args[2]);
         String name = parseName(args[3]);
         double price = parsePrice(args[4]);
         LocalDate date = LocalDate.parse(args[5]);
         int maxPeople = Integer.parseInt(args[6]);
+
         LocalDateTime dateTime = date.atTime(LocalTime.MAX);
 
-        return new ProductMeeting(id, name, price, dateTime, maxPeople);
+        return new EventProducts(
+                id,
+                name,
+                price,
+                dateTime,
+                maxPeople,
+                eventType
+        );
     }
 
     @Override
     protected String getOkMessage() {
-        return "prod addMeeting: ok\n";
+        return "prod " + secondArg + ": ok\n";
     }
-
 }

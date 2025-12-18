@@ -3,7 +3,7 @@ package etsisi.poo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductPersonalized extends RegularProduct implements Personalized {
+public class ProductPersonalized extends RegularProduct {
     private final int maxPersonal;
     private List<String> personalizationList = new ArrayList<>();
 
@@ -23,9 +23,19 @@ public class ProductPersonalized extends RegularProduct implements Personalized 
         return personalizationList;
     }
 
-    @Override
-    public double getPrice() {
-        return getPriceWithTexts(getBasePrice(), 1, personalizationList);
+    public int getMaxPersonal() {
+        return maxPersonal;
+    }
+
+    private double getPriceWithTexts(double basePrice, int quantity, List<String> texts) {
+        int nTexts = (texts == null) ? 0 : texts.size();
+
+        if (nTexts > maxPersonal) {
+            System.out.println("Too many customization texts. Use max: " + maxPersonal);
+        }
+
+        double multiplier = 1 + (0.10 * nTexts);
+        return basePrice * multiplier * quantity;
     }
 
     public double getBasePrice() {
@@ -33,9 +43,10 @@ public class ProductPersonalized extends RegularProduct implements Personalized 
     }
 
     @Override
-    public int getMaxPersonal() {
-        return maxPersonal;
+    public double getPrice() {
+        return getPriceWithTexts(getBasePrice(), 1, personalizationList);
     }
+
 
     @Override
     public String toString() {
