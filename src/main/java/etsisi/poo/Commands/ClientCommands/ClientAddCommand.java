@@ -25,10 +25,10 @@ public class ClientAddCommand implements ICommand {
     @Override
     public String execute(String[] args) {
         if (args.length != 6) {
-            return "Use: client add \"<name>\" <DNI> <email> <UW_cashier>";
+            return "Use: client add \"<name>\" <DNI|NIF> <email> <UW_cashier>";
         }
         String name = args[2].replace("\"", "");
-        String dni = args[3];
+        String id= args[3];
         String email = args[4];
         String uw = args[5];
 
@@ -37,7 +37,7 @@ public class ClientAddCommand implements ICommand {
             return "Cashier not found";
         }
 
-        Client client = userController.createClient(name, email, dni, cashier);
+        Client client = userController.createClient(name, email, id, cashier);
 
         if (client == null) {
             return "Client could not be created";

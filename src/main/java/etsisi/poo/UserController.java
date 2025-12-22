@@ -20,16 +20,29 @@ public class UserController {
         return cashierMap.get(cashierID);
     }
 
-    public Client createClient(String name, String email, String DNI, Cashier cashier) {
-        if (clientMap.containsKey(DNI)) {
+    public Client createClient(String name, String email, String id, Cashier cashier) {
+        if (clientMap.containsKey(id)) {
             System.out.println("Ya hay un cliente con ese DNI");
         }
 
         if (!cashierMap.containsKey(cashier.getID())) {
             System.out.println("El cajero no existe");
         }
-
-        return new Client(name, email, DNI, cashier);
+        if(!properFormatID(id)){
+            System.out.println("El ID no es correcto");
+        }
+        if(Character.isLetter(id.charAt(0))){
+            return new ClientEmpresa(name, email, id, cashier);
+        } else{
+            return new Client(name, email, id, cashier);
+        }
+    }
+    private boolean properFormatID(String id){
+        if( id==null || id.isEmpty() ) return false;
+        if(Character.isLetter(id.charAt(0))){
+            return id.length() == 9;
+        }
+        return Character.isDigit(id.charAt(0));
     }
 
     public void addClient(Client client) {
