@@ -7,10 +7,12 @@ import java.util.Map;
 
 public class Catalog {
     private final Map<Integer, Product> items;
+    private final Map<String, Service> services;
     private static final int MAX_ELEMENTS = 200;
 
     public Catalog() {
         this.items = new HashMap<>();
+        this.services = new HashMap<>();
     }
 
     public boolean addProduct(Product product) {
@@ -22,6 +24,15 @@ public class Catalog {
         }
         items.put(product.getId(), product);
         return true;
+    }
+    public void addService(Service service) {
+        services.put(service.getId(), service);
+    }
+    public void removeService(String id) {
+        services.remove(id);
+    }
+    public Service getService(String id) {
+        return services.get(id);
     }
 
     public Map<Integer, Product> getProducts() {
