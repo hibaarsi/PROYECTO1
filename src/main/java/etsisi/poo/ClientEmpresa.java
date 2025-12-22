@@ -1,0 +1,14 @@
+package etsisi.poo;
+
+public class ClientEmpresa extends Client{
+    public ClientEmpresa(String name, String email, String nif, Cashier cashier) {
+        super(name, email, nif, cashier); // el id es el nif ya que es un cliente empresa
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ClientEmpresa{identifier='%s', name='%s', email='%s', cash=%s}",
+                this.id, getName(), getEmail(), this.cashier.getID());
+    }
+}

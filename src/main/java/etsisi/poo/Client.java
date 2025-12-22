@@ -5,13 +5,13 @@ import java.util.Collection;
 import java.util.List;
 
 public class Client extends Users {
-    private String DNI;
-    private Cashier cashier;
-    private List<TicketModel> tickets;
+    protected String id;
+    protected Cashier cashier;
+    protected List<TicketModel> tickets;
 
-    public Client(String name, String email, String DNI, Cashier cashier) {
+    public Client(String name, String email, String id, Cashier cashier) {
         super(name, email);
-        this.DNI = DNI;
+        this.id= id;
         this.cashier = cashier;
         this.tickets = new ArrayList<>();
     }
@@ -32,13 +32,13 @@ public class Client extends Users {
 
     @Override
     public String getID() {
-        return this.DNI;
+        return this.id;
     }
 
     @Override
     public String toString() {
         return String.format(
                 "Client{identifier='%s', name='%s', email='%s', cash=%s}",
-                this.DNI, getName(), getEmail(), this.cashier.getID());
+                this.id, getName(), getEmail(), this.cashier.getID());
     }
 }
