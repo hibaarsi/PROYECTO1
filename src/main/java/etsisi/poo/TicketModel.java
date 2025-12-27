@@ -8,18 +8,21 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-public class TicketModel {
-    private String id;
-    private TicketStatus ticketStatus;
-    private ArrayList<Product> products;
-    private LocalDateTime openDate;
-    private LocalDateTime endDate;
+public abstract class TicketModel<T> {
+    protected String id;
+    protected TicketStatus ticketStatus;
+    protected ArrayList<Product> products;
+    protected List<Service> services;
+    protected LocalDateTime openDate;
+    protected LocalDateTime endDate;
 
-    private final List<ElementoTicket> elementos;
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
+    protected List<ElementoTicket> elementos;
+    protected T ticketType;
+    protected static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yy-MM-dd-HH:mm");
 
-    public TicketModel(String id) {
+    public TicketModel(String id,T ticketType) {
         this.id = id;
+        this.ticketType=ticketType;
         this.elementos = new ArrayList<>();
         this.products = new ArrayList<>();
         this.ticketStatus = TicketStatus.EMPTY;
@@ -29,7 +32,9 @@ public class TicketModel {
     public List<ElementoTicket> getElementos() {//para leer desde fuera las lineas del ticket
         return elementos;
     }
-
+    public T getTicketType(){
+        return ticketType;
+    }
     public static String calculateID() {
         String baseId = LocalDateTime.now().format(DATE_FORMATTER);
         Random random = new Random();
